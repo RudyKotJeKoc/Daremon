@@ -1,0 +1,96 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serwis Daremon - analiza konfliktu rodzinnego, kalendarz Barbary Adamskiej, dynamiczna mapa relacji i więcej.">
+    <meta name="keywords" content="konflikt rodzinny, analiza kalendarza, mapa relacji, Daremon">
+    <title>Daremon - Strona główna</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Daremon</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="analizy.html">Analiza konfliktu</a></li>
+                <li><a href="analiza_kalendarza.html">Kalendarz Barbary</a></li>
+                <li><a href="mapa_relacji.html">Mapa relacji</a></li>
+                <li><a href="zarzuty.html">Zarzuty</a></li>
+                <li><a href="verhalen.html">Opowieści</a></li>
+                <li><a href="winkel.html">Sklep</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="intro">
+            <h2>Witaj na Daremon</h2>
+            <p>Serwis Daremon to miejsce, w którym zgłębiamy historię konfliktu rodzinnego poprzez interaktywne raporty, szczegółowe analizy kalendarza Barbary Adamskiej, dynamiczną mapę relacji oraz opowieści. Poznaj szczegóły i odkryj wszystkie aspekty tej historii.</p>
+        </section>
+        <section id="timeline">
+            <h2>Oś czasu</h2>
+            <p>Poniżej znajdziesz uproszczoną oś czasu kluczowych wydarzeń. Pełna wersja dostępna jest na <a href="mapa_relacji.html">Mapie relacji</a>.</p>
+            <ul>
+                <li><strong>Styczeń 2023</strong>: Początek konfliktu rodzinnego.</li>
+                <li><strong>Marzec 2023</strong>: Kluczowe wpisy w kalendarzu Barbary.</li>
+                <li><strong>Czerwiec 2023</strong>: Eskalacja wydarzeń.</li>
+                <li><strong>Grudzień 2023</strong>: Podsumowanie roku i nowe ustalenia.</li>
+            </ul>
+        </section>
+        <section id="overview">
+            <h2>Przegląd sekcji</h2>
+            <ul>
+                <li><a href="analizy.html">Analiza konfliktu</a>: Interaktywny raport z podziałem na kategorie i FAQ.</li>
+                <li><a href="analiza_kalendarza.html">Kalendarz Barbary</a>: Szczegółowa rekonstrukcja wpisów.</li>
+                <li><a href="mapa_relacji.html">Mapa relacji</a>: Dynamiczna oś czasu z filtrami.</li>
+                <li><a href="zarzuty.html">Zarzuty</a>: Lista zarzutów z komentarzami i audio.</li>
+                <li><a href="verhalen.html">Opowieści</a>: Narracyjne historie, w tym „Polana kłamstw”.</li>
+                <li><a href="winkel.html">Sklep</a>: Produkty związane z tematyką serwisu.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Daremon. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>
