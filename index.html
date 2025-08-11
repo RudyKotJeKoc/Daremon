@@ -1,0 +1,296 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Kowalska - Doradca Fotowoltaiczny w Bydgoszczy</title>
+    <style>
+        /* CSS: Minimalistyczny, nowoczesny design z bielą i zielonymi akcentami */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        header, section, footer {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #f0f8f0;
+            text-align: center;
+            border-bottom: 2px solid #4caf50;
+        }
+        h1, h2, h3 {
+            color: #4caf50;
+        }
+        a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .section-half {
+            flex: 1 1 45%;
+            margin: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #success-message {
+            display: none;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-question {
+            cursor: pointer;
+            color: #4caf50;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #f0f8f0;
+            text-align: center;
+            font-size: 0.8em;
+            color: #777;
+            position: relative;
+        }
+        .inside-joke {
+            font-size: 0.7em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        #visit-counter {
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .highlight-email {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Julia Kowalska - Doradca Fotowoltaiczny w Bydgoszczy</h1>
+        <p>Profesjonalne doradztwo w zakresie instalacji fotowoltaicznych. Oszczędzaj na energii, dbaj o środowisko.</p>
+    </header>
+
+    <section id="welcome">
+        <h2>To tylko zabawa, ale może być czymś więcej</h2>
+        <p>Cześć Julia, ta strona to taki mój żart technologiczny – stworzona dla zabawy, żeby pokazać, co potrafię. Ale jeśli zechcesz, może stać się Twoim realnym narzędziem do pracy: generowania leadów, prezentacji wiedzy i budowania wizerunku. Żadnych zobowiązań, żadnego nacisku. Jeśli widzisz w tym potencjał, napisz na <a href="mailto:dariusz@daremon.nl" class="highlight-email">dariusz@daremon.nl</a>, a ja udostępnię Ci moje zasoby techniczne i know-how. Wszystko online, bez prywatnych kontaktów – czysto profesjonalnie.</p>
+    </section>
+
+    <section id="about">
+        <h2>O mnie</h2>
+        <div class="container">
+            <div class="section-half">
+                <img src="https://daremon.nl/images/5eco.png" alt="Julia Kowalska" style="border-radius: 50%; max-width: 100%;">
+            </div>
+            <div class="section-half">
+                <p>Julia Kowalska, doradca klienta z Bydgoszczy z ponad 5 latami doświadczenia w branży fotowoltaicznej. Specjalizuję się w doborze optymalnych rozwiązań PV dla domów i firm. Moja misja: pomagać klientom oszczędzać na rachunkach za prąd, jednocześnie promując ekologiczne technologie.</p>
+                <p>Historia zawodowa: Zaczynałam jako inżynier w firmie instalacyjnej, dziś oferuję niezależne doradztwo bez ukrytych kosztów.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="offer">
+        <h2>Oferta</h2>
+        <p>Doradztwo w zakresie fotowoltaiki: analiza potrzeb, dobór paneli, symulacje oszczędności. Jeśli chcesz, mogę pomóc Ci to rozwinąć – wszystko zależy od Ciebie.</p>
+        <h3>Z kim współpracujesz?</h3>
+        <p>Strona to dzieło inżyniera z pasją do automatyzacji i web developmentu. To pokaz możliwości – od kalkulatorów po integracje. Zero prowizji, czysta technologia.</p>
+    </section>
+
+    <section id="calculator">
+        <h2>Kalkulator korzyści PV</h2>
+        <p>Oblicz szacunkowe oszczędności. Wprowadź dane, a ja przygotuję wstępną analizę.</p>
+        <form id="pv-form">
+            <label for="consumption">Zużycie prądu rocznie (kWh):</label>
+            <input type="number" id="consumption" required>
+            <label for="roof-area">Powierzchnia dachu (m²):</label>
+            <input type="number" id="roof-area" required>
+            <label for="location">Lokalizacja (miasto):</label>
+            <input type="text" id="location" required>
+            <button type="submit">Oblicz oszczędności</button>
+        </form>
+        <div id="result" style="margin-top: 20px;"></div>
+    </section>
+
+    <section id="knowledge">
+        <h2>Panel wiedzy technicznej</h2>
+        <div class="faq-item">
+            <div class="faq-question">Jak działa fotowoltaika?</div>
+            <div class="faq-answer">Panele PV przekształcają światło słoneczne w prąd elektryczny za pomocą efektu fotowoltaicznego. Inwerter konwertuje DC na AC do użytku domowego.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Co daje instalacja PV?</div>
+            <div class="faq-answer">Oszczędności na rachunkach, niezależność energetyczna, dotacje i ulgi podatkowe. Średni zwrot inwestycji w 5-7 lat.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Najczęstsze błędy przy zakupie paneli</div>
+            <div class="faq-answer">Niedopasowanie mocy do potrzeb, ignorowanie jakości inwertera, brak analizy dachu. Zawsze konsultuj z ekspertem.</div>
+        </div>
+        <p class="inside-joke">Jeśli wciąż czytasz, jesteś już po drugiej stronie.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Jeśli jesteś zainteresowany doradztwem, napisz bezpośrednio do Julii. Dane są przetwarzane zgodnie z RODO. Polityka prywatności: Dane nie są udostępniane trzecim stronom.</p>
+        <!-- Formularz usunięty -->
+        <p class="highlight-email">Kontakt do twórcy platformy: <a href="mailto:dariusz@daremon.nl">dariusz@daremon.nl</a></p>
+    </section>
+
+    <section id="why">
+        <h2>Dlaczego to robię?</h2>
+        <p>To eksperyment dla frajdy – test technologii i kreatywności. Ale jeśli chcesz, Julia, mogę przekuć to w narzędzie, które pomoże Ci w pracy. Napisz na <a href="mailto:dariusz@daremon.nl" class="highlight-email">dariusz@daremon.nl</a>, a dostosujemy to pod Ciebie. Bez prywatnych kontaktów, tylko online.</p>
+        <h3>Ciekawe możliwości i ułatwienia dla Ciebie, Julia:</h3>
+        <ul>
+            <li>Integracja z CRM: Automatyczne przesyłanie leadów z kalkulatora do Twojego systemu (np. Google Sheets lub HubSpot) – oszczędzisz czas na ręcznym wpisywaniu danych.</li>
+            <li>Personalizowany newsletter: Narzędzie do wysyłania aktualizacji o fotowoltaice do subskrybentów, z automatycznym zbieraniem e-maili (zgodne z RODO).</li>
+            <li>Analityka ruchu: Szczegółowe raporty o odwiedzających – skąd przychodzą, co klikają – byś mogła optymalizować marketing.</li>
+            <li>Dynamiczne portfolio: Sekcja z Twoimi realizacjami, którą możesz aktualizować samodzielnie przez prosty panel admina.</li>
+            <li>Chatbot PV: Prosty AI do odpowiedzi na podstawowe pytania klientów, integrujący się z kalkulatorem dla lepszej konwersji.</li>
+            <li>Integracja z kalendarzem: Automatyczne umawianie konsultacji online (np. via Zoom) po wypełnieniu formularza.</li>
+        </ul>
+        <h3>Efekty</h3>
+        <p>Odwiedziny: <span id="visit-counter">0</span> | Zgłoszenia: 5 (symulacja)</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Julia Kowalska. Wszelkie prawa zastrzeżone.</p>
+        <div class="inside-joke">Hakier pierdolony – jeśli to czytasz, to wiesz, o co chodzi.</div>
+        <div class="tooltip">
+            <span>🔋</span>
+            <span class="tooltiptext">Jak tu wszedłeś, to już nie wyjdziesz.</span>
+        </div>
+    </footer>
+
+    <script>
+        // JS: Funkcjonalności
+        // Licznik odwiedzin (symulacja z localStorage)
+        let visits = localStorage.getItem('visits') || 0;
+        visits = parseInt(visits) + 1;
+        localStorage.setItem('visits', visits);
+        document.getElementById('visit-counter').textContent = visits;
+
+        // Kalkulator PV
+        document.getElementById('pv-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const consumption = parseFloat(document.getElementById('consumption').value);
+            const roofArea = parseFloat(document.getElementById('roof-area').value);
+            const location = document.getElementById('location').value;
+            const potentialPower = roofArea * 0.15; // kWp na m² (przybliżenie)
+            const savings = potentialPower * 1000 * 0.8; // Oszczędności roczne w PLN (przybliżenie)
+            document.getElementById('result').innerHTML = `Szacunkowe oszczędności dla ${location}: ${savings.toFixed(2)} PLN rocznie. Lead wysłany do Julii.`;
+            console.log('Lead PV:', {consumption, roofArea, location}); // Symulacja wysyłki
+        });
+
+        // FAQ accordion
+        const questions = document.querySelectorAll('.faq-question');
+        questions.forEach(q => {
+            q.addEventListener('click', () => {
+                const answer = q.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

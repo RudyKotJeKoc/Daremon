@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Daremon.nl – Analiza sprawy Dariusza Adamskiego. Przejrzysta i obiektywna analiza konfliktu rodzinnego, dokumentów i dowodów.">
+<meta name="keywords" content="Daremon, Dariusz Adamski, analiza sprawy, konflikt rodzinny, darowizna, prawda">
+<meta name="author" content="Daremon.nl">
+<title>DAREMON – Prawda Wyjdzie Na Jaw: Analiza Sprawy Dariusza Adamskiego</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+.sticky-nav {
+position: sticky;
+top: 0;
+z-index: 1000;
+        }
+.section-icon {
+margin-right: 8px;
+        }
+.citation {
+font-size: 0.8em;
+color: #666;
+vertical-align: super;
+        }
+</style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+<!-- Hero Section -->
+<header class="bg-gradient-to-r from-gray-800 to-gray-600 text-white py-16 text-center">
+<div class="container mx-auto px-4">
+<h1 class="text-4xl md:text-5xl font-bold mb-4">DAREMON – Prawda Wyjdzie Na Jaw</h1>
+<p class="text-lg md:text-xl mb-6">Demistyfikacja Kompleksowości Sprawy Dariusza Adamskiego</p>
+<a href="#o-stronie" class="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Dowiedz się więcej</a>
+</div>
+</header>
+<!-- Nawigacja z przyciskami przekierowującymi -->
+<nav class="bg-gray-900 text-white py-4 sticky-nav" aria-label="Main navigation">
+<ul class="container mx-auto flex flex-wrap justify-center space-x-2 md:space-x-4">
+<li><button onclick="checkAccess('index')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Strona główna">Strona główna</button></li>
+<li><button onclick="checkAccess('kalendarz_barbary')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Kalendarz Barbary">Kalendarz Barbary</button></li>
+<li><button onclick="checkAccess('mapa_relacji')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Mapa relacji">Mapa relacji</button></li>
+<li><button onclick="checkAccess('os_czas')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Oś czasu">Oś czasu</button></li>
+<li><button onclick="checkAccess('projecten')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Projekty">Projekty</button></li>
+<li><button onclick="checkAccess('verhalen')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Historie">Historie</button></li>
+<li><button onclick="checkAccess('winkel')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Sklep">Sklep</button></li>
+<li><button onclick="checkAccess('analiza_kalendarza')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Analiza kalendarza">Analiza kalendarza</button></li>
+<li><button onclick="checkAccess('analizy')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Analizy">Analizy</button></li>
+<li><button onclick="checkAccess('echo')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Echo">Echo</button></li>
+<li><button onclick="checkAccess('geschiedenis')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Historia">Historia</button></li>
+<li><button onclick="checkAccess('index2')" class="px-4 py-2 hover:bg-gray-700 rounded transition" title="Strona alternatywna">Strona alt</button></li>
+</ul>
+</nav>
+<!-- Główna zawartość -->
+<div class="container mx-auto px-4 py-8">
+<section id="o-stronie" class="bg-white p-6 rounded-lg shadow-md mb-8">
+<h2 class="text-2xl font-semibold text-blue-600 border-b-2 border-gray-200 pb-2 mb-4">O Stronie: Demistyfikacja Kompleksowości</h2>
+<p>Przestrzeń Daremon.nl jest dedykowana <strong>analizie sprawy karnej, cywilnej i rodzinnej Dariusza Adamskiego</strong>. Celem jest eksploracja skomplikowanych zależności, ukrytych motywów i jawnych sprzeczności w tym konflikcie. Strona ma za zadanie dostarczyć <strong>profesjonalnej, precyzyjnej analizy</strong>, która pozwoli na samodzielną ocenę dynamiki sporu i zrozumienie jego głębokich konsekwencji.</p>
+<p>Każdy element platformy został zaprojektowany z myślą o maksymalnej <strong>przejrzystości i obiektywności</strong>, opierając się wyłącznie na dostępnych dokumentach i relacjach, które są poddawane chłodnej, analitycznej ocenie.</p>
+</section>
+<!-- Sekcja: Wybór roli użytkownika -->
+<section id="user-roles" class="bg-white p-6 rounded-lg shadow-md mb-8">
+<h2 class="text-2xl font-semibold text-blue-600 border-b-2 border-gray-200 pb-2 mb-4">Wybierz swoją rolę</h2>
+<p class="mb-4">Aby uzyskać dostęp do spersonalizowanych treści, wybierz swoją rolę. Dla gości dostęp jest otwarty. Inne role wymagają podania hasła.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<button onclick="checkRole('guest')" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition">Gość (otwarty dostęp)</button>
+<button onclick="checkRole('adwokat')" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition">Adwokat</button>
+<button onclick="checkRole('sedzia')" class="bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition">Sędzia</button>
+<button onclick="checkRole('analitycy')" class="bg-yellow-600 text-white py-3 px-6 rounded-lg hover:bg-yellow-700 transition">Analitycy</button>
+<button onclick="checkRole('baza_danych')" class="bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition">Baza Danych</button>
+<button onclick="checkRole('ekspert')" class="bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition">Ekspert</button>
+<button onclick="checkRole('prokurator')" class="bg-orange-600 text-white py-3 px-6 rounded-lg hover:bg-orange-700 transition">Prokurator</button>
+<button onclick="checkRole('dokumenty_tajne')" class="bg-gray-600 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition">Dokumenty Tajne</button>
+<button onclick="checkRole('symulacja_sadu')" class="bg-teal-600 text-white py-3 px-6 rounded-lg hover:bg-teal-700 transition">Symulacja Sądu</button>
+</div>
+</section>
+<!-- Pozostała zawartość -->
+<section id="os-czasu" class="bg-white p-6 rounded-lg shadow-md mb-8">
+<h2 class="text-2xl font-semibold text-blue-600 border-b-2 border-gray-200 pb-2 mb-4"><span class="section-icon">🕰️</span>Oś Czasu: Kronika Eskalacji</h2>
+<p>Oś czasu stanowi <strong>fundamentalną strukturę</strong> dla wszystkich późniejszych analiz, pomagając rozjaśnić prawdę i wykuć zrozumienie tam, gdzie szepczą sekrety.</p>
+</section>
+</div>
+<!-- Stopka z dodatkowymi przyciskami -->
+<footer class="bg-gray-900 text-white text-center py-6">
+<p>&copy; 2025 Daremon.nl - Wszelkie prawa zastrzeżone. Analiza oparta na dostępnych dokumentach źródłowych.</p>
+<div class="mt-4 space-x-4">
+<button onclick="checkAccess('kalendarz_barbary')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" title="Przejdź do Kalendarza Barbary">Kalendarz Barbary</button>
+<button onclick="checkAccess('mapa_relacji')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition" title="Przejdź do Mapy relacji">Mapa relacji</button>
+</div>
+</footer>
+<script>
+const passwords = {
+'adwokat': 'obrona2025',
+'sedzia': 'wyrokprawdy',
+'analitycy': 'analiza_danych',
+'baza_danych': 'dostep_bazy',
+'ekspert': 'ekspertiza',
+'prokurator': 'oskarzenie',
+'dokumenty_tajne': 'tajne_dokumenty',
+'symulacja_sadu': 'symulacja_sadu'
+        };
+
+const pageToHref = {
+'index': 'index.html',
+'kalendarz_barbary': 'Kalendarz_Barbary.html',
+'mapa_relacji': 'mapa_relacji.html',
+'os_czas': 'os_czas.html',
+'projecten': 'projecten.html',
+'verhalen': 'verhalen.html',
+'winkel': 'winkel.html',
+'analiza_kalendarza': 'analiza_kalendarza.html',
+'analizy': 'analizy.html',
+'echo': 'echo.html',
+'geschiedenis': 'geschiedenis.html',
+'index2': 'index2.html'
+};
+
+const pageToRole = {
+'kalendarz_barbary': 'adwokat',
+'mapa_relacji': 'sedzia',
+'os_czas': 'analitycy',
+'projecten': 'baza_danych',
+'winkel': 'ekspert',
+'analiza_kalendarza': 'prokurator',
+'analizy': 'dokumenty_tajne',
+'echo': 'symulacja_sadu',
+'geschiedenis': 'prokurator',
+'index2': 'ekspert'
+};
+
+function checkAccess(page) {
+if (page === 'index' || page === 'verhalen') {
+window.location.href = pageToHref[page];
+} else {
+const role = pageToRole[page];
+if (role) {
+const enteredPassword = prompt(`Podaj hasło dla zakładki: ${page.replace('_', ' ').toUpperCase()}`);
+if (enteredPassword === passwords[role]) {
+window.location.href = pageToHref[page];
+} else {
+alert('Błędne hasło. Spróbuj ponownie.');
+}
+} else {
+alert('Brak dostępu do tej zakładki.');
+}
+}
+}
+
+function checkRole(role) {
+if (role === 'guest') {
+window.location.href = '#o-stronie';
+} else {
+const enteredPassword = prompt(`Podaj hasło dla roli: ${role.toUpperCase()}`);
+if (enteredPassword === passwords[role]) {
+window.location.href = `${role}.html`;
+} else {
+alert('Błędne hasło. Spróbuj ponownie.');
+}
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+```html
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentacja Obrony Dariusza Adamskiego - Sprawa o Odwołanie Darowizny</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8; /* Pastelowy niebieski-szary */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            font-size: 18px; /* Duże, czytelne fonty */
+        }
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        aside {
+            width: 250px;
+            background-color: #e3f2fd; /* Pastelowy niebieski */
+            padding: 20px;
+            border-right: 1px solid #bbdefb;
+            height: 100vh;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            margin-bottom: 10px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lekkie cienie */
+            background-color: #fff;
+        }
+        nav a:hover, nav a.active {
+            background-color: #bbdefb; /* Pastelowy akcent */
+        }
+        nav i {
+            margin-right: 10px;
+            color: #64b5f6; /* Pastelowy niebieski */
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        h1, h2 {
+            color: #1976d2; /* Pastelowy niebieski nagłówek */
+        }
+        h2 {
+            border-bottom: 1px solid #bbdefb;
+            padding-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        blockquote {
+            border-left: 4px solid #64b5f6;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #bbdefb;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e3f2fd;
+        }
+        .download-btn {
+            background-color: #64b5f6;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background-color: #1976d2;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #bbdefb;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #bbdefb;
+                overflow-y: visible;
+            }
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="#intro" class="active"><i class="fas fa-home"></i> Wstęp i Chronologia</a></li>
+                    <li><a href="#kalendarz"><i class="fas fa-calendar-alt"></i> Analiza Kalendarza Barbary</a></li>
+                    <li><a href="#plan-barbary"><i class="fas fa-chess"></i> Plan Barbary – Mechanizmy Manipulacji</a></li>
+                    <li><a href="#absurdalne-zarzuty"><i class="fas fa-exclamation-triangle"></i> Absurdalne i Sprzeczne Zarzuty</a></li>
+                    <li><a href="#porownanie-zeznan"><i class="fas fa-balance-scale"></i> Porównanie Zeznań i Notatek</a></li>
+                    <li><a href="#zdrada-adwokata"><i class="fas fa-gavel"></i> Zdrada Adwokata</a></li>
+                    <li><a href="#dowody-troski"><i class="fas fa-heart"></i> Dowody Troski i Inwestycji Dariusza</a></li>
+                    <li><a href="#stan-zdrowia"><i class="fas fa-user-md"></i> Stan Zdrowia Sylwestra i Pełnomocnictwo</a></li>
+                    <li><a href="#sms-sylwestra"><i class="fas fa-envelope"></i> SMS Sylwestra – Akt Przebaczenia</a></li>
+                    <li><a href="#materiay-dowodowe"><i class="fas fa-file-alt"></i> Materiały Dowodowe</a></li>
+                    <li><a href="#podsumowanie"><i class="fas fa-check-circle"></i> Podsumowanie i Rekomendacje</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <section id="intro" class="tab-content active">
+                <h2>Wstęp i Chronologia</h2>
+                <p>Tekst do edycji: Wprowadzenie do sprawy, tło konfliktu rodzinnego, kluczowe daty (np. darowizna 2017, początek konfliktu luty 2021, wyrok karny 2021, SMS 2025).</p>
+                <blockquote>Cytat: Wyrok SN z 28 lutego 2020 r., sygn. V CSK 428/19 – rażąca niewdzięczność wymaga umyślnej krzywdy.</blockquote>
+                <table>
+                    <thead>
+                        <tr><th>Data</th><th>Zdarzenie</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>07.07.2017</td><td>Akt darowizny</td></tr>
+                        <tr><td>Luty 2021</td><td>Początek konfliktu</td></tr>
+                        <!-- Dodaj więcej wierszy -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="kalendarz" class="tab-content">
+                <h2>Analiza Kalendarza Barbary</h2>
+                <p>Tekst do edycji: Przykłady selektywnych notatek, wyolbrzymień (np. odmowa kluczyków przerobiona na odmowę pomocy).</p>
+                <blockquote>Cytat z kalendarza: "Odmówił dać klucz... Zadzwoń na pogotowie".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz PDF Kalendarza</button></div>
+            </section>
+
+            <section id="plan-barbary" class="tab-content">
+                <h2>Plan Barbary – Mechanizmy Manipulacji</h2>
+                <p>Tekst do edycji: Opis planowania (konsultacje prawne, pełnomocnictwo, prowokacje), chronologia manipulacji.</p>
+                <blockquote>Cytat: "To nie plotkowanie – to budowanie sprawy".</blockquote>
+                <table>
+                    <thead>
+                        <tr><th>Mechanizm</th><th>Przykład</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Prowokacje</td><td>Wyłączanie prądu</td></tr>
+                        <!-- Dodaj więcej -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="absurdalne-zarzuty" class="tab-content">
+                <h2>Absurdalne i Sprzeczne Zarzuty</h2>
+                <p>Tekst do edycji: Porównanie oskarżeń z faktami (np. kamery jako inwigilacja vs. bezpieczeństwo).</p>
+                <blockquote>Cytat z pozwu: "Odmówił zawiezienia ojca".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz Analizę Zarzutów</button></div>
+            </section>
+
+            <section id="porownanie-zeznan" class="tab-content">
+                <h2>Porównanie Zeznań i Notatek</h2>
+                <p>Tekst do edycji: Zestawienie zeznań Sylwestra (łagodne) vs. oskarżeń Barbary, policji.</p>
+                <blockquote>Cytat z zeznań Sylwestra: "Ignoruje mnie... nie obraża".</blockquote>
+                <table>
+                    <thead>
+                        <tr><th>Źródło</th><th>Zarzut</th><th>Fakty</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Zeznania Sylwestra</td><td>Ignorowanie</td><td>Brak agresji</td></tr>
+                        <!-- Dodaj więcej -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="zdrada-adwokata" class="tab-content">
+                <h2>Zdrada Adwokata</h2>
+                <p>Tekst do edycji: Analiza działań Domka, wymuszone przyznanie się, wpływ na wyrok karny.</p>
+                <blockquote>Cytat: "Zmusił do przyznania się 5 minut przed rozprawą".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz Analizę Wyroku Karnego</button></div>
+            </section>
+
+            <section id="dowody-troski" class="tab-content">
+                <h2>Dowody Troski i Inwestycji Dariusza</h2>
+                <p>Tekst do edycji: Rachunki inwestycji (ocieplenie, fotowoltaika), unikanie jako ochrona.</p>
+                <blockquote>Cytat: "Inwestycje w nieruchomość dowodzą wdzięczności".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz Rachunki</button></div>
+            </section>
+
+            <section id="stan-zdrowia" class="tab-content">
+                <h2>Stan Zdrowia Sylwestra i Pełnomocnictwo</h2>
+                <p>Tekst do edycji: Chronologia zdrowia, analiza pełnomocnictwa jako narzędzia kontroli.</p>
+                <blockquote>Cytat: "On już nie ogarnia – podpisze wszystko".</blockquote>
+                <table>
+                    <thead>
+                        <tr><th>Data</th><th>Stan Zdrowia</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2019</td><td>Wylew</td></tr>
+                        <!-- Dodaj więcej -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="sms-sylwestra" class="tab-content">
+                <h2>SMS Sylwestra – Akt Przebaczenia</h2>
+                <p>Tekst do edycji: Komentarz prawny, znaczenie dla procesu (wybaczenie niweczy zarzuty).</p>
+                <blockquote>Cytat z SMS: "Kochany synu... wróć... jesteśmy z ciebie dumni".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz SMS</button></div>
+            </section>
+
+            <section id="materiay-dowodowe" class="tab-content">
+                <h2>Materiały Dowodowe</h2>
+                <p>Tekst do edycji: Lista plików do pobrania (np. protokoły, notatki).</p>
+                <ul>
+                    <li><button class="download-btn">Pobierz Protokół Policji</button></li>
+                    <li><button class="download-btn">Pobierz Kalendarz Barbary</button></li>
+                    <!-- Dodaj więcej -->
+                </ul>
+            </section>
+
+            <section id="podsumowanie" class="tab-content">
+                <h2>Podsumowanie i Rekomendacje</h2>
+                <p>Tekst do edycji: Główne wnioski (manipulacja Barbary), porady (biegły, mediacja).</p>
+                <blockquote>Cytat: "Szanse na wygraną: 90%".</blockquote>
+                <div>Pobierz plik: <button class="download-btn">Pobierz Pełny Raport</button></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const links = document.querySelectorAll('nav a');
+        const contents = document.querySelectorAll('.tab-content');
+        function activateTab(targetId) {
+            contents.forEach(content => content.classList.remove('active'));
+            links.forEach(l => l.classList.remove('active'));
+            document.getElementById(targetId).classList.add('active');
+            const activeLink = Array.from(links).find(l => l.getAttribute('href') === `#${targetId}`);
+            if (activeLink) activeLink.classList.add('active');
+            history.pushState(null, null, `#${targetId}`);
+        }
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                activateTab(targetId);
+            });
+        });
+        // Load tab from URL hash
+        const hash = window.location.hash.substring(1);
+        if (hash) activateTab(hash);
+        else activateTab('intro');
+
+        // Download buttons placeholder
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text('Przykładowy PDF - Pobieranie Dokumentu', 10, 10);
+                doc.save('dokument.pdf');
+            });
+        });
+    </script>
+</body>
+</html>
+```
