@@ -1,0 +1,173 @@
+// app.js
+
+// Mock data
+window.DAREMON_DATA = {
+    timeline: [
+        { date: "2017-07-07", title: "Darowizna nieruchomości", tags: ["cywilna"], summary: "Akt notarialny – darczyńca w pełni świadomy.", links: ["doc-akt-darowizny.pdf"] },
+        { date: "2021-04-20", title: "Wpis o wizycie u psychologa", tags: ["manipulacja"], summary: "Notatka w kalendarzu – analiza kontekstu.", links: ["scan-kalendarz-0420.png"] },
+        { date: "2021-05-21", title: "Incydent i transport do szpitala", tags: ["karna","manipulacja"], summary: "Porównanie relacji i brak potwierdzenia trybu transportu.", links: ["raport-porownawczy-0521.pdf"] },
+        { date: "2021-08-06", title: "Pismo o odwołaniu darowizny", tags: ["cywilna"], summary: "Pełnomocnictwo vs zdolność do czynności – niespójności.", links: ["pismo-odwolanie.pdf"] },
+        { date: "2025-06-29", title: "Aktualizacja sprawy", tags: ["cywilna","karna"], summary: "Podsumowanie stanu na dzień 2025-06-29.", links: [] }
+    ],
+    documents: [
+        { id:"doc1", type:"cywilne", title:"Akt darowizny (07.07.2017)", thumb:"thumb-akt.png", src:"doc-akt-darowizny.pdf", notes:"Darowizna świadoma, planowanie majątkowe." },
+        { id:"doc2", type:"karne", title:"Wyrok nakazowy II K 568/21", thumb:"thumb-wyrok.png", src:"wyrok-nakazowy.pdf", notes:"Rola obrońcy, brak korelacji dowodowej." },
+        { id:"doc3", type:"psychologia", title:"Notatki z kalendarza", thumb:"thumb-kalendarz.png", src:"scan-kalendarz-0420.png", notes:"Selektywność wpisów; kontekst rodzinny." }
+    ],
+    relations: [
+        { from:"Dariusz", to:"Barbara", type:"konflikt" },
+        { from:"Barbara", to:"Sylwester", type:"pełnomocnictwo" },
+        { from:"Dorota", to:"Barbara", type:"wsparcie" },
+        { from:"Adwokat", to:"Dariusz", type:"reprezentacja" }
+    ],
+    diffExamples: [
+        { date:"2021-05-21", sourceA:"Kalendarz Barbary", textA:"...", sourceB:"Dokumentacja medyczna", textB:"...", verdict:"Niespójność dot. trybu transportu." }
+    ]
+};
+
+// Offline check
+if (!navigator.onLine) {
+    document.getElementById('offline-banner').hidden = false;
+}
+
+// Menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navMobile = document.querySelector('.nav-mobile');
+const closeMenu = document.querySelector('.close-menu');
+hamburger.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !expanded);
+    navMobile.setAttribute('aria-hidden', expanded);
+});
+closeMenu.addEventListener('click', () => {
+    hamburger.setAttribute('aria-expanded', 'false');
+    navMobile.setAttribute('aria-hidden', 'true');
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMobile.getAttribute('aria-hidden') === 'false') {
+        hamburger.setAttribute('aria-expanded', 'false');
+        navMobile.setAttribute('aria-hidden', 'true');
+    }
+});
+navMobile.addEventListener('click', (e) => {
+    if (e.target === navMobile) {
+        hamburger.setAttribute('aria-expanded', 'false');
+        navMobile.setAttribute('aria-hidden', 'true');
+    }
+});
+
+// Timeline render and filter
+const timelineData = DAREMON_DATA.timeline;
+const timelineContainer = document.querySelector('.timeline');
+const timelineFilters = document.querySelectorAll('.timeline-section .filters input');
+function renderTimeline(filteredData) {
+    timelineContainer.innerHTML = '';
+    filteredData.forEach(item => {
+        const el = document.createElement('div');
+        el.classList.add('timeline-item');
+        el.innerHTML = `<h3>${item.date}: ${item.title}</h3><p>${item.summary}</p><div>${item.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>`;
+        el.addEventListener('click', () => openModal(`<h2>${item.title}</h2><p>${item.summary}</p><ul>${item.links.map(link => `<li><a href="${link}">${link}</a></li>`).join('')}</ul>`));
+        timelineContainer.appendChild(el);
+    });
+}
+renderTimeline(timelineData);
+timelineFilters.forEach(filter => filter.addEventListener('change', () => {
+    const activeTags = Array.from(timelineFilters).filter(f => f.checked).map(f => f.value);
+    const filtered = timelineData.filter(item => item.tags.some(tag => activeTags.includes(tag)));
+    renderTimeline(filtered);
+}));
+
+// Documents render and filter/search
+const documentsData = DAREMON_DATA.documents;
+const documentsGrid = document.querySelector('.documents-grid');
+const docFilters = document.querySelectorAll('.documents-section .filters input');
+const searchInput = document.getElementById('search-input');
+function renderDocuments(filteredData) {
+    documentsGrid.innerHTML = '';
+    filteredData.forEach(doc => {
+        const el = document.createElement('div');
+        el.classList.add('doc-tile');
+        el.innerHTML = `<img src="${doc.thumb}" alt="Miniatura" class="thumb"><h3>${doc.title}</h3><p>${doc.notes}</p>`;
+        el.addEventListener('click', () => openModal(`<h2>${doc.title}</h2><p>${doc.notes}</p><a href="${doc.src}">Pobierz</a> <button onclick="alert('Powiązania: mock')">Zobacz powiązania</button> <button onclick="navigator.clipboard.writeText('${doc.notes}')">Skopiuj cytat</button>`));
+        documentsGrid.appendChild(el);
+    });
+}
+renderDocuments(documentsData);
+docFilters.forEach(filter => filter.addEventListener('change', filterDocuments));
+searchInput.addEventListener('input', filterDocuments);
+function filterDocuments() {
+    const activeTypes = Array.from(docFilters).filter(f => f.checked).map(f => f.value);
+    const query = searchInput.value.toLowerCase();
+    const filtered = documentsData.filter(doc => activeTypes.includes(doc.type) && doc.title.toLowerCase().includes(query));
+    renderDocuments(filtered);
+}
+
+// Modal
+const modal = document.getElementById('modal');
+const modalBody = document.getElementById('modal-body');
+const closeModalBtn = document.querySelector('.close-modal');
+function openModal(content) {
+    modalBody.innerHTML = content;
+    modal.setAttribute('aria-hidden', 'false');
+    modal.focus();
+}
+closeModalBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+}
+
+// Relations graph (simple SVG)
+const relations = DAREMON_DATA.relations;
+const svg = document.getElementById('relations-graph');
+relations.forEach((rel, i) => {
+    const circle1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle1.setAttribute('cx', 50 + i * 100);
+    circle1.setAttribute('cy', 50);
+    circle1.setAttribute('r', 20);
+    circle1.setAttribute('fill', '#4CC9F0');
+    const text1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text1.setAttribute('x', 50 + i * 100);
+    text1.setAttribute('y', 55);
+    text1.textContent = rel.from;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', 50 + i * 100);
+    line.setAttribute('y1', 50);
+    line.setAttribute('x2', 150 + i * 100);
+    line.setAttribute('y2', 150);
+    line.setAttribute('stroke', '#89D2DC');
+    svg.appendChild(circle1);
+    svg.appendChild(text1);
+    svg.appendChild(line);
+});
+
+// Diff panel (simple)
+const diffExamples = DAREMON_DATA.diffExamples;
+const panelA = document.querySelector('.panel-a');
+const panelB = document.querySelector('.panel-b');
+panelA.innerHTML = `<h4>${diffExamples[0].sourceA}</h4><p>${diffExamples[0].textA}</p>`;
+panelB.innerHTML = `<h4>${diffExamples[0].sourceB}</h4><p>${diffExamples[0].textB}</p><p>Werdykt: ${diffExamples[0].verdict}</p>`;
+
+// Charts (simple canvas)
+function drawLineChart(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(0, 50);
+    ctx.lineTo(100, 20);
+    ctx.lineTo(200, 80);
+    ctx.strokeStyle = '#4CC9F0';
+    ctx.stroke();
+}
+drawLineChart(document.getElementById('chart1').getContext('2d'));
+drawLineChart(document.getElementById('chart2').getContext('2d'));
+drawLineChart(document.getElementById('chart3').getContext('2d'));
+drawLineChart(document.getElementById('consistency-chart').getContext('2d'));
+
+// Report download (print)
+document.getElementById('download-report').addEventListener('click', () => window.print());
+
+// Contact form demo
+document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Dziękujemy (demo)');
+});

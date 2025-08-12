@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza Konfliktu Rodziny Adamskich</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #555;
+        }
+        section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #007bff;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #007bff;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #007bff;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .right::after {
+            left: -16px;
+        }
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+        }
+        .schema {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .person {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .person:hover {
+            background-color: #ced4da;
+        }
+        .connections {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        .faq-question {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .faq-answer {
+            display: none;
+        }
+        @media screen and (max-width: 600px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item::after {
+                left: 15px;
+            }
+            .right {
+                left: 0%;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Analiza Konfliktu Rodziny Adamskich</h1>
+        <p>Przystępne wyjaśnienie kluczowych aspektów sporu rodzinnego wokół nieruchomości w Adamowie.</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#sluzebnosc">Służebność Osobista</a></li>
+            <li><a href="#nadinterpretacja">Nadinterpretacja Służebności</a></li>
+            <li><a href="#pelnomocnictwo">Pełnomocnictwo i Kontrola Majątku</a></li>
+            <li><a href="#chronologia">Chronologia Wydarzeń</a></li>
+            <li><a href="#schemat">Schemat Relacji</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#dokumenty">Dokumenty Źródłowe</a></li>
+        </ul>
+    </nav>
+    <section id="sluzebnosc">
+        <h2>Czym jest służebność osobista i jakie są jej granice prawne?</h2>
+        <p>Służebność osobista to prawo, które pozwala oznaczonej osobie fizycznej korzystać z nieruchomości w określony sposób. Zgodnie z polskim Kodeksem cywilnym, nieruchomość można obciążyć na rzecz takiej osoby prawem, którego treść odpowiada treści służebności gruntowej.<grok-card data-id="ebeb9c" data-type="citation_card"></grok-card> Na przykład, służebność mieszkania umożliwia zamieszkanie w budynku, korzystanie z urządzeń wspólnego użytku i swobodne poruszanie się po posesji.</p>
+        <p>Granice służebności są określone w akcie notarialnym. Zazwyczaj obejmuje ona część mieszkalną, ale niekoniecznie budynki gospodarcze używane do działalności właściciela. Osoba uprawniona może przyjąć na mieszkanie małżonka i małoletnie dzieci, ale inne osoby tylko jeśli są utrzymywane.<grok-card data-id="ccc1f5" data-type="citation_card"></grok-card> Nie daje to jednak pełnej kontroli nad całą nieruchomością – właściciel zachowuje prawo do zarządzania swoją własnością.</p>
+    </section>
+    <section id="nadinterpretacja">
+        <h2>W jaki sposób Barbara nadinterpretowała służebność i wykorzystała ją do próby przejęcia nieruchomości?</h2>
+        <p>Barbara Adamska interpretowała służebność jako prawo do pełnej kontroli nad całą nieruchomością, w tym budynkami gospodarczymi i narzędziami. Na przykład, skarżyła się na ograniczanie dostępu do warsztatu czy zewnętrznej toalety, mimo że służebność dotyczyła głównie budynku mieszkalnego i urządzeń wspólnych.</p>
+        <p>Ta nadinterpretacja posłużyła do dokumentowania rzekomych naruszeń, takich jak instalacja kamer czy zamykanie pomieszczeń, co stało się podstawą oskarżeń o przemoc psychiczną i rażącą niewdzięczność, mających na celu odwołanie darowizny.</p>
+    </section>
+    <section id="pelnomocnictwo">
+        <h2>Jak uzyskanie pełnomocnictwa od Sylwestra posłużyło przejęciu kontroli nad majątkiem?</h2>
+        <p>Pełnomocnictwo to upoważnienie do działania w imieniu innej osoby. W Kodeksie cywilnym obejmuje ono czynności zwykłego zarządu, a do szczególnych potrzebne jest specjalne umocowanie.<grok-card data-id="c88876" data-type="citation_card"></grok-card> Barbara uzyskała szerokie pełnomocnictwo od schorowanego Sylwestra 19 lipca 2021 roku, co pozwoliło jej zarządzać majątkiem, reprezentować go w sądach i podpisywać dokumenty w jego imieniu.</p>
+        <p>Wykorzystała to do odwołania darowizny 6 sierpnia 2021 roku, mimo sprzecznych zeznań Sylwestra, co sugeruje instrumentalizację jego stanu zdrowia do realizacji własnego planu odzyskania nieruchomości.</p>
+    </section>
+    <section id="chronologia">
+        <h2>Chronologia Wydarzeń</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>7 lipca 2017</h3>
+                    <p>Akt darowizny Sylwestra na rzecz Dariusza z ustanowieniem służebności.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>Luty 2021</h3>
+                    <p>Początek konfliktu związany z Julią, eskalacja i notatki Barbary.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>29 marca 2021</h3>
+                    <p>Pierwsza interwencja policji zgłoszona przez Barbarę.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>3-4 kwietnia 2021</h3>
+                    <p>Pierwsza próba samobójcza Dariusza.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>19 lipca 2021</h3>
+                    <p>Barbara uzyskuje pełnomocnictwo od Sylwestra.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>25 lipca 2021</h3>
+                    <p>Kolejna interwencja policji, wdrożenie Niebieskiej Karty.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>6 sierpnia 2021</h3>
+                    <p>Oświadczenie o odwołaniu darowizny.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>13 września 2021</h3>
+                    <p>Wyrok nakazowy przeciwko Dariuszowi.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>14 października 2021</h3>
+                    <p>Sprzeciw Dariusza od wyroku.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>29 kwietnia 2022</h3>
+                    <p>Pozew o nakazanie złożenia oświadczenia woli.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="schemat">
+        <h2>Interaktywny Schemat Relacji Między Postaciami</h2>
+        <div class="schema">
+            <div class="person" onclick="showInfo('sylwester')">Sylwester Adamski (Ojciec)</div>
+            <div class="person" onclick="showInfo('barbara')">Barbara Adamska (Matka)</div>
+            <div class="person" onclick="showInfo('dariusz')">Dariusz Adamski (Syn)</div>
+            <div class="person" onclick="showInfo('julia')">Julia Kowalska (Kuzynka)</div>
+            <div class="person" onclick="showInfo('dorota')">Dorota Kowalska (Siostra Barbary)</div>
+            <div class="connections" id="info"></div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>FAQ - Najczęściej Zadawane Pytania</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Czym jest służebność osobista?</div>
+            <div class="faq-answer">To prawo do korzystania z nieruchomości na rzecz konkretnej osoby, np. do zamieszkania. Nie daje pełnej kontroli nad własnością.<grok-card data-id="b57cb0" data-type="citation_card"></grok-card></div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Jakie są granice służebności mieszkania?</div>
+            <div class="faq-answer">Obejmuje zamieszkanie, korzystanie z urządzeń wspólnych, ale niekoniecznie budynków gospodarczych.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Czym jest pełnomocnictwo?</div>
+            <div class="faq-answer">Upoważnienie do działania w imieniu innej osoby, regulowane Kodeksem cywilnym.<grok-card data-id="1b6731" data-type="citation_card"></grok-card></div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Czy pełnomocnictwo można nadużyć?</div>
+            <div class="faq-answer">Tak, jeśli pełnomocnik działa wbrew woli mocodawcy, co może prowadzić do unieważnienia czynności.</div>
+        </div>
+    </section>
+    <section id="dokumenty">
+        <h2>Dokumenty Źródłowe</h2>
+        <ul>
+            <li><a href="#akt-darowizny" target="_blank">Akt darowizny z 7 lipca 2017 (placeholder)</a></li>
+            <li><a href="#pelnomocnictwo" target="_blank">Akt pełnomocnictwa z 19 lipca 2021 (placeholder)</a></li>
+            <li><a href="#odwolanie" target="_blank">Oświadczenie o odwołaniu darowizny z 6 sierpnia 2021 (placeholder)</a></li>
+            <li><a href="#notatki" target="_blank">Notatki z kalendarza Barbary (placeholder)</a></li>
+        </ul>
+    </section>
+    <script>
+        function showInfo(person) {
+            const info = document.getElementById('info');
+            let text = '';
+            switch(person) {
+                case 'sylwester':
+                    text = 'Darczyńca, schorowany, udzielił pełnomocnictwa Barbarze.';
+                    break;
+                case 'barbara':
+                    text = 'Inicjatorka działań prawnych, pełnomocnik Sylwestra.';
+                    break;
+                case 'dariusz':
+                    text = 'Obdarowany, oskarżony o znęcanie.';
+                    break;
+                case 'julia':
+                    text = 'Kuzynka Dariusza, przyczyna eskalacji konfliktu.';
+                    break;
+                case 'dorota':
+                    text = 'Siostra Barbary, doradczyni w gromadzeniu dowodów.';
+                    break;
+            }
+            info.innerHTML = `<p>Informacje o ${person}: ${text}</p>`;
+        }
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

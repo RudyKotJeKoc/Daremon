@@ -1,294 +1,656 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julia Kowalska - Doradca Fotowoltaiczny w Bydgoszczy</title>
+    <title>Analiza Sprawy Adamskich: Strategiczne Rekomendacje</title>
     <style>
-        /* CSS: Minimalistyczny, nowoczesny design z bielą i zielonymi akcentami */
         body {
             font-family: 'Arial', sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: #f4f7f6;
             color: #333;
-            line-height: 1.6;
-        }
-        header, section, footer {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        header {
-            background-color: #f0f8f0;
-            text-align: center;
-            border-bottom: 2px solid #4caf50;
-        }
-        h1, h2, h3 {
-            color: #4caf50;
-        }
-        a {
-            color: #4caf50;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
         }
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
-        .section-half {
-            flex: 1 1 45%;
-            margin: 10px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input, textarea {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #success-message {
-            display: none;
-            color: #4caf50;
-            font-weight: bold;
-        }
-        .faq-item {
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
             margin-bottom: 20px;
         }
-        .faq-question {
-            cursor: pointer;
-            color: #4caf50;
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
         }
-        .faq-answer {
-            display: none;
+        header p {
+            font-size: 1.1em;
             margin-top: 10px;
+            opacity: 0.9;
+        }
+        nav {
+            background-color: #34495e;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 5px;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #2980b9;
+            color: #fff;
+        }
+        section {
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        details {
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+        details[open] {
+            background-color: #dde1e2;
+        }
+        summary {
+            font-weight: bold;
+            padding: 15px 20px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            user-select: none;
+            color: #2c3e50;
+        }
+        summary::marker {
+            content: ''; /* Remove default marker */
+        }
+        summary::before {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            font-size: 1.2em;
+            color: #3498db;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::before {
+            content: '-';
+            transform: rotate(0deg);
+        }
+        .content {
+            padding: 10px 20px 15px;
+            background-color: #fcfcfc;
+            border-top: 1px solid #bdc3c7;
+        }
+        .citation {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+            display: block;
+        }
+        .highlight {
+            background-color: #d1ecf1;
+            padding: 5px;
+            border-left: 5px solid #007bff;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .note {
+            background-color: #ffeeba;
+            border-left: 5px solid #ffc107;
+            padding: 10px;
+            margin: 15px 0;
         }
         footer {
-            background-color: #f0f8f0;
             text-align: center;
-            font-size: 0.8em;
+            padding: 20px 0;
+            margin-top: 30px;
             color: #777;
-            position: relative;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
         }
-        .inside-joke {
-            font-size: 0.7em;
-            color: #aaa;
-            margin-top: 10px;
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        #visit-counter {
-            font-weight: bold;
-            color: #4caf50;
-        }
-        .highlight-email {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #4caf50;
-            margin: 10px 0;
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            .container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Julia Kowalska - Doradca Fotowoltaiczny w Bydgoszczy</h1>
-        <p>Profesjonalne doradztwo w zakresie instalacji fotowoltaicznych. Oszczędzaj na energii, dbaj o środowisko.</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Adamski kontra Adamska</h1>
+            <p>Analiza motywów i działań</p>
+        </header>
 
-    <section id="welcome">
-        <h2>To tylko zabawa, ale może być czymś więcej</h2>
-        <p>Cześć Julia, ta strona to taki mój żart technologiczny – stworzona dla zabawy, żeby pokazać, co potrafię. Ale jeśli zechcesz, może stać się Twoim realnym narzędziem do pracy: generowania leadów, prezentacji wiedzy i budowania wizerunku. Żadnych zobowiązań, żadnego nacisku. Jeśli widzisz w tym potencjał, napisz na <a href="mailto:dariusz@daremon.nl" class="highlight-email">dariusz@daremon.nl</a>, a ja udostępnię Ci moje zasoby techniczne i know-how. Wszystko online, bez prywatnych kontaktów – czysto profesjonalnie.</p>
-    </section>
+        <nav>
+            <ul>
+                <li><a href="#intro">Wstęp i Kontekst</a></li>
+                <li><a href="#chronology">Chronologia Wydarzeń</a></li>
+                <li><a href="#calendar">Kalendarz Barbary</a></li>
+                <li><a href="#manipulations">Mechanizmy Manipulacji</a></li>
+                <li><a href="#legal">Analiza Prawna</a></li>
+                <li><a href="#incidents">Kluczowe Incydenty</a></li>
+                <li><a href="#lawyer">Rola Adwokata Domka</a></li>
+                <li><a href="#contradictions">Sprzeczności w Zeznaniach</a></li>
+                <li><a href="#intentions">Intencje Stron</a></li>
+                <li><a href="#instrumental">Instrumentalny Charakter Powództwa</a></li>
+                <li><a href="#recommendations">Rekomendacje i Wnioski</a></li>
+            </ul>
+        </nav>
 
-    <section id="about">
-        <h2>O mnie</h2>
-        <div class="container">
-            <div class="section-half">
-                <img src="https://daremon.nl/images/5eco.png" alt="Julia Kowalska" style="border-radius: 50%; max-width: 100%;">
-            </div>
-            <div class="section-half">
-                <p>Julia Kowalska, doradca klienta z Bydgoszczy z ponad 5 latami doświadczenia w branży fotowoltaicznej. Specjalizuję się w doborze optymalnych rozwiązań PV dla domów i firm. Moja misja: pomagać klientom oszczędzać na rachunkach za prąd, jednocześnie promując ekologiczne technologie.</p>
-                <p>Historia zawodowa: Zaczynałam jako inżynier w firmie instalacyjnej, dziś oferuję niezależne doradztwo bez ukrytych kosztów.</p>
-            </div>
-        </div>
-    </section>
+        <section id="intro">
+            <h2>Wstęp i Kontekst Sprawy</h2>
+            <p>Sprawa cywilna dotyczy cofnięcia darowizny nieruchomości (powództwo o nakazanie złożenia oświadczenia woli – zwrot darowizny) wytoczonego przez Sylwestra Adamskiego (działającego przez pełnomocnika Barbarę Adamską) przeciwko Dariuszowi Adamskiemu [1]. Sprawa koncentruje się na cofnięciu darowizny nieruchomości dokonanej 7 lipca 2017 roku przez Sylwestra Adamskiego (darczyńcę, ojca pozwanego) na rzecz Dariusza Adamskiego (obdarowanego, pozwanego) [2, 10, 12, 14, 15, 24-29]. Darowizna ta, o wartości 210 000 zł, była świadomym aktem planowania majątkowego [2, 12, 14, 15, 25, 26, 28, 30]. W akcie notarialnym ustanowiono dożywotnią i nieodpłatną służebność osobistą mieszkania na rzecz Sylwestra i Barbary Adamskich, obejmującą cały budynek mieszkalny oraz swobodne poruszanie się po całej nieruchomości [2, 12, 14, 25, 28]. Umowa nie nakładała na obdarowanego zobowiązań finansowych poza służebnością mieszkania [2, 25].</p>
+            <p>Faktycznym inicjatorem działań jest Barbara Adamska (żona darczyńcy, matka pozwanego, pełnomocnik Sylwestra), która działa w swoim interesie (kontrola nad nieruchomością), wykorzystując osłabiony stan zdrowia Sylwestra po wylewie w 2019 roku [10, 24, 25, 29-33]. Sylwester, po wylewie w 2019 roku, miał pogorszoną świadomość, samodzielność i zdolność decyzyjną [25, 29, 32]. Od tego momentu Barbara przejęła kontrolę, co budzi wątpliwości co do ważności późniejszych czynności prawnych [25, 29, 31-34].</p>
+            <p>Powództwo opiera się na zarzutach "rażącej niewdzięczności" (art. 898 § 1 k.c.), jednak analizy wskazują na brak podstaw merytorycznych i formalnych [9, 24, 35-40]. Konflikty rodzinne, eskalujące od lutego 2021 roku [9, 10, 27, 29, 30, 41-46], są selektywnie dokumentowane przez Barbarę, co sugeruje instrumentalne budowanie narracji [3, 9, 30, 47-53]. Dariusz ciężko pracował w Holandii i inwestował niemal wszystkie zarobki w dom rodzinny, co dowodzi jego troski o rodzinę i wdzięczności [26, 28, 37, 54].</p>
+        </section>
 
-    <section id="offer">
-        <h2>Oferta</h2>
-        <p>Doradztwo w zakresie fotowoltaiki: analiza potrzeb, dobór paneli, symulacje oszczędności. Jeśli chcesz, mogę pomóc Ci to rozwinąć – wszystko zależy od Ciebie.</p>
-        <h3>Z kim współpracujesz?</h3>
-        <p>Strona to dzieło inżyniera z pasją do automatyzacji i web developmentu. To pokaz możliwości – od kalkulatorów po integracje. Zero prowizji, czysta technologia.</p>
-    </section>
+        <section id="chronology">
+            <h2>Chronologia Kluczowych Wydarzeń</h2>
+            <p>Poniższa oś czasu przedstawia najważniejsze punkty konfliktu, od darowizny po obecne postępowania sądowe [12, 27-29, 42, 45, 55-57]:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Wydarzenie</th>
+                        <th>Kluczowe Szczegóły / Kontekst</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07.07.2017</td>
+                        <td>Akt Darowizny</td>
+                        <td>Sylwester Adamski przekazuje Dariuszowi gospodarstwo o wartości 210 000 zł, z ustanowioną służebnością dla siebie i Barbary. Darowizna była świadomym aktem planowania majątkowego [2, 12, 14, 15, 25-28].</td>
+                    </tr>
+                    <tr>
+                        <td>2019</td>
+                        <td>Wylew Sylwestra</td>
+                        <td>Pogorszenie świadomości i zdolności decyzyjnych. Od tego momentu Barbara przejmuje kontrolę [25, 29, 32, 34].</td>
+                    </tr>
+                    <tr>
+                        <td>Luty 2021</td>
+                        <td>Początek eskalacji konfliktów</td>
+                        <td>Barbara dezaprobuje związek Dariusza z kuzynką Julią. Prowokacje Barbary (nocne wtargnięcia, wyłączanie prądu, insynuacje) [9, 13, 27, 29, 41-44, 58].</td>
+                    </tr>
+                    <tr>
+                        <td>29.03.2021</td>
+                        <td>Wizyta u prawnika / Incydent z prądem</td>
+                        <td>Barbara i Sylwester udają się do prawnika w Złotowie. Tego samego dnia Barbara wyłącza prąd w domu, co wywołuje incydent z paralizatorem [43, 59-64].</td>
+                    </tr>
+                     <tr>
+                        <td>03-04.04.2021</td>
+                        <td>Próby samobójcze Dariusza</td>
+                        <td>Dariusz cierpi na głęboką depresję, miał myśli i próby samobójcze, schudł 9 kg [26, 29, 43, 44, 65-70].</td>
+                    </tr>
+                    <tr>
+                        <td>21.05.2021</td>
+                        <td>Incydent szpitalny</td>
+                        <td>Barbara notuje odmowę klucza do samochodu dla Sylwestra. Dariusz sugeruje wezwanie pogotowia lub taksówki [29, 31, 41, 71-79].</td>
+                    </tr>
+                    <tr>
+                        <td>19.07.2021</td>
+                        <td>Pełnomocnictwo dla Barbary</td>
+                        <td>Sylwester udziela Barbarze szerokiego pełnomocnictwa w stanie osłabionej świadomości [29, 31, 33, 34, 41, 74, 80-87].</td>
+                    </tr>
+                    <tr>
+                        <td>Lipiec 2021</td>
+                        <td>Niebieska Karta</td>
+                        <td>Interwencje policji (17.07, 25.07) inicjowane przez Barbarę; oskarżenia o znęcanie psychiczne [29, 53, 55, 73, 74, 84, 88-97].</td>
+                    </tr>
+                    <tr>
+                        <td>03.08.2021</td>
+                        <td>Zeznanie Sylwestra</td>
+                        <td>"Dariusz mnie nie obraża, ignoruje; nigdy nas nie uderzył" – sprzeczne z listem odwołania [29, 33, 47, 80, 98-107].</td>
+                    </tr>
+                    <tr>
+                        <td>06.08.2021</td>
+                        <td>List odwołania darowizny</td>
+                        <td>Podpisany przez Barbarę; ogólne zarzuty bez konkretów; wysłany na nieaktualny adres. Nieskuteczny [29, 33, 41, 80, 102, 104, 108-116].</td>
+                    </tr>
+                    <tr>
+                        <td>Sierpień 2021</td>
+                        <td>Wyprowadzka Dariusza</td>
+                        <td>Dariusz opuszcza dom rodzinny w Adamowie i zrywa kontakt, wyjeżdżając do Holandii [29, 70, 82, 89, 91, 113, 117-119].</td>
+                    </tr>
+                    <tr>
+                        <td>13.10.2021</td>
+                        <td>Wyrok nakazowy (II K 568/21)</td>
+                        <td>Za znęcanie psychiczne po wymuszonym przyznaniu się; wniesiono sprzeciw, co spowodowało utratę mocy wyroku [18, 29, 33, 55, 77, 93, 98, 103, 120-130].</td>
+                    </tr>
+                    <tr>
+                        <td>29.04.2022</td>
+                        <td>Pozew cywilny</td>
+                        <td>Sylwester wnosi pozew o zwrot nieruchomości, formalnie Sylwester, merytorycznie Barbara [29, 33, 55, 98, 116, 128, 131-134].</td>
+                    </tr>
+                    <tr>
+                        <td>08.02.2024</td>
+                        <td>Propozycja ugody</td>
+                        <td>Cel – kontrola nad nieruchomością (dostęp do pomieszczeń, narzędzi, kamer), nie ochrona darczyńcy [29, 69, 71, 98, 116, 135-140].</td>
+                    </tr>
+                    <tr>
+                        <td>05.08.2025</td>
+                        <td>SMS od Sylwestra</td>
+                        <td>"Jeśli czujesz się przerażony... zgodź się na leczenie." Sugeruje troskę ojca i podważa tezę o braku przebaczenia [29, 54, 69, 141-143].</td>
+                    </tr>
+                    <tr>
+                        <td>10.08.2025</td>
+                        <td>Data sporządzenia raportu</td>
+                        <td>Aktualny status sprawy i podsumowanie analiz [1, 7, 9, 16, 17].</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-    <section id="calculator">
-        <h2>Kalkulator korzyści PV</h2>
-        <p>Oblicz szacunkowe oszczędności. Wprowadź dane, a ja przygotuję wstępną analizę.</p>
-        <form id="pv-form">
-            <label for="consumption">Zużycie prądu rocznie (kWh):</label>
-            <input type="number" id="consumption" required>
-            <label for="roof-area">Powierzchnia dachu (m²):</label>
-            <input type="number" id="roof-area" required>
-            <label for="location">Lokalizacja (miasto):</label>
-            <input type="text" id="location" required>
-            <button type="submit">Oblicz oszczędności</button>
-        </form>
-        <div id="result" style="margin-top: 20px;"></div>
-    </section>
+        <section id="calendar">
+            <h2>Analiza Kalendarza Barbary Adamskiej: Narzędzie Manipulacji</h2>
+            <p>Kalendarz Barbary Adamskiej jest kluczowym dokumentem przedstawianym jako dowód w konflikcie, jednak jego wiarygodność i obiektywizm są podważane, a zapisy stanowią część przemyślanej strategii procesowej [3, 48-53, 78, 144-146].</p>
+            <details>
+                <summary>Brak obiektywizmu i selektywność wpisów</summary>
+                <div class="content">
+                    <p>Barbara skrupulatnie dokumentuje zachowania Dariusza, które mogą obciążyć go w kontekście "rażącej niewdzięczności", pomijając fakty korzystne dla Dariusza (np. odebranie Sylwestra ze szpitala przez Dariusza) [49-51, 53, 78, 124, 144, 147-149]. Kalendarz skupia się na zdarzeniach negatywnych, ignorując wszelkie przejawy jego troski czy wcześniejszych inwestycji w dom [27, 49, 50, 53, 54, 67, 78, 144, 147, 150].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Przykłady instrumentalnego wykorzystania kalendarza</summary>
+                <div class="content">
+                    <ul>
+                        <li><span class="highlight">10 lutego 2021: "Zauważyłam, że ona jest cały czas u niego w pokoju. Po godzinie drugiej w nocy zgasili światło. Nadal nie wychodziła. Wtedy weszłam, było prawie 2.30 w nocy."</span> Ten wpis, jeden z pierwszych, uznawany jest za początek eskalacji konfliktu. Dariusz twierdzi, że to wtargnięcie było prowokacją i naruszeniem prywatności [13, 58].</li>
+                        <li><span class="highlight">15 lutego 2021: "Syn zablokował nasze telef. Nie odbiera."</span> Barbara notuje izolowanie się Dariusza, co z jego perspektywy było reakcją na "obsesyjne insynuacje" i ingerencję matki w jego życie osobiste [151, 152].</li>
+                        <li><span class="highlight">29 marca 2021: "Byliśmy w Złotowie u prawnika. (...) Po 22 zadzwoniliśmy po policję, bo chyba oszalał. Walił w podłogę, latał z laserem, trzaskał drzwiami. Policji już nie otworzył, bo zasnął."</span> Wpis odnotowuje wizytę u prawnika na wczesnym etapie konfliktu, co sugeruje, że Barbara już wtedy rozważała kroki prawne. Barbara pomija własną rolę w sprowokowaniu incydentu (wyłączenie prądu) [43, 59-64].</li>
+                        <li><span class="highlight">21 maja 2021: "Odmówił, żeby dać klucz do samochodu, żebym zawiozła Sylwka do szpitala."</span> Ten wpis jest kluczowy i przedstawiany jako akt "rażącej niewdzięczności". Jednak Dariusz twierdzi, że odebrał ojca ze szpitala, co zostało celowo pominięte [29, 31, 71-79, 153].</li>
+                        <li><span class="highlight">24 maja 2021: "U góry w przedpokoju założył kamerę."</span> Barbara interpretuje to jako inwigilację. Dariusz twierdzi, że kamery zamontowano dla bezpieczeństwa z powodu ginących narzędzi [91, 92, 100, 118, 154-156].</li>
+                    </ul>
+                </div>
+            </details>
+            <p>Całość działań Barbary, od notowania w kalendarzu po inicjowanie procedur prawnych (Niebieska Karta, pozew o odwołanie darowizny), wydaje się być przemyślaną strategią mającą na celu ukaranie syna i odzyskanie majątku [6, 49, 92, 134, 150, 157-163].</p>
+        </section>
 
-    <section id="knowledge">
-        <h2>Panel wiedzy technicznej</h2>
-        <div class="faq-item">
-            <div class="faq-question">Jak działa fotowoltaika?</div>
-            <div class="faq-answer">Panele PV przekształcają światło słoneczne w prąd elektryczny za pomocą efektu fotowoltaicznego. Inwerter konwertuje DC na AC do użytku domowego.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Co daje instalacja PV?</div>
-            <div class="faq-answer">Oszczędności na rachunkach, niezależność energetyczna, dotacje i ulgi podatkowe. Średni zwrot inwestycji w 5-7 lat.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Najczęstsze błędy przy zakupie paneli</div>
-            <div class="faq-answer">Niedopasowanie mocy do potrzeb, ignorowanie jakości inwertera, brak analizy dachu. Zawsze konsultuj z ekspertem.</div>
-        </div>
-        <p class="inside-joke">Jeśli wciąż czytasz, jesteś już po drugiej stronie.</p>
-    </section>
+        <section id="manipulations">
+            <h2>Mechanizmy Manipulacji i "Plan Barbary"</h2>
+            <p>Barbara Adamska stosuje wyrachowane techniki kontroli narracji, aby odzyskać mienie i ukarać syna [50, 53, 102, 130, 145, 146, 160, 164-171].</p>
+            <details>
+                <summary>Selektywność i fabrykowanie informacji</summary>
+                <div class="content">
+                    <p>Kalendarz jest prowadzony selektywnie, zawiera wyłącznie negatywne wpisy dotyczące Dariusza, bez zapisów pozytywnych działań [47-51, 53, 78, 144, 145]. Barbara pomija kluczowe fakty, takie jak odebranie Sylwestra ze szpitala przez Dariusza [49-51, 53, 78, 124, 144, 147-149]. Drobne incydenty są wyolbrzymiane i przedstawiane jako "rażąca niewdzięczność" [50, 102]. Przykładem jest zarzut o groźbę zatrucia wody środkiem chemicznym (Randap), który Sylwester usłyszał od sąsiada [26, 118, 172-177].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Wykorzystanie stanu zdrowia Sylwestra</summary>
+                <div class="content">
+                    <p>Po wylewie Sylwestra (stan zależny), Barbara uzyskała szerokie pełnomocnictwo (19 lipca 2021 r.), dwa dni po złożeniu zawiadomienia o znęcaniu się [31, 33, 34, 83-86]. Sama Barbara przyznaje: "On już nie rozumiał, co się dzieje. To ja podejmowałam decyzje." [31]. Klauzula "na wypadek podważania świadomości" w dokumencie odwołującym darowiznę świadczy o tym, że Barbara liczyła się z możliwością podważenia zdolności decyzyjnej Sylwestra [34, 114, 178, 179]. To nadużycie pełnomocnictwa służyło realizacji jej własnej agendy [34, 84, 86, 87, 130, 160, 163].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Instrumentalizacja instytucji i osób trzecich</summary>
+                <div class="content">
+                    <p>Barbara wykorzystuje procedurę "Niebieskiej Karty" do budowania sprawy, informując policję o zamiarze cofnięcia darowizny [29, 52, 53, 84, 93-97, 180]. Postępowanie karne i cywilne są używane jako narzędzia do odzyskania kontroli nad nieruchomością i ukarania syna [10, 51, 52, 93, 129, 139, 150, 157, 161-163, 181]. Świadkowie, tacy jak Dorota Kowalska (siostra Barbary), opierają swoje zeznania na relacjach Barbary, co wskazuje na brak niezależnych faktów i tworzenie spójnej narracji [10, 47, 84, 94, 175, 176, 182-185].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Projekcja roli ofiary</summary>
+                <div class="content">
+                    <p>Barbara konsekwentnie przedstawia siebie jako ofiarę, pomimo własnych prowokacji [130, 164, 186-192]. Wiele działań Dariusza, choć naganne, można interpretować jako reakcję na prowokacyjne działania Barbary, np. wtargnięcie do pokoju, wyłączenie prądu czy obsesyjne insynuacje dotyczące związku [3, 13, 43, 44, 49, 52, 63, 122, 173, 189, 193-197]. Dariusz twierdzi, że jego działania były obronne i wynikały z głębokiego stresu i depresji [26, 43, 44, 68-70, 135].</p>
+                </div>
+            </details>
+        </section>
 
-    <section id="contact">
-        <h2>Kontakt</h2>
-        <p>Jeśli jesteś zainteresowany doradztwem, napisz bezpośrednio do Julii. Dane są przetwarzane zgodnie z RODO. Polityka prywatności: Dane nie są udostępniane trzecim stronom.</p>
-        <!-- Formularz usunięty -->
-        <p class="highlight-email">Kontakt do twórcy platformy: <a href="mailto:dariusz@daremon.nl">dariusz@daremon.nl</a></p>
-    </section>
+        <section id="legal">
+            <h2>Analiza Prawna i Zarzuty</h2>
+            <p>Główne ustalenia prawne w sprawie cofnięcia darowizny opierają się na art. 898 § 1 k.c. (rażąca niewdzięczność), jednak wymagają one dokładnej weryfikacji w kontekście faktów [24, 35-40].</p>
+            <details>
+                <summary>Rażąca niewdzięczność (art. 898 § 1 k.c.)</summary>
+                <div class="content">
+                    <p>Rażąca niewdzięczność wymaga celowej złej woli wymierzonej w darczyńcę, charakteryzującej się znacznym nasileniem (przemoc, poważne znieważenia, celowe krzywdzenie) [35-39, 106, 110, 112, 136, 138, 198]. Zwykłe konflikty rodzinne nie kwalifikują się jako rażąca niewdzięczność; wymaga ona złej woli i uporczywości [136, 138, 158, 199, 200]. Konflikty Dariusza dotyczą głównie Barbary, nie Sylwestra (darczyńcy), co osłabia zarzut [30, 35, 38, 101, 106]. Sylwester zeznał, że Dariusz go ignoruje i unika rozmów, ale nie obraża ani nie stosuje przemocy fizycznej wobec niego [29, 33, 47, 67, 98-107].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Ważność pełnomocnictwa (art. 82 k.c.)</summary>
+                <div class="content">
+                    <p>Możliwa jest nieważność pełnomocnictwa udzielonego Barbarze z powodu stanu zdrowia Sylwestra po wylewie w 2019 roku, co ograniczyło jego świadomość i zdolność decyzyjną [25, 29, 31-35, 84, 86, 87, 115, 167, 178, 201]. Barbara sama liczyła się z możliwością podważenia świadomości Sylwestra, o czym świadczy klauzula w liście odwołującym darowiznę [34, 114, 178, 179].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Nadużycie prawa (art. 5 k.c.)</summary>
+                <div class="content">
+                    <p>Działania Barbary mogą być uznane za sprzeczne z zasadami współżycia społecznego [35, 36, 39, 130, 202, 203]. Instrumentalizacja procedur (Niebieska Karta) i manipulacja dowodami wskazują na nadużycie prawa w celu odzyskania majątku, a nie ochrony darczyńcy [51, 52, 93, 129, 139, 150, 157, 160-163, 181].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Skutek odwołania darowizny</summary>
+                <div class="content">
+                    <p>Odwołanie darowizny nie cofa własności bez wyroku sądowego [35, 110, 134]. Powoduje jedynie obowiązek zwrotny nieruchomości [110, 134, 158, 199]. Dla nieruchomości wymaga sądu do przeniesienia własności [110, 134, 158, 199].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Służebność osobista</summary>
+                <div class="content">
+                    <p>Służebność mieszkania była ograniczona do budynku mieszkalnego i urządzeń wspólnych, nie obejmowała pomieszczeń gospodarczych czy warsztatu [2, 12, 14, 25, 28, 35, 37, 63, 102, 204-206]. Barbara błędnie interpretowała służebność jako prawo do pełnego dostępu do wszystkich pomieszczeń, co nie wynikało z aktu notarialnego [49, 72, 82, 102, 204-213].</p>
+                </div>
+            </details>
+        </section>
 
-    <section id="why">
-        <h2>Dlaczego to robię?</h2>
-        <p>To eksperyment dla frajdy – test technologii i kreatywności. Ale jeśli chcesz, Julia, mogę przekuć to w narzędzie, które pomoże Ci w pracy. Napisz na <a href="mailto:dariusz@daremon.nl" class="highlight-email">dariusz@daremon.nl</a>, a dostosujemy to pod Ciebie. Bez prywatnych kontaktów, tylko online.</p>
-        <h3>Ciekawe możliwości i ułatwienia dla Ciebie, Julia:</h3>
-        <ul>
-            <li>Integracja z CRM: Automatyczne przesyłanie leadów z kalkulatora do Twojego systemu (np. Google Sheets lub HubSpot) – oszczędzisz czas na ręcznym wpisywaniu danych.</li>
-            <li>Personalizowany newsletter: Narzędzie do wysyłania aktualizacji o fotowoltaice do subskrybentów, z automatycznym zbieraniem e-maili (zgodne z RODO).</li>
-            <li>Analityka ruchu: Szczegółowe raporty o odwiedzających – skąd przychodzą, co klikają – byś mogła optymalizować marketing.</li>
-            <li>Dynamiczne portfolio: Sekcja z Twoimi realizacjami, którą możesz aktualizować samodzielnie przez prosty panel admina.</li>
-            <li>Chatbot PV: Prosty AI do odpowiedzi na podstawowe pytania klientów, integrujący się z kalkulatorem dla lepszej konwersji.</li>
-            <li>Integracja z kalendarzem: Automatyczne umawianie konsultacji online (np. via Zoom) po wypełnieniu formularza.</li>
-        </ul>
-        <h3>Efekty</h3>
-        <p>Odwiedziny: <span id="visit-counter">0</span> | Zgłoszenia: 5 (symulacja)</p>
-    </section>
+        <section id="incidents">
+            <h2>Analiza Kluczowych Incydentów</h2>
+            <details>
+                <summary>Incydent Szpitalny (21 maja 2021)</summary>
+                <div class="content">
+                    <p>Barbara odnotowała odmowę Dariusza udostępnienia kluczyka do samochodu i jego obojętność wobec stanu ojca: "Odmówił, żeby dać klucz do samochodu, żebym zawiozła Sylwka do szpitala. D. Zadzwoń na pogotowie. Ja: Ale jak tata zostanie, to jak ja wrócę. D. Co mnie to obchodzi, taksówką, okazją. Nawet nie zapytał, co się stało." [71, 72, 210].</p>
+                    <p>Jednakże, analiza innych dokumentów ujawnia luki i niespójności: dokumentacja medyczna Sylwestra potwierdza jego przyjęcie do szpitala 21 maja 2021 roku, ale nie precyzuje sposobu transportu [72, 175, 214, 215]. Co więcej, w kalendarzu Barbary brakuje wzmianki o tym, że to Dariusz odebrał ojca ze szpitala [72, 124, 147, 148]. Dariusz twierdzi, że ten fakt został celowo pominięty [2, 72, 147, 149, 150, 216]. Sugerowanie wezwania pogotowia przez Dariusza nie jest "odmową pomocy", a racjonalną formą odpowiedzi w sytuacji nagłego pogorszenia stanu zdrowia osoby po wylewie [72, 79, 149]. Brak późniejszego zainteresowania stanem ojca świadczy o oziębłości i zerwaniu więzi, ale niekoniecznie o nacechowanej złą wolą intencji wyrządzenia krzywdy, wymaganej przez prawo [79].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Incydent z prądem i paralizatorem (29 marca 2021)</summary>
+                <div class="content">
+                    <p>Barbara zanotowała incydent z głośną muzyką i wezwaniem policji: "Po 22 zadzwoniliśmy po policję, bo chyba oszalał. Walił w podłogę, latał z laserem, trzaskał drzwiami. Policji już nie otworzył, bo zasnął." [59, 196]. Rodzice zeznali, że Dariusz groził matce paralizatorem, oskarżając ich o celowe spowodowanie zwarcia instalacji elektrycznej [63].</p>
+                    <p>Jednak dzielnicowy Antoni Bogdaszewski zeznał, że to Barbara Adamska celowo wyłączyła zasilanie elektryczne w domu podczas interwencji policji w związku z głośną muzyką puszczaną przez syna [59, 63, 195, 217]. To oznacza, że Barbara faktycznie dopuściła się ingerencji w instalację elektryczną, co zdaje się potwierdzać podejrzenia Dariusza (że rodzice powodują wyłączenia prądu) [59, 63, 195, 217]. Barbara, opisując to zdarzenie, pomija własną rolę w sprowokowaniu incydentu [59, 195].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Zamykanie pomieszczeń i kamery</summary>
+                <div class="content">
+                    <p>Barbara zarzuca Dariuszowi ograniczanie dostępu do pomieszczeń gospodarczych (warsztat, garaże, toaleta zewnętrzna) i niszczenie mienia (np. zaspawanie toalety, zapiankowanie drzwi, niszczenie roślin) [63, 82, 94, 97, 113, 177, 205-209, 211-213, 218-224]. Dariusz natomiast twierdzi, że zamykał pomieszczenia w celu zabezpieczenia własności, zwłaszcza w obliczu jego nieobecności i rosnącego konfliktu [49, 205-208, 211, 213, 219, 225, 226].</p>
+                    <p>Odnośnie kamer, Barbara odnotowała zainstalowanie kamery w przedpokoju i interpretuje to jako formę inwigilacji [62, 74, 90, 92, 118, 154-156, 227]. Dariusz wyjaśnia, że kamery zostały zamontowane dla bezpieczeństwa, głównie z powodu ginących narzędzi [48, 91, 92, 100, 156, 195, 208, 225, 227].</p>
+                </div>
+            </details>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Julia Kowalska. Wszelkie prawa zastrzeżone.</p>
-        <div class="inside-joke">Hakier pierdolony – jeśli to czytasz, to wiesz, o co chodzi.</div>
-        <div class="tooltip">
-            <span>🔋</span>
-            <span class="tooltiptext">Jak tu wszedłeś, to już nie wyjdziesz.</span>
-        </div>
-    </footer>
+        <section id="lawyer">
+            <h2>Rola Adwokata Aleksandra Domka</h2>
+            <p>Rola adwokata Aleksandra Domka w postępowaniu karnym przeciwko Dariuszowi Adamskiemu budzi poważne wątpliwości i jest kluczowym elementem strategii obrony [18, 51, 68, 77, 93, 103, 121, 122, 127, 129, 130, 193, 228-231].</p>
+            <details>
+                <summary>Brak należytej obrony i wymuszenie przyznania się</summary>
+                <div class="content">
+                    <p>Adwokat Domek pojawił się tuż przed rozprawą, czasem nawet "5 minut przed rozprawą", nie zapoznając się wcześniej z aktami sprawy [121, 122, 228, 229]. Nie zgłosił żadnych wniosków dowodowych na korzyść Dariusza ani nie zakwestionował wiarygodności świadków [121, 228, 229]. Wymusił na Dariuszu przyznanie się do winy wbrew faktom, sugerując, że będzie to "lepsze rozwiązanie" lub pozwoli "zamknąć sprawę" [68, 77, 103, 121, 122, 127, 130, 229]. Wyrok karny (nakazowy) został wydany "wyłącznie z tego wymuszonego przyznania się", a "brak obiektywnych dowodów winy" ze strony Dariusza był znaczący [68, 77, 103, 121, 122, 130, 229].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Konflikt interesów</summary>
+                <div class="content">
+                    <p>Istnieją poważne podejrzenia, że adwokat Domek kontaktował się z Barbarą Adamską, czyli osobą z przeciwnej strony konfliktu, co jednoznacznie wskazuje na konflikt interesów [68, 77, 121, 122, 127, 130, 229]. Ponadto, Domek miał nakazać Dariuszowi napisanie na tekturze oświadczenia o "nie wracaniu do sprawy" po zakończeniu rozprawy, co jest działaniem pozbawionym podstaw prawnych i o charakterze manipulacyjnym [122, 127, 229]. Celem adwokata było prawdopodobnie szybkie zamknięcie sprawy i uzyskanie wynagrodzenia, działając wbrew interesom swojego klienta [122, 127, 229].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Skutki wyroku nakazowego w sprawie cywilnej</summary>
+                <div class="content">
+                    <p>Wyrok nakazowy, mimo wydania, stracił moc prawną po wniesieniu sprzeciwu przez Dariusza (art. 506 § 3 k.p.k.) [29, 55, 77, 98, 120, 123-129]. Oznacza to, że nie ma on mocy wiążącej dla sądu cywilnego w zakresie oceny "rażącej niewdzięczności" (art. 11 k.p.c.) [77, 103, 120, 127, 129, 130, 230, 232]. Barbara Adamska konsekwentnie wykorzystuje ten wyrok jako "dowód" rażącej niewdzięczności w toczącym się postępowaniu cywilnym [1, 3, 41, 55, 58, 71, 77, 80, 93, 103, 117, 121, 125, 126, 128-130, 133, 134, 138, 151, 172, 173, 181, 233-237].</p>
+                </div>
+            </details>
+            <p class="note"><b>Dalszym krokiem analitycznym</b> powinno być formalne przygotowanie i złożenie <a href="#recommendations">skargi do Okręgowej Rady Adwokackiej (ORA)</a> na działania Aleksandra Domka [40, 202, 203, 230, 231, 238].</p>
+        </section>
+
+        <section id="contradictions">
+            <h2>Sprzeczności w Zeznaniach i Materiale Dowodowym</h2>
+            <p>W toku postępowań ujawniło się kilka istotnych sprzeczności, które mają znaczenie dla oceny wiarygodności zeznań obu stron [101, 239].</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sprzeczność</th>
+                        <th>Wersja Barbary/Sylwestra (zarzut)</th>
+                        <th>Wersja Dariusza/Dowody obiektywne</th>
+                        <th>Implikacja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Znęcanie się nad ojcem</td>
+                        <td>Barbara twierdziła, że syn znęcał się psychicznie także nad Sylwestrem [101].</td>
+                        <td>Sylwester kategorycznie zaprzeczył, by Dariusz go obrażał; stwierdził, że syn go ignoruje, ale nie atakuje werbalnie ani fizycznie [29, 33, 47, 67, 98-107].</td>
+                        <td>Osłabia wiarygodność Barbary, sugerując próbę wzmocnienia oskarżenia [101].</td>
+                    </tr>
+                    <tr>
+                        <td>Incydent 17 lipca 2021</td>
+                        <td>Barbara zgłosiła "awanturę domową" i ucieczkę do lasu przed agresją syna [94].</td>
+                        <td>Dorota Kowalska (świadek) zaprzeczyła, by tamtego wieczoru doszło do jakiejkolwiek bezpośredniej awantury słownej czy fizycznej; Dariusz nie atakował ich bezpośrednio, dokonał zniszczeń mienia i zamknął się w domu [95, 240].</td>
+                        <td>Sugestia, że Barbara mogła wyolbrzymiać zagrożenie dla przyspieszenia interwencji [240].</td>
+                    </tr>
+                    <tr>
+                        <td>Zwarcie prądu/paralizator</td>
+                        <td>Sylwester przedstawił syna jako paranoicznie podejrzewającego rodziców o spowodowanie zwarcia [63, 217].</td>
+                        <td>Dzielnicowy Bogdaszewski zeznał wprost, że to Barbara wyłączyła zasilanie elektryczne w obecności policji [59, 63, 195, 217].</td>
+                        <td>Podważa wiarygodność Sylwestra w tej kwestii; sugeruje, że celowo przedstawił korzystniejszą wersję dla żony [217].</td>
+                    </tr>
+                    <tr>
+                        <td>Ograniczanie dostępu do pomieszczeń</td>
+                        <td>Dariusz zaprzeczył, jakoby kiedykolwiek próbował bezprawnie odbierać rodzicom dostęp do pomieszczeń objętych służebnością [205].</td>
+                        <td>Liczne dowody fizyczne i zeznania świadków (np. spawanie toalety, piankowanie drzwi, blokowanie garaży) wskazują, że Dariusz faktycznie ograniczał dostęp do pomieszczeń objętych służebnością [63, 82, 94, 97, 113, 177, 205-209, 211-213, 218-224].</td>
+                        <td>Twierdzenie Dariusza jest niewiarygodne w świetle zebranego materiału, co podważa jego ogólną rzetelność [205].</td>
+                    </tr>
+                     <tr>
+                        <td>Przyczyny zachowania syna</td>
+                        <td>Rodzice twierdzili, że Dariusz nie miał żadnych "powodów" do takiego zachowania; jego agresja wzięła się "znikąd" [241].</td>
+                        <td>Wszystkie dokumenty wskazują, że konflikty rozpoczęły się w lutym 2021 roku i były bezpośrednio związane z ingerencją rodziców (szczególnie Barbary) w związek Dariusza z kuzynką Julią [9, 10, 27, 29, 42-46, 58, 241, 242].</td>
+                        <td>Narracja powodów pomija istotny kontekst i katalizator konfliktu, co jest pewnym zniekształceniem [241].</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="intentions">
+            <h2>Intencje i Postawy Głównych Uczestników Konfliktu</h2>
+            <details>
+                <summary>Barbara Adamska: Kontrola, Kara, Bezpieczeństwo</summary>
+                <div class="content">
+                    <p>Barbara jest głęboko zraniona zachowaniem syna i zdeterminowana, by odzyskać kontrolę nad sytuacją. Jej intencje są wielowarstwowe [243, 244]:</p>
+                    <ul>
+                        <li><span class="highlight">Ochrona:</span> Fundamentalnym motywem jest poczucie zagrożenia i chęć uwolnienia się od psychicznego terroru. Działania Barbary to reakcje obronne, dążące do legalnego i trwałego rozwiązania problemu przemocy [243, 244].</li>
+                        <li><span class="highlight">Ukaranie:</span> Odczuwa zdradę i upokorzenie. Pragnie ukarać syna za "rażącą niewdzięczność" i wymierzyć sprawiedliwość moralną [244, 245].</li>
+                        <li><span class="highlight">Finansowo-majątkowe:</span> Chce odzyskać gospodarstwo, aby nie pozostawić go synowi, który ich skrzywdził. Może brać pod uwagę sprzedaż lub przekazanie innym dzieciom [244, 246]. Jest to intencja sprzężona z moralną: syn nie zasługuje, więc trzeba mu zabrać, zabezpieczając przy tym dach nad głową [244, 246].</li>
+                        <li><span class="highlight">Emocjonalne:</span> Głęboko zraniona miłością syna, którą obrócił w nienawiść. Pragnie sprawiedliwości i przywrócenia swojej godności [247].</li>
+                        <li><span class="highlight">Zerwanie relacji:</span> Nie wyraża nadziei na pojednanie. Jej celem jest definitywne zakończenie tej historii i wykluczenie syna z dziedzictwa [248].</li>
+                    </ul>
+                </div>
+            </details>
+            <details>
+                <summary>Sylwester Adamski: Wsparcie, Honor, Zabezpieczenie Bytu</summary>
+                <div class="content">
+                    <p>Sylwester, choć formalnie powód, działa w dużej mierze z myślą o Barbarze i własnym zabezpieczeniu [249, 250]:</p>
+                    <ul>
+                        <li><span class="highlight">Wspieranie żony:</span> Pożycza swój autorytet i prawa żonie, by razem wystąpić przeciw synowi, czując odpowiedzialność za to, co ją spotkało [249, 250].</li>
+                        <li><span class="highlight">Odzyskanie majątku i honoru:</span> Odczuwa zawód i gniew, że syn, któremu przekazał dorobek życia, nie szanuje go i ignoruje. Pragnie przywrócić sprawiedliwość i ukarać syna [250, 251].</li>
+                        <li><span class="highlight">Zabezpieczenie bytu:</span> Jako osoba schorowana, zależna od opieki, obawia się o przyszłość. Odwołanie darowizny jest dla niego planem ratunkowym w celu zapewnienia spokojnej starości [250, 252].</li>
+                        <li><span class="highlight">Postawa wobec syna:</span> Jest bardziej rzeczowy i zdystansowany niż Barbara. Jego wypowiedzi zdradzają zgorzknienie i poczucie zawodu. Skreślił Dariusza i nie liczy już na relację [250, 253].</li>
+                        <li><span class="highlight">Wpływ Barbary:</span> Choć Sylwester wydaje się przytomny, Barbara może mieć na niego wpływ, zwłaszcza w inicjowaniu działań prawnych [254].</li>
+                    </ul>
+                </div>
+            </details>
+            <details>
+                <summary>Dariusz Adamski: Bunt, Niezależność, Obrona Majątku</summary>
+                <div class="content">
+                    <p>Dariusz kierował się mieszanką buntu, urazy i pragnienia niezależności. Obecnie jego celem jest zachowanie majątku i obrona przed publicznym potępieniem [255, 256]:</p>
+                    <ul>
+                        <li><span class="highlight">Bunt przeciw kontroli:</span> Konflikt wywołała ingerencja rodziców w jego życie osobiste. Jego działania były wyładowaniem frustracji na tych, których obwinia o swój ból [256, 257].</li>
+                        <li><span class="highlight">Izolacja i autonomia:</span> Poprzez instalowanie kamer i zamykanie pomieszczeń chciał odgrodzić się od rodziców i pokazać, że to jego terytorium. To intencja dominacji [256, 258].</li>
+                        <li><span class="highlight">Obrona (paranoiczna?):</span> Podejrzewał rodziców o wrogie działania. Jego intencją było kontrolować otoczenie i przewidywać ich ruchy, by czuć się bezpiecznie [256, 259].</li>
+                        <li><span class="highlight">Zatrzymanie majątku i oczyszczenie z zarzutów:</span> Jego aktualnym celem jest utrzymanie prawa własności gospodarstwa i udowodnienie, że powództwo jest bezzasadne [256, 260, 261].</li>
+                        <li><span class="highlight">Brak skruchy:</span> Nie widać w nim wyrazu żalu. Tłumaczy i usprawiedliwia swoje czyny, skupiając się na własnym cierpieniu i atakując wiarygodność matki [256, 262, 263].</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+        <section id="instrumental">
+            <h2>Instrumentalny Charakter Powództwa o Odwołanie Darowizny</h2>
+            <p>Choć powództwo oparte jest na dowodach niewdzięczności, nosi wyraźne cechy działania instrumentalnego, mającego na celu odzyskanie majątku [21, 162, 163, 264].</p>
+            <details>
+                <summary>Wczesne planowanie i pragmatyzm</summary>
+                <div class="content">
+                    <p>Notatka z 3 sierpnia 2021 roku dokumentuje, że Barbara i Sylwester już na tym etapie, tuż po drugiej interwencji policji, zdecydowali o zamiarze odwołania darowizny po konsultacji z prawnikiem [180, 265, 266]. To wskazuje, że odwołanie darowizny zostało potraktowane jako strategia radzenia sobie z synem – zabranie mu tego, co dali [265]. Fakt, że nie rozważali mediacji (wniosek w pozwie, by sprawy do mediacji nie kierować), potwierdza, iż celem nie było już naprawienie relacji, lecz osiągnięcie określonego skutku prawnego – cofnięcia darowizny [265, 267].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Nastawienie na wygraną w procesie</summary>
+                <div class="content">
+                    <p>Strona powodowa skrupulatnie gromadzi dowody (własne zeznania, zdjęcia, dokumentacja Niebieskiej Karty, akta sprawy karnej), co pokazuje profesjonalną i metodyczną strategię procesową [268]. Barbara nagrywała kłótnie i notowała incydenty w kalendarzu, co świadczy o pewnym planowaniu i świadomości ewentualnych procesów [161]. Nie jest to symboliczny gest zawodu moralnego, lecz z góry zaplanowana batalia sądowa o odzyskanie nieruchomości [268].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Propozycja ugody a prawdziwe cele</summary>
+                <div class="content">
+                    <p>Propozycja ugody z lutego 2024 roku (skupiająca się na dostępie do pomieszczeń i kamer) demaskuje pozew o odwołanie całej darowizny jako narzędzie presji, a nie faktyczny cel sam w sobie [29, 69, 71, 98, 116, 135-140]. Rzeczywistym celem powodów jest odzyskanie kontroli i dostępu do części nieruchomości, a nie całkowite wywłaszczenie syna [140, 163].</p>
+                </div>
+            </details>
+            <p>Wnioski: Powództwo, choć prawnie uzasadnione dowodami niewdzięczności, zostało w znacznej mierze użyte instrumentalnie przez rodziców, jako środek do osiągnięcia określonego celu (odebrania własności synowi) [162, 269]. Nie deprecjonuje to realności ich krzywdy, ale wskazuje na chłodną kalkulację i zdyscyplinowane dążenie do celu [162, 269].</p>
+        </section>
+
+        <section id="recommendations">
+            <h2>Rekomendacje do Dalszych Analiz i Strategia Obrony</h2>
+            <p>Poniższe zalecenia stanowią praktyczny plan działania dla obrony Dariusza Adamskiego [120, 202, 203, 231, 270-274]. Szanse na oddalenie powództwa są <strong>bardzo wysokie</strong>, pod warunkiem skutecznego wykorzystania istniejących sprzeczności dowodowych oraz wsparcia linii obrony opiniami biegłych [238, 275].</p>
+            <details>
+                <summary>Kluczowe dowody do podkreślenia</summary>
+                <div class="content">
+                    <ul>
+                        <li>Fakt wizyty u prawnika 29 marca 2021 roku jako dowód na premedytację Barbary i Sylwestra [59, 64, 276].</li>
+                        <li>Treść zeznań Sylwestra Adamskiego z 3 sierpnia 2021 roku, potwierdzających brak osobistej krzywdy i agresji skierowanej bezpośrednio na niego [29, 33, 98-107].</li>
+                        <li>Treść propozycji ugodowej z 2024 roku jako dowód na nieproporcjonalność żądania pozwu i ujawnienie prawdziwych celów rodziców (kontrola nad dostępem do nieruchomości, a nie całkowite wywłaszczenie syna) [29, 69, 71, 98, 116, 135-140, 276, 277].</li>
+                        <li>SMS od Sylwestra z 5 sierpnia 2025 roku wskazujący na wybaczenie i troskę ojca, co podważa zarzuty "rażącej niewdzięczności" [29, 54, 69, 141-143].</li>
+                        <li>Dokumentacja medyczna Sylwestra (od 2019 r.) oraz Dariusza (depresja, próby samobójcze) [26, 29, 30, 43, 44, 65-71, 164, 278].</li>
+                        <li>Akta sprawy karnej (II K 568/21) oraz dowody na wymuszone przyznanie się Dariusza [71, 77, 120, 122, 164, 203, 230, 272].</li>
+                        <li>Faktury i dowody nakładów Dariusza na nieruchomość [28, 37, 54, 71].</li>
+                    </ul>
+                </div>
+            </details>
+            <details>
+                <summary>Wnioski dowodowe</summary>
+                <div class="content">
+                    <ul>
+                        <li><strong>Biegli:</strong> Powołanie biegłych (neurologa, psychiatry) do oceny stanu zdrowia i świadomości Sylwestra w kluczowych momentach (szczególnie w 2021 r. w momencie udzielenia pełnomocnictwa i odwołania darowizny) [36, 71, 172, 201, 203, 238, 270, 272]. Dodatkowo, powołanie biegłego psychologa do stworzenia profilu Barbary, z uwzględnieniem cech narcystycznych i skłonności do kontroli, a także oceny mechanizmów manipulacji [36, 71, 104, 166, 170, 173, 201, 203, 238, 270, 272, 279, 280].</li>
+                        <li><strong>Świadkowie:</strong> Przesłuchanie Barbary (krzyżowe), Sylwestra (ostrożnie), innych świadków (Artur, Monika, Michał, Dorota Kowalska, funkcjonariusze policji, Aleksander Domek) [38, 69, 98, 107, 117, 202, 203, 276, 278].</li>
+                    </ul>
+                </div>
+            </details>
+            <details>
+                <summary>Główna linia argumentacji i zmiana narracji</summary>
+                <div class="content">
+                    <p>Obrona musi konsekwentnie przedstawiać sprawę nie jako „rażącą niewdzięczność”, lecz jako „spór majątkowy ubrany w rodzinną tragedię” [281]. Należy argumentować, że strona powodowa używa ekstremalnego, nacechowanego moralnie narzędzia odwołania darowizny do rozwiązania prozaicznego problemu z dostępem do pomieszczeń i kontrolą [281, 282]. Wykazanie braku "rażącej niewdzięczności" (konflikty były symetryczne i prowokowane) oraz powołanie się na nadużycie prawa podmiotowego (art. 5 k.c.) [35, 36, 39, 40, 202, 203, 237].</p>
+                </div>
+            </details>
+            <details>
+                <summary>Działania formalne i procesowe</summary>
+                <div class="content">
+                    <ul>
+                        <li>Przygotowanie i złożenie <strong>skargi do Okręgowej Rady Adwokackiej (ORA)</strong> na działania Aleksandra Domka [40, 202, 203, 230, 231, 238].</li>
+                        <li>Rozważenie możliwości wniesienia <strong>kontrpowództwa</strong> opartego na nadużyciu prawa (art. 5 k.c.) lub działaniu pod wpływem podstępu (art. 86 k.c.) [39, 40, 120, 202, 203].</li>
+                        <li>Przygotowanie szczegółowych pytań do Barbary, które obnażą nieścisłości i celowe pominięcia w jej kalendarzu i zeznaniach [107, 202, 278].</li>
+                        <li>Monitorowanie sprawy karnej w celu weryfikacji jej aktualnego statusu [117, 120, 203].</li>
+                    </ul>
+                </div>
+            </details>
+            <p><strong>Podsumowanie:</strong> Przedstawione ustalenia wskazują na słabość powództwa: brak konkretów, wątpliwości co do ważności czynności, instrumentalność Barbary. Szanse na oddalenie powództwa są bardzo wysokie, pod warunkiem skutecznego wykorzystania istniejących sprzeczności dowodowych (zwłaszcza zeznania Sylwestra z 03.08.2021) oraz wsparcia linii obrony opiniami biegłych [120, 238, 275].</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Analiza Sprawy Adamskich. Wszystkie prawa zastrzeżone. Raport oparty wyłącznie na dostarczonych materiałach źródłowych.</p>
+        </footer>
+    </div>
 
     <script>
-        // JS: Funkcjonalności
-        // Licznik odwiedzin (symulacja z localStorage)
-        let visits = localStorage.getItem('visits') || 0;
-        visits = parseInt(visits) + 1;
-        localStorage.setItem('visits', visits);
-        document.getElementById('visit-counter').textContent = visits;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
 
-        // Kalkulator PV
-        document.getElementById('pv-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const consumption = parseFloat(document.getElementById('consumption').value);
-            const roofArea = parseFloat(document.getElementById('roof-area').value);
-            const location = document.getElementById('location').value;
-            const potentialPower = roofArea * 0.15; // kWp na m² (przybliżenie)
-            const savings = potentialPower * 1000 * 0.8; // Oszczędności roczne w PLN (przybliżenie)
-            document.getElementById('result').innerHTML = `Szacunkowe oszczędności dla ${location}: ${savings.toFixed(2)} PLN rocznie. Lead wysłany do Julii.`;
-            console.log('Lead PV:', {consumption, roofArea, location}); // Symulacja wysyłki
-        });
+            // Highlight active navigation link on scroll (optional, for more advanced interactivity)
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
 
-        // FAQ accordion
-        const questions = document.querySelectorAll('.faq-question');
-        questions.forEach(q => {
-            q.addEventListener('click', () => {
-                const answer = q.nextElementSibling;
-                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
             });
         });
     </script>

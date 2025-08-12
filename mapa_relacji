@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Interaktywna Mapa Absurdu</title>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.min.css" />
+  <style>
+    body { background: #1b1f23; color: #eaeaea; font-family: 'Segoe UI', Verdana, sans-serif; margin: 0; padding-bottom: 20px; }
+    .header { padding: 22px; text-align: center; background: #22282c; font-size: 2.2rem; font-weight: 700; }
+    #mynetwork { width: 100%; height: 750px; border: 2px solid #303c49; border-radius: 16px; background: #232831; margin: 26px auto 8px auto; }
+    .controls { display: flex; justify-content: space-around; max-width: 830px; margin: 15px auto; padding: 15px; background: #272f38; border-radius: 10px; }
+    .control-group { display: flex; flex-direction: column; align-items: center; margin: 0 10px; }
+    .control-group label { margin-bottom: 8px; font-size: 0.9rem; }
+    .control-group input[type="range"] { width: 180px; }
+    #details { margin: 0 auto 28px auto; max-width: 830px; background: #272f38; padding: 30px 28px 20px 28px; border-radius: 20px; box-shadow: 0 6px 22px #0008; min-height: 100px; }
+    .section { margin-top: 16px; }
+    .section-title { font-size: 1.25rem; margin-bottom: 7px; color: #ace8ff;}
+    .variant { margin-bottom: 10px; }
+    .date { color: #facc15; font-weight: 700; font-size: 1.05rem; }
+    .event-title { color: #dbeafe; font-size: 1.25rem; font-weight: 700; }
+    .people { color: #80f7f4; }
+    a { color: #6ee7ff; }
+  </style>
+</head>
+<body>
+  <div class="header">Radio Adamowo &mdash; Interaktywna Mapa Absurdu, Sprzeczności i Manipulacji</div>
+  <div id="mynetwork"></div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="absurditySlider" style="color: #FF6B6B;">Poziom Absurdu:</label>
+      <input type="range" id="absurditySlider" min="0" max="100" value="0">
+      <span id="absurdityValue">0</span>
+    </div>
+    <div class="control-group">
+      <label for="contradictionSlider" style="color: #6B9EFF;">Poziom Sprzeczności:</label>
+      <input type="range" id="contradictionSlider" min="0" max="100" value="0">
+      <span id="contradictionValue">0</span>
+    </div>
+    <div class="control-group">
+      <label for="manipulationSlider" style="color: #D46BFF;">Poziom Manipulacji:</label>
+      <input type="range" id="manipulationSlider" min="0" max="100" value="0">
+      <span id="manipulationValue">0</span>
+    </div>
+  </div>
+
+  <div id="details">
+    <span style="opacity:0.7;">Kliknij na wydarzenie lub osobę, by poznać szczegóły. Użyj suwaków powyżej, aby podświetlić wydarzenia według ich charakteru.</span>
+  </div>
+
+  <script>
+    // Baza postaci
+    const people = [
+      { id: 1, label: "Dariusz", group: "person" },
+      { id: 2, label: "Barbara", group: "person" },
+      { id: 3, label: "Sylwester", group: "person" },
+      { id: 7, label: "System Prawny", group: "institution" },
+      { id: 8, label: "Kuzynka Julia", group: "person" },
+      { id: 9, label: "Dorota Kowalska", group: "person" },
+      { id: 10, label: "Artur Adamski", group: "person" },
+      { id: 11, label: "Monika Malinowska", group: "person" },
+      { id: 12, label: "Bożena Kuffel", group: "person" }
+    ];
+
+    // Baza wydarzeń z ocenami
+    let events = [
+      {
+        id: "2017-07-07", label: "Akt darowizny", group: "event", date: "2017-07-07", people: [1, 2, 3],
+        official: "Podpisanie aktu notarialnego darowizny nieruchomości przez Sylwestra na rzecz Dariusza. Ustanowienie służebności mieszkania dla rodziców. Dariusz twierdzi, że wiele inwestował w dom. [cite: Akt notarialny.pdf, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Startujemy! Darek dostaje dom, rodzice 'dożywotnio' w pakiecie. Co może pójść nie tak?",
+        absurdityLevel: 2, contradictionLevel: 3, manipulationLevel: 1 // Niskie na początku
+      },
+      {
+        id: "2021-02-01", label: "Początek konfliktu", group: "event", date: "Luty 2021", people: [1, 2, 3, 8],
+        official: "Nasilenie problemów po przyjeździe kuzynki Julii. Sprzeciw Barbary. Dariusz oskarża matkę o agresję wobec Julii (wtargnięcie, wyzwiska), prześladowanie. [cite: 7_Zawiadomienie_przemoc_domowa_Dariusz_Adamski_IMG_4405-4406.JPG.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Romeo, Julia i... Teściowa z piekła rodem o 2 w nocy. Rodzinna sielanka nabiera rumieńców.",
+        absurdityLevel: 7, contradictionLevel: 8, manipulationLevel: 7 // Wg Dariusza, matka manipuluje
+      },
+      {
+        id: "2021-03-00", label: "Pierwsze Eskalacje", group: "event", date: "Marzec 2021", people: [1, 2, 3, 7],
+        official: "Zgłoszenia o agresji Dariusza (paralizator - zaprzecza użyciu). 29.03 interwencja policji ws. głośnej muzyki (mandat). Dariusz twierdzi, że rodzice zrobili zwarcie. [cite: 15_Notatki z kalendarza Barbary.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Adamowo House Party! DJ Daro gra tak głośno, że aż bezpieczniki siadają. Paralizator w tej historii to jak czajnik.",
+        absurdityLevel: 6, contradictionLevel: 7, manipulationLevel: 5
+      },
+       {
+        id: "2021-05-21", label: "Hospitalizacja Sylwestra", group: "event", date: "2021-05-21", people: [1, 2, 3],
+        official: "Sylwester hospitalizowany. Barbara i pozew wskazują na odmowę zawiezienia go do szpitala przez Dariusza. [cite: Karta informacyjna z leczenia szpitalnego.pdf, Pozew komentarze.docx].",
+        sarcasm: "Tata w szpitalu, syn rzekomo odmówił podwózki. Może Uber by szybciej przyjechał?",
+        absurdityLevel: 5, contradictionLevel: 6, manipulationLevel: 4 // Potencjalna manipulacja narracją
+      },
+      {
+        id: "2021-05-00", label: "Zaostrzenie Środków", group: "event", date: "Maj 2021", people: [1, 2, 3],
+        official: "Dariusz montuje zamek na kod do swojego pokoju 'aby zabezpieczyć się przed atakami matki'. Niszczenie roślin. [cite: 15_Notatki z kalendarza Barbary.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Witamy w Fortecy Adamowo! Hasło do pokoju Darka: 'FrancoCholernaWon'.",
+        absurdityLevel: 7, contradictionLevel: 5, manipulationLevel: 6 // Inwigilacja, kontrola
+      },
+      {
+        id: "2021-07-17", label: "Zaspawana Toaleta, Spanie w Warsztacie", group: "event", date: "2021-07-17", people: [1, 2, 3, 7, 9, 12],
+        official: "Barbara zgłasza zaspawanie toalety (Dariusz przyznaje), zniszczenie żarówek. NK. Dariusz twierdzi, że spał w warsztacie (prosił Bożenę o materac), unikał kontaktu. [cite: 15_Notatki z kalendarza Barbary.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Toaleta zamknięta! Dariusz woli spać w warsztacie. Komfort godny króla... absurdu.",
+        absurdityLevel: 9, contradictionLevel: 6, manipulationLevel: 7 // Skrajne działania, inwigilacja
+      },
+      {
+        id: "2021-07-21", label: "Naprawa samochodu z Bożeną", group: "event", date: "2021-07-21", people: [1, 12],
+        official: "Barbara notuje: Dariusz o 4 rano naprawia auto w warsztacie z Bożeną Kuffel. [cite: 15_Notatki z kalendarza Barbary.txt, Zaprzeczenie zarzutom .docx]",
+        sarcasm: "Nocne majsterkowanie. Czy to naprawa auta, czy budowa arki przed potopem absurdów?",
+        absurdityLevel: 3, contradictionLevel: 2, manipulationLevel: 2
+      },
+      {
+        id: "2021-07-25", label: "Druga NK, Zawiadomienie, Wyjazd Dariusza", group: "event", date: "2021-07-25", people: [1, 2, 3, 7],
+        official: "Kolejna NK. 27.07 Barbara składa zawiadomienie o znęcaniu. Dariusz twierdzi, że 26.07 dzielnicowy mówił o braku podstaw do NK, a 27.07 wyjechał za granicę. [cite: 1_Notatka_urzedowa_Barbara_Adamska_IMG_435_2021-07-27.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Niebieska Karta: The Sequel! Darek pakuje manatki. Czy to koniec serialu?",
+        absurdityLevel: 8, contradictionLevel: 7, manipulationLevel: 7
+      },
+      {
+        id: "2021-08-01", label: "Wszczęcie Dochodzenia", group: "event", date: "2021-08-01", people: [1, 2, 3, 7],
+        official: "Policja wszczyna dochodzenie ws. znęcania się (art. 207 §1 k.k.). [cite: 27_Postanowienie_wszczecie_dochodzenia_207kk_IMG_4426_2021-08-01.txt].",
+        sarcasm: "I stało się! Papierologia ruszyła pełną parą.",
+        absurdityLevel: 2, contradictionLevel: 1, manipulationLevel: 1
+      },
+      {
+        id: "2021-08-06", label: "Odwołanie darowizny", group: "event", date: "2021-08-06", people: [1, 2, 3],
+        official: "Sylwester odwołuje darowiznę, powołując się na rażącą niewdzięczność. Dariusz pisma nie odbiera. [cite: List Odwolanie darowizny 06-08-2021.txt, Pozew komentarze.docx].",
+        sarcasm: "Prezent na Dzień Dziecka... cofnięty! Bo jak się nie podoba obsługa, to trzeba towar zwrócić.",
+        absurdityLevel: 7, contradictionLevel: 4, manipulationLevel: 6 // Sugestia manipulacji Sylwestrem
+      },
+      {
+        id: "2021-09-20", label: "Przesłuchanie Dariusza", group: "event", date: "2021-09-20", people: [1, 7],
+        official: "Dariusz przesłuchany jako podejrzany. Nie przyznaje się. Mówi o prowokacjach matki, swoim załamaniu. [cite: 66_Protokół_przesłuchania_Dariusz_Adamski_2021.09.20_IMG_4486-4490.txt, Zaprzeczenie zarzutom .docx].",
+        sarcasm: "Główny podejrzany w końcu zabiera głos! Twierdzi, że to on jest ofiarą...",
+        absurdityLevel: 3, contradictionLevel: 7, manipulationLevel: 3
+      },
+      {
+        id: "2021-09-27", label: "Akt oskarżenia Dariusza", group: "event", date: "2021-09-27", people: [1, 2, 7],
+        official: "Akt oskarżenia przeciw Dariuszowi o znęcanie się nad matką. [cite: 70_Akt_oskarżenia_Dariusz_Adamski_207kk_2021-09-27_IMG_4494-4495.txt].",
+        sarcasm: "No i mamy finał pierwszego sezonu: Darek oficjalnie oskarżony.",
+        absurdityLevel: 2, contradictionLevel: 1, manipulationLevel: 1
+      },
+       {
+        id: "2021-10-12", label: "Dariusz ustanawia obrońcę", group: "event", date: "2021-10-12", people: [1, 7],
+        official: "Dariusz ustanawia adw. Aleksandra Domka obrońcą w sprawie karnej II K 568/21. [cite: Upoważnienie.pdf, Adamski UMOWA ZLECENIA  (1).doc].",
+        sarcasm: "Nasz bohater kontratakuje! Adwokat wkracza na scenę.",
+        absurdityLevel: 1, contradictionLevel: 0, manipulationLevel: 0
+      },
+      {
+        id: "2021-10-13", label: "Wyrok Nakazowy", group: "event", date: "2021-10-13", people: [1, 2, 7],
+        official: "Sąd Rejonowy w Tucholi wydaje wyrok nakazowy (II K 568/21), uznając Dariusza za winnego. [cite: 78_Wyrok nakazowy Sygn. akt II K 568.21 13.09.2021.txt].",
+        sarcasm: "Szybka piłka w sądzie! Winny! Płacić!",
+        absurdityLevel: 3, contradictionLevel: 2, manipulationLevel: 1
+      },
+      {
+        id: "2021-10-14", label: "Sprzeciw od Wyroku Nakazowego", group: "event", date: "Po 13.10.2021", people: [1, 7],
+        official: "Dariusz wnosi sprzeciw od wyroku nakazowego. Sprawa karna kontynuowana. [cite: Adamski Dariusz - sprzeciw w imieniu własnym.odt, 1999_001.pdf].",
+        sarcasm: "Wyrok? Jaki wyrok? Darek mówi 'nie, dziękuję' i wrzuca sprawę z powrotem na wokandę.",
+        absurdityLevel: 4, contradictionLevel: 1, manipulationLevel: 0
+      },
+      {
+        id: "2021-11-19", label: "Opieka Psychiatryczna Rodziców", group: "event", date: "2021-11-19", people: [2, 3, 7],
+        official: "Zaświadczenia lekarskie: Barbara i Sylwester są pod opieką Poradni Zdrowia Psychicznego. [cite: Zaświadczenie lekarskie.pdf, Pozew komentarze.docx].",
+        sarcasm: "Rodzice oficjalnie pod opieką specjalistów. Kto by nie potrzebował wsparcia?",
+        absurdityLevel: 3, contradictionLevel: 2, manipulationLevel: 3 // Kwestia interpretacji przyczyn
+      },
+      {
+        id: "2022-01-20", label: "Pełnomocnik dla Sylwestra", group: "event", date: "2022-01-20", people: [1, 3, 7],
+        official: "Sąd (I Co 317/21) zwalnia Sylwestra od kosztów i ustanawia pełnomocnika z urzędu ws. odwołania darowizny. [cite: Postanowienie.pdf].",
+        sarcasm: "Druga runda, tym razem na polu cywilnym! Tata dostaje wsparcie prawne.",
+        absurdityLevel: 1, contradictionLevel: 0, manipulationLevel: 1
+      },
+      {
+        id: "2022-04-29", label: "Pozew o zwrot darowizny", group: "event", date: "2022-04-29", people: [1, 2, 3, 7, 10, 11, 9],
+        official: "Sylwester wnosi pozew przeciw Dariuszowi o zwrot darowizny z powodu rażącej niewdzięczności. Świadkowie: Dorota K., Artur A., Monika M., Barbara A. [cite: Pozew komentarze.docx].",
+        sarcasm: "Sądowa batalia część druga! 'Rażąca niewdzięczność' brzmi jak tytuł hitu disco polo.",
+        absurdityLevel: 5, contradictionLevel: 3, manipulationLevel: 4
+      },
+      {
+        id: "2022-05-26", label: "Wezwanie do odpowiedzi na pozew", group: "event", date: "2022-05-26", people: [1, 3, 7],
+        official: "Sąd (I C 634/22) doręcza Dariuszowi odpis pozwu i zobowiązuje do odpowiedzi. [cite: Sygn. akt I C 634 22.pdf, Przesyłka.pdf].",
+        sarcasm: "Listonosz puka dwa razy... nawet w Holandii!",
+        absurdityLevel: 1, contradictionLevel: 0, manipulationLevel: 0
+      },
+      {
+        id: "2024-02-08", label: "Negocjacje Ugodowe w Sprawie Cywilnej", group: "event", date: "Luty 2024", people: [1, 2, 3, 7],
+        official: "Korespondencja pełnomocników ws. ugody (I C 634/22). Propozycje Sylwestra: dostęp do pomieszczeń, 2 kamery, narzędzia, drewno. Sylwester chce rozmawiać z Dariuszem. [cite: image_891145.png, image_89116b.png].",
+        sarcasm: "Po latach walki, czas na... ugodę? Tata chce pogadać i odzyskać dostęp do gratów.",
+        absurdityLevel: 6, contradictionLevel: 3, manipulationLevel: 2
+      },
+      {
+        id: "2024-02-23", label: "Rozprawa Zdalna - Posiedzenie Przygotowawcze", group: "event", date: "2024-02-23", people: [1, 3, 7],
+        official: "Sąd przesyła link do rozprawy zdalnej (posiedzenia przygotowawczego) w sprawie I C 634/22. [cite: image_8911a5.png].",
+        sarcasm: "Technologia wkracza do Adamowa! Nawet rodzinne dramy można teraz oglądać online.",
+        absurdityLevel: 2, contradictionLevel: 0, manipulationLevel: 0
+      },
+      {
+        id: "2024-03-00", label: "Propozycja Terminu u Notariusza (Ugoda)", group: "event", date: "Marzec/Kwiecień 2024", people: [1, 3, 7],
+        official: "Pełnomocnik Dariusza kontaktuje się ws. terminu u notariusza (proponowany 04.04.2024) w celu wykonania ugody. [cite: image_8911c6.png].",
+        sarcasm: "Wielki finał u notariusza? Czy Darek podpisze cyrograf?",
+        absurdityLevel: 4, contradictionLevel: 1, manipulationLevel: 1
+      }
+    ];
+
+    const nodeList = [];
+    const edgeList = [];
+
+    events.sort((a, b) => {
+        const dateA = new Date(a.id.replace(/-00$/, '-01')); 
+        const dateB = new Date(b.id.replace(/-00$/, '-01'));
+        return dateA - dateB;
+    });
+    
+    const eventNodeSpacingX = 260; 
+    const eventNodeStartY = 300;  
+    const personNodeY = 80;       
+    const institutionNodeY = 520; 
+
+    const personNodes = people.filter(p => p.id !== 7); 
+    personNodes.forEach((p, index) => {
+        nodeList.push({ 
+            id: p.id, 
+            label: p.label, 
+            group: p.group, 
+            x: (index - Math.floor(personNodes.length / 2)) * 180, 
+            y: personNodeY, 
+            margin: 10, 
+            font: {size: 18},
+            fixed: { x: false, y:true } 
+        });
+    });
+    
+    const systemPrawnyNode = people.find(p => p.id === 7);
+    if(systemPrawnyNode){
+        nodeList.push({ 
+            id: systemPrawnyNode.id, 
+            label: systemPrawnyNode.label, 
+            group: systemPrawnyNode.group, 
+            x: 0, 
+            y: institutionNodeY, 
+            margin: 10, 
+            font: {size: 17},
+            fixed: { x:true, y:true } 
+        });
+    }
+    
+    events.forEach((e, index) => {
+      nodeList.push({
+        id: e.id,
+        label: `${e.label}\n${e.date}`,
+        group: e.group,
+        x: (index - Math.floor(events.length / 2)) * eventNodeSpacingX, 
+        y: eventNodeStartY,
+        margin: 10,
+        font: {size: 16},
+        fixed: {x:false, y:true},
+        absurdityLevel: e.absurdityLevel,
+        contradictionLevel: e.contradictionLevel,
+        manipulationLevel: e.manipulationLevel
+      });
+      e.people.forEach(pid => edgeList.push({ from: e.id, to: pid }));
+    });
+
+    const nodes = new vis.DataSet(nodeList);
+    const edges = new vis.DataSet(edgeList);
+
+    const defaultEventBorderColorHex = '#a68a01';
+    const absurdityBaseColor = { r: 255, g: 0, b: 0 }; // Red
+    const contradictionBaseColor = { r: 0, g: 0, b: 255 }; // Blue
+    const manipulationBaseColor = { r: 128, g: 0, b: 128 }; // Purple
+
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
+
+    function lerpColor(color1, color2, amount) {
+        const r = Math.round(color1.r + (color2.r - color1.r) * amount);
+        const g = Math.round(color1.g + (color2.g - color1.g) * amount);
+        const b = Math.round(color1.b + (color2.b - color1.b) * amount);
+        return { r: Math.min(255, Math.max(0, r)), g: Math.min(255, Math.max(0, g)), b: Math.min(255, Math.max(0, b)) };
+    }
+    
+    const defaultEventBorderRgb = hexToRgb(defaultEventBorderColorHex);
+
+    function updateNodeStyles() {
+        const absurdityValue = parseInt(document.getElementById('absurditySlider').value);
+        const contradictionValue = parseInt(document.getElementById('contradictionSlider').value);
+        const manipulationValue = parseInt(document.getElementById('manipulationSlider').value);
+
+        document.getElementById('absurdityValue').textContent = absurdityValue;
+        document.getElementById('contradictionValue').textContent = contradictionValue;
+        document.getElementById('manipulationValue').textContent = manipulationValue;
+
+        const updatedNodes = [];
+        nodes.forEach(node => {
+            if (node.group === 'event') {
+                let finalRgb = {...defaultEventBorderRgb};
+                let absurdityIntensity = 0;
+                let contradictionIntensity = 0;
+                let manipulationIntensity = 0;
+
+                if (absurdityValue > 0 && node.absurdityLevel > 0) {
+                    absurdityIntensity = (absurdityValue / 100) * (node.absurdityLevel / 10);
+                    finalRgb = lerpColor(finalRgb, absurdityBaseColor, absurdityIntensity);
+                }
+                if (contradictionValue > 0 && node.contradictionLevel > 0) {
+                    contradictionIntensity = (contradictionValue / 100) * (node.contradictionLevel / 10);
+                    // Blend with the result from absurdity or default
+                     finalRgb = lerpColor(finalRgb, contradictionBaseColor, contradictionIntensity);
+                }
+                if (manipulationValue > 0 && node.manipulationLevel > 0) {
+                    manipulationIntensity = (manipulationValue / 100) * (node.manipulationLevel / 10);
+                    // Blend with the result from previous or default
+                    finalRgb = lerpColor(finalRgb, manipulationBaseColor, manipulationIntensity);
+                }
+                
+                updatedNodes.push({ 
+                    id: node.id, 
+                    color: { 
+                        border: rgbToHex(finalRgb.r, finalRgb.g, finalRgb.b),
+                        background: '#ffe082' // Keep background constant
+                    }
+                });
+            }
+        });
+        if (updatedNodes.length > 0) {
+            nodes.update(updatedNodes);
+        }
+    }
+
+    document.getElementById('absurditySlider').addEventListener('input', updateNodeStyles);
+    document.getElementById('contradictionSlider').addEventListener('input', updateNodeStyles);
+    document.getElementById('manipulationSlider').addEventListener('input', updateNodeStyles);
+
+
+    const options = {
+      nodes: {
+        shape: "box",
+        widthConstraint: { minimum: 140, maximum: 240 }, 
+        heightConstraint: { minimum: 60 },
+        font: { color: "#d1faff", multi: 'html', align: 'center' },
+        borderWidth: 3, // Slightly thicker border
+        shapeProperties: {
+          borderRadius: 8
+        }
+      },
+      edges: {
+        width: 2.5,
+        color: { color: "#7b8da0", highlight: "#facc15", hover: "#b0c7e8" },
+        smooth: {
+            enabled: true,
+            type: 'cubicBezier', 
+            forceDirection: 'vertical', 
+            roundness: 0.4
+        }
+      },
+      groups: {
+        person: { color: { background: "#31c3f5", border: "#1378a7" }, font: {size: 18} },
+        event: { color: { background: "#ffe082", border: defaultEventBorderColorHex }, font: {size: 16, color: "#333333"} },
+        institution: { color: { background: "#ff8686", border: "#b11212" }, font: {size: 17} }
+      },
+      physics: {
+        enabled: true, 
+         barnesHut: {
+          gravitationalConstant: -40000, 
+          centralGravity: 0.03,       
+          springLength: 250,           
+          springConstant: 0.02,       
+          damping: 0.4,               
+          avoidOverlap: 0.8           
+        },
+        solver: 'barnesHut',
+        stabilization: {
+            iterations: 3500, 
+            fit: true
+        }
+      },
+      layout: {
+        hierarchical: false 
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 200,
+        dragNodes: true, 
+        dragView: true,
+        zoomView: true
+      }
+    };
+
+    const container = document.getElementById('mynetwork');
+    const data = { nodes, edges };
+    const network = new vis.Network(container, data, options);
+
+    const details = document.getElementById('details');
+    network.on("selectNode", function(params) {
+      const nodeId = params.nodes[0];
+      const nodeData = nodes.get(nodeId);
+
+      if (nodeData.group === "person") {
+        const p = people.find(pp => pp.id == nodeId);
+        if (p) {
+          details.innerHTML = `
+            <div class="event-title">${p.label}</div>
+            <div class="section-title">Rola w historii:</div>
+            <div class="variant">${{
+              1: "Dariusz, syn, centralna postać konfliktu. Oskarżony o znęcanie się i skazany w I instancji (wniósł sprzeciw). Przedstawia się jako ofiara manipulacji matki, dążącej do odzyskania majątku. Podkreśla swoje inwestycje w dom i załamanie psychiczne spowodowane działaniami matki, w tym próby samobójcze i spanie w warsztacie. [cite: 66_Protokół_przesłuchania_Dariusz_Adamski_2021.09.20_IMG_4486-4490.txt, Zaprzeczenie zarzutom .docx, Adamski Dariusz - sprzeciw w imieniu własnym.odt]. Pozwany w sprawie cywilnej o zwrot darowizny, w której toczą się negocjacje ugodowe [cite: Pozew komentarze.docx, image_891145.png].",
+              2: "Barbara, matka, główna oskarżycielka. Zgłasza przemoc psychiczną, inwigilację (kamery, podsłuchy), niszczenie mienia. Dariusz oskarża ją o prowokacje, agresję wobec Julii, wtargnięcia do pokoju i manipulowanie mężem w celu odzyskania darowizny. [cite: 1_Notatka_urzedowa_Barbara_Adamska_IMG_4395_2021-07-27.txt, 7_Zawiadomienie_przemoc_domowa_Dariusz_Adamski_IMG_4405-4406.JPG.txt, Zaprzeczenie zarzutom .docx]. Pozostająca pod opieką Poradni Zdrowia Psychicznego [cite: Zaświadczenie lekarskie.pdf].",
+              3: "Sylwester, ojciec, darczyńca nieruchomości. Odwołuje darowiznę i wnosi pozew o jej zwrot, powołując się na rażącą niewdzięczność syna. Potwierdza część zarzutów żony, ale Dariusz sugeruje, że Barbara wykorzystuje jego stan zdrowia. [cite: 32_Protokol_przesluchania_Sylwester_Adamski_IMG_4437.txt, List Odwolanie darowizny 06-08-2021.txt, Pozew komentarze.docx, Zaprzeczenie zarzutom .docx]. Pozostający pod opieką Poradni Zdrowia Psychicznego [cite: Zaświadczenie lekarskie.pdf]. Wyraża chęć rozmowy z synem w ramach negocjacji ugodowych [cite: image_89116b.png].",
+              7: "System Prawny (Policja, Prokuratura, Sądy, MGOPS, Adwokaci, Pełnomocnicy z urzędu) – instytucje i osoby wielokrotnie angażowane w sprawę, od interwencji Niebieskiej Karty po procesy karne i cywilne, w tym negocjacje ugodowe. [cite: Multiple documents, Upoważnienie.pdf, image_891145.png].",
+              8: "Kuzynka Julia – jej przyjazd i relacja z Dariuszem stają się punktem zapalnym konfliktu. Dariusz przedstawia ją jako osobę po traumie, wymagającą wsparcia, a działania matki jako agresję i prześladowanie wymierzone w nią i ich relację. [cite: 7_Zawiadomienie_przemoc_domowa_Dariusz_Adamski_IMG_4405-4406.JPG.txt, Zaprzeczenie zarzutom .docx].",
+              9: "Dorota Kowalska, siostra Barbary, ciotka Dariusza. Świadek w sprawie, widziała skutki zniszczeń (rozbite lampy) w lipcu 2021. Wskazana jako świadek w pozwie o odwołanie darowizny. [cite: 62_Protokol_przesluchania_Dorota_Kowalska_11.09.2021_IMG_4479.txt, Pozew komentarze.docx].",
+              10: "Artur Adamski, brat Dariusza. Wskazany jako świadek w pozwie o odwołanie darowizny. Wcześniej odwiedzał rodziców z Moniką. [cite: Pozew komentarze.docx, 15_Notatki z kalendarza Barbary.txt].",
+              11: "Monika Malinowska, siostra Dariusza. Wskazana jako świadek w pozwie o odwołanie darowizny. Wcześniej odwiedzała rodziców z Arturem. [cite: Pozew komentarze.docx, 15_Notatki z kalendarza Barbary.txt].",
+              12: "Bożena Kuffel, znajoma/ciotka Dariusza. Według notatek Barbary, pomagała Dariuszowi naprawiać samochód. Dariusz prosił ją o materac do spania w warsztacie i wskazał jako świadka. [cite: 15_Notatki z kalendarza Barbary.txt, Zaprzeczenie zarzutom .docx]."
+            }[p.id] || "Brak opisu."}</div>
+          `;
+        }
+      } else if (nodeData.group === "event") {
+        const e = events.find(ee => ee.id == nodeId);
+        if (e) {
+          details.innerHTML = `
+            <div class="date">${e.date}</div>
+            <div class="event-title">${e.label}</div>
+            <div class="section">
+              <span class="section-title">Wersja oficjalna (na podstawie dokumentów):</span>
+              <div class="variant">${e.official}</div>
+              <span class="section-title">Wersja alternatywna (sarkastyczny komentarz Radia Adamowo):</span>
+              <div class="variant">${e.sarcasm}</div>
+              <span class="section-title">Kluczowe osoby/instytucje:</span>
+              <span class="people">${
+                e.people.map(pid => people.find(p => p.id === pid)?.label || "?" ).join(", ")
+              }</span>
+            </div>
+          `;
+        }
+      } else {
+          details.innerHTML = "Kliknij na dowolny element mapy.";
+      }
+    });
+    network.on("deselectNode", function() {
+      details.innerHTML = '<span style="opacity:0.7;">Kliknij na wydarzenie lub osobę, by poznać szczegóły. Użyj suwaków powyżej, aby podświetlić wydarzenia według ich charakteru.</span>';
+    });
+
+    network.once("stabilizationIterationsDone", function () {
+        network.setOptions({ physics: false });
+        network.fit({ 
+            animation: {
+                duration: 1000,
+                easingFunction: 'easeInOutQuad'
+            }
+        });
+    });
+    // Initialize styles on load
+    updateNodeStyles();
+  </script>
+</body>
+</html>

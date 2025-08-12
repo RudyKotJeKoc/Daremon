@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daremon – Winkel</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #eee;
+      font-family: "Segoe UI", sans-serif;
+      padding: 2rem;
+    }
+    h1 {
+      border-left: 4px solid #e63946;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    .product {
+      margin-bottom: 2rem;
+      background-color: #1a1a1a;
+      padding: 1.5rem;
+      border-left: 4px solid #444;
+      cursor: pointer;
+    }
+    .product h3 {
+      margin-top: 0;
+      color: #fff;
+    }
+    .product .purchase {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #aaa;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #fff;
+    }
+    #secret-message {
+      display: none;
+      margin-top: 3rem;
+      padding: 2rem;
+      background-color: #222;
+      border-left: 4px solid #e63946;
+      font-style: italic;
+    }
+    #secret-message strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Winkel</h1>
+
+  <p>
+    Niet alles wat verkocht wordt, heeft een prijs. Niet alles wat te koop is, is bedoeld om te bezitten. Hier vind je objecten van twijfelachtige oorsprong, gemaakt voor een functie die (nog) niet bestaat.
+  </p>
+
+  <div class="product" data-key="Z">
+    <h3>Resonantiekaart Z-Ø</h3>
+    <p>Een stuk bedrukt karton dat alleen ruis lijkt te zijn… tot het iets activeert. Waarop het werkt, weet niemand. Het werkt. Misschien.</p>
+    <p class="purchase">
+      <em>Wil je het ontvangen? Of wil het jou ontvangen?</em><br>
+      <a href="https://www.paypal.me/daremonnl/1?note=Resonantiekaart%20Z-Ø" target="_blank">→ Verkrijg het fragment voor 1€</a>
+    </p>
+  </div>
+
+  <div class="product" data-key="P">
+    <h3>PULSELIGHT Mini (concept)</h3>
+    <p>Een passieve lichtmodule die lijkt te reageren op trillingen die niemand hoort. Niet gecertificeerd. Niet verklaard. Niet voor iedereen.</p>
+    <p class="purchase">
+      <em>Alleen beschikbaar voor zij die durven twijfelen aan stilte.</em><br>
+      <a href="https://www.paypal.me/daremonnl/1?note=PULSELIGHT%20Mini%20documentatie" target="_blank">→ Ontvang documentatie voor 1€</a>
+    </p>
+  </div>
+
+  <div class="product" data-key="H">
+    <h3>USB-apparaat 'Hermit'</h3>
+    <p>Niets op de stick. En toch verandert er iets wanneer hij is aangesloten. Je zult het merken. Of niet.</p>
+    <p class="purchase">
+      <em>Bestel het bestand dat je systeem zal negeren, maar je geest niet.</em><br>
+      <a href="https://www.paypal.me/daremonnl/1?note=USB%20Hermit%20toegang" target="_blank">→ Download toegang voor 1€</a>
+    </p>
+  </div>
+
+  <div class="product" data-key="X">
+    <h3>Daremon-patch</h3>
+    <p>Een zwart embleem zonder herkenningsteken. Wie het draagt, stelt geen vragen. Wie het herkent, zwijgt.</p>
+    <p class="purchase">
+      <em>Wil je zichtbaar worden voor hen die niet bestaan?</em><br>
+      <a href="https://www.paypal.me/daremonnl/1?note=Daremon%20patch" target="_blank">→ Verkrijg de patch voor 1€</a>
+    </p>
+  </div>
+
+  <div id="secret-message">
+    <strong>Toegang ontgrendeld.</strong>
+    Je hebt gezien wat je niet moest zien. De toegang is tijdelijk geopend.<br>
+    <p>
+      <em>In de schaduw van de werkelijkheid liggen spellen die je geest zullen testen. Geen regels. Geen uitleg. Alleen gevolgen.</em>
+    </p>
+    <p>
+      Om verder te gaan, is een symbolische toegang vereist. Slechts één euro... om te bewijzen dat je bestaat.<br>
+      <a href="https://www.paypal.me/daremonnl/1?note=Mentale%20simulatie%20toegang" target="_blank">→ Ontgrendel de psychologische toegang voor 1€</a>
+    </p>
+    <p>
+      Na betaling ontvang je binnen 24 uur toegang tot de eerste mentale simulatie. Vertrouw niemand. Ook jezelf niet.
+    </p>
+  </div>
+
+  <p><a href="index.html">← Terug naar de hoofdpagina</a></p>
+
+  <script>
+    const secretSequence = ['Z', 'P', 'H'];
+    let clickSequence = [];
+
+    document.querySelectorAll('.product').forEach(product => {
+      product.addEventListener('click', () => {
+        const key = product.dataset.key;
+        clickSequence.push(key);
+
+        if (clickSequence.length > secretSequence.length) {
+          clickSequence.shift();
+        }
+
+        if (JSON.stringify(clickSequence) === JSON.stringify(secretSequence)) {
+          document.getElementById('secret-message').style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

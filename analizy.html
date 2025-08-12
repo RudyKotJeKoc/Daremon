@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analiza konfliktu rodzinnego Adamskich z profesjonalnym kalendarzem Barbary – szczegółowe notatki i perspektywa strategiczna.">
+    <meta name="keywords" content="Adamski, konflikt rodzinny, kalendarz Barbary, analiza strategiczna, darowizna">
+    <meta name="author" content="Daremon.nl">
+    <title>Analiza Konfliktu Rodzinnego Adamskich: Perspektywa Strategiczna</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #333; margin: 0; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: auto; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; min-height: 100vh; }
+        .sidebar { width: 250px; background-color: #f9f9f9; padding: 20px; border-right: 1px solid #ddd; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin-bottom: 10px; }
+        .sidebar a { color: #3498db; text-decoration: none; font-weight: bold; display: block; padding: 10px; border-radius: 4px; transition: background-color 0.3s; }
+        .sidebar a:hover { background-color: #e0e8f0; }
+        .main-content { flex: 1; padding: 30px; }
+        h1 { text-align: center; color: #34495e; font-family: 'Montserrat', sans-serif; font-size: 2.2em; margin-bottom: 20px; }
+        h2 { border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; font-size: 1.8em; margin-top: 25px; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; }
+        h3 { color: #3498db; font-size: 1.4em; margin-top: 15px; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; }
+        .note { background-color: #ecf0f1; padding: 15px; border-left: 5px solid #3498db; margin-bottom: 20px; border-radius: 4px; }
+        .tl-dr { background-color: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin-bottom: 20px; font-style: italic; }
+        .section-header { cursor: pointer; background-color: #eaf2f8; padding: 12px 20px; border-radius: 6px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1em; font-weight: bold; color: #2c3e50; transition: background-color 0.3s ease; animation: fadeIn 0.5s ease-in-out; }
+        .section-header:hover { background-color: #dbeaf5; }
+        .section-header.expanded span { transform: rotate(90deg); }
+        .interactive-content { display: none; margin-top: 10px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; animation: fadeIn 0.5s ease-in-out; }
+        .interactive-content.active { display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .calendar-entry { cursor: pointer; background-color: #f9f9f9; transition: background-color 0.3s ease; }
+        .calendar-entry:hover { background-color: #e0e8f0; }
+        .calendar-details { display: none; padding: 10px; background-color: #f0f4f8; margin-top: 5px; border-left: 4px solid #3498db; animation: fadeIn 0.5s ease-in-out; }
+        .calendar-details.active { display: block; }
+        .timeline { position: relative; max-width: 100%; margin: 0 auto; padding: 20px 0; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background-color: #3498db; top: 0; bottom: 0; left: 50%; margin-left: -3px; }
+        .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; animation: fadeIn 0.5s ease-in-out; }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        .timeline-container::after { content: ''; position: absolute; width: 25px; height: 25px; right: -17px; background-color: white; border: 4px solid #3498db; top: 15px; border-radius: 50%; z-index: 1; }
+        .timeline-container.right::after { left: -16px; }
+        .timeline-content { padding: 20px 30px; background-color: white; position: relative; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s; }
+        .timeline-content:hover { transform: scale(1.05); }
+        .timeline-details { display: none; margin-top: 10px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; animation: fadeIn 0.5s ease-in-out; }
+        .timeline-details.active { display: block; }
+        .faq-header { cursor: pointer; background-color: #eaf2f8; padding: 12px 20px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1em; font-weight: bold; color: #2c3e50; transition: background-color 0.3s ease; animation: fadeIn 0.5s ease-in-out; }
+        .faq-header:hover { background-color: #dbeaf5; }
+        .faq-content { display: none; margin-top: 10px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; animation: fadeIn 0.5s ease-in-out; }
+        .faq-content.active { display: block; }
+        .quote-card { padding: 15px; background-color: #f9f9f9; border-left: 5px solid #3498db; margin-bottom: 20px; border-radius: 4px; font-style: italic; }
+        .cta-button { display: inline-block; background-color: #3498db; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; margin-top: 10px; transition: background-color 0.3s; }
+        .cta-button:hover { background-color: #2980b9; }
+        .diagram { text-align: center; margin-bottom: 20px; }
+        .heatmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .heatmap div { padding: 10px; text-align: center; border-radius: 4px; color: white; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #ddd; }
+            .timeline::after { left: 31px; }
+            .timeline-container { width: calc(100% - 70px); padding: 0 0 0 70px; left: 0 !important; }
+            .timeline-container::after { left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Menu boczne -->
+        <aside class="sidebar">
+            <h3 class="text-lg font-bold mb-4">Kategorie Analiz</h3>
+            <ul>
+                <li><a href="#darowizna">Darowizna</a></li>
+                <li><a href="#calendar">Kalendarz Barbary</a></li>
+                <li><a href="#psychologia">Psychologia Konfliktu</a></li>
+                <li><a href="#manipulacje">Manipulacje</a></li>
+                <li><a href="#dokumenty">Wyroki i Dokumenty</a></li>
+                <li><a href="#timeline-section">Oś Czasu</a></li>
+                <li><a href="#faq-section">FAQ</a></li>
+                <li><a href="#odwolanie">Odwołanie Darowizny</a></li>
+                <li><a href="#pozew">Pozew Cywilny</a></li>
+                <li><a href="#ugoda">Propozycja Ugody</a></li>
+                <li><a href="#wezwanie">Wezwanie Sądowe</a></li>
+                <li><a href="#plan-barbary">Plan Barbary: Manipulacje i Instrumentalizacja</a></li>
+                <li><a href="#przesluchania">Przesłuchania Świadków</a></li>
+                <li><a href="#akt-oskarzenia">Akt Oskarżenia</a></li>
+                <li><a href="#wyrok">Wyrok Nakazowy</a></li>
+            </ul>
+        </aside>
+
+        <!-- Główna treść -->
+        <main class="main-content">
+            <h1>Analiza Konfliktu Rodzinnego Adamskich: Perspektywa Strategiczna</h1>
+            <p class="note">
+                Ten interaktywny raport ma na celu szybkie i efektywne zrozumienie złożonej dynamiki konfliktu w rodzinie Adamskich. Został przygotowany, aby dostarczyć kluczowych informacji potrzebnych do formułowania strategicznych rekomendacji dla senior leadership, z uwzględnieniem perspektyw prawnych, psychologicznych i finansowych.
+            </p>
+
+            <!-- Sekcja Strony Konfliktu -->
+            <div class="section-header" onclick="toggleSection('partie')">
+                1. Strony Konfliktu <span>&#9658;</span>
+            </div>
+            <div id="partie" class="interactive-content">
+                <div class="tl-dr">TL;DR: Konflikt angażuje Barbarę (inicjatorkę), Sylwestra (darczyńcę) i Dariusza (obdarowanego), z kluczowymi rolami w manipulacji i obronie.</div>
+                <h3>Barbara Adamska</h3>
+                <ul>
+                    <li>Matka Dariusza i żona Sylwestra. Główna osoba zgłaszająca zarzuty znęcania psychicznego wobec syna [273].</li>
+                    <li>Prowadziła skrupulatne notatki w kalendarzu, które stały się kluczowym dowodem [1-12, 273].</li>
+                    <li>Leczy się psychiatrycznie i psychologicznie z powodu nerwicy i depresji, odnotowała utratę 7 kg wagi i drżenie rąk [113, 274, 275].</li>
+                    <li>Postrzegana jako inicjatorka działań prawnych, dążąca do odzyskania nieruchomości [102, 130, 143, 276].</li>
+                </ul>
+
+                <h3>Sylwester Adamski</h3>
+                <ul>
+                    <li>Ojciec Dariusza i mąż Barbary. W 2017 roku przekazał synowi gospodarstwo w darowiźnie [23, 277].</li>
+                    <li>Miał wylew dwa lata przed zeznaniami (2021), ma I grupę inwalidzką i porusza się na skuterze inwalidzkim [21, 278].</li>
+                    <li>Udzielił Barbarze pełnomocnictwa do działania w jego imieniu we wszelkimi sprawach [13-18, 131, 279].</li>
+                    <li>Zeznał, że Dariusz go ignoruje i unika rozmów, ale nie obraża ani nie stosuje przemocy fizycznej wobec niego [20, 82, 280].</li>
+                </ul>
+
+                <h3>Dariusz Adamski</h3>
+                <ul>
+                    <li>Syn Barbary i Sylwestra. Otrzymał gospodarstwo w darowiźnie w 2017 roku [24, 278].</li>
+                    <li>Oskarżony o psychiczne znęcanie się nad matką [68, 210, 281].</li>
+                    <li>Ciężko pracował w Holandii i inwestował niemal wszystkie zarobki w dom rodzinny [79, 248, 282].</li>
+                    <li>Twierdzi, że jego działania były reakcją obronną na prowokacje i manipulacje matki [81, 275, 283].</li>
+                    <li>Cierpi na głęboką depresję, miał myśli i próby samobójcze, schudł 9 kg [81, 255, 284]. Czuje się zniszczony psychicznie i zdradzony przez system [255, 284].</li>
+                </ul>
+            </div>
+
+            <!-- Sekcja Oś Czasu -->
+            <div class="section-header" onclick="toggleSection('timeline-section')">
+                Interaktywna Oś Czasu <span>&#9658;</span>
+            </div>
+            <div id="timeline-section" class="interactive-content timeline">
+                <div class="tl-dr">TL;DR: Konflikt eskaluje od darowizny w 2017 r. do pozwu w 2022 r., z kluczowymi momentami w 2021 r.</div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-2017')">
+                        <h4>7 lipca 2017</h4>
+                        <p>Akt Darowizny</p>
+                        <div id="timeline-2017" class="timeline-details">
+                            Sylwester Adamski przekazuje Dariuszowi gospodarstwo rolne wraz z zabudowaniami o wartości 210 000 zł, ustanawiając służebność osobistą (źródło: akt notarialny). Dariusz inwestuje w modernizację, co pokazuje jego troskę o rodzinę.
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-feb-2021')">
+                        <h4>Luty 2021</h4>
+                        <p>Początek Napięć – Przyjazd Julii</p>
+                        <div id="timeline-feb-2021" class="timeline-details">
+                            10 lutego: Barbara zauważa Julię w pokoju Dariusza i wtarga do pokoju o 2:30 w nocy (cytat z kalendarza: "Zauważyłam, że ona jest cały czas u niego w pokoju..."). Kontekst: Obsesyjne sugestie Barbary o związku Dariusza z kuzynką stają się zarzewiem konfliktu (źródło: analiza kalendarza).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-mar-2021')">
+                        <h4>Marzec 2021</h4>
+                        <p>Incydent z Paralizatorem i Interwencja Policji</p>
+                        <div id="timeline-mar-2021" class="timeline-details">
+                            29 marca: Interwencja policji z powodu głośnej muzyki; Barbara wyłącza prąd (cytat: "Po 22 zadzwoniliśmy po policję..."). Kontekst: Dariusz izoluje się, montując kamery; Barbara pomija swoją rolę w prowokacji (źródło: notatki policyjne).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-apr-2021')">
+                        <h4>Kwiecień 2021</h4>
+                        <p>Izolacja i Pierwsza Próba Samobójcza</p>
+                        <div id="timeline-apr-2021" class="timeline-details">
+                            1 kwietnia: Zmiana kodu do warsztatu (cytat: "Zmienił kod do warsztatu..."). Kontekst: Dariusz unika kontaktu, co jest reakcją na nękanie; próba samobójcza Dariusza (źródło: zeznania Dariusza).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-may-2021')">
+                        <h4>21 maja 2021</h4>
+                        <p>Incydent ze Szpitalem</p>
+                        <div id="timeline-may-2021" class="timeline-details">
+                            Barbara notuje odmowę klucza do samochodu dla Sylwestra (cytat: "Odmówił, żeby dać klucz..."). Kontekst: Dariusz odbiera ojca ze szpitala, co Barbara pomija (źródło: kalendarz i analiza prawna).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul-2021')">
+                        <h4>Lipiec 2021</h4>
+                        <p>Eskalacja i Zaspawana Toaleta</p>
+                        <div id="timeline-jul-2021" class="timeline-details">
+                            20 lipca: Konflikt o toaletę i próba nagrania (cytat: "Chciałam nagrać to, co mówi..."). Kontekst: Wdrożenie Niebieskiej Karty; pełnomocnictwo dla Barbary (źródło: dokumenty sądowe).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul17-2021')">
+                        <h4>17 lipca 2021</h4>
+                        <p>Interwencja Policji i Niebieska Karta</p>
+                        <div id="timeline-jul17-2021" class="timeline-details">
+                            Interwencja z powodu awantury Dariusza; wdrożenie Niebieskiej Karty. Cytat: "Syn od lutego 2021 roku stosuje wobec niej przemoc psychiczną... zaspawał skobel...". Kontekst: Barbara czeka w lesie; policja notuje ograniczenie dostępu, kamery (źródło: Notatka Mateusz Majewski [DOCUMENT filename="48_Mateusz Majewski Notatka Urzędowa 17;18.07.2021_IMG_4463.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul25-2021')">
+                        <h4>25 lipca 2021</h4>
+                        <p>Druga Interwencja i Niebieska Karta</p>
+                        <div id="timeline-jul25-2021" class="timeline-details">
+                            Kolejna interwencja; sporządzenie Niebieskiej Karty. Cytat: "Kobieta czuje się zastraszana... syn zaspawał toaletę...". Kontekst: Potwierdzenie kamer, zamkniętych pomieszczeń; darowizna jako tło (źródło: Notatka Krystian Sługiewicz [DOCUMENT filename="38_ Krystian Sługiewicz notatka urzedowa 26.07.2021_IMG_4444-4445.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul26-2021')">
+                        <h4>26 lipca 2021</h4>
+                        <p>Kontrola Niebieskiej Karty</p>
+                        <div id="timeline-jul26-2021" class="timeline-details">
+                            Wizyta dzielnicowego; Dariusz wyjaśnia konflikt. Cytat: "Barbara Adamska oświadczyła, iż jej syn Dariusz Adamski... ogranicza...". Kontekst: Dariusz wyprowadził się; konflikt o darowiznę (źródło: Notatka Antoni Bogdaszewski [DOCUMENT filename="35_Notatka_urzedowa_Barbara_Adamska_IMG_4395_2021-07-27.txt"] – zaktualizowany z nowymi danymi).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul27-2021')">
+                        <h4>27 lipca 2021</h4>
+                        <p>Zgłoszenie Znęcania Psychicznego</p>
+                        <div id="timeline-jul27-2021" class="timeline-details">
+                            Barbara zgłasza znęcanie. Cytat: "Mój syn Dariusz Adamski znęca się psychicznie... wyzywa używając słów wulgarnych...". Kontekst: Pierwsze formalne zawiadomienie; brak dowodów fizycznych (źródło: Zawiadomienie [DOCUMENT filename="7_Zawiadomienie_przemoc_domowa_Dariusz_Adamski_IMG_4405-4406.JPG.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jul29-2021')">
+                        <h4>29 lipca 2021</h4>
+                        <p>Pismo MGOPS o Niebieskiej Karcie</p>
+                        <div id="timeline-jul29-2021" class="timeline-details">
+                            Wniosek o notatkę do Niebieskiej Karty. Cytat: "Proszę o przesłanie notatki...". Kontekst: Zespół Interdyscyplinarny żąda szczegółów interwencji (źródło: Pismo [DOCUMENT filename="39_Pismo_MGOPS_NK_Adamscy_2021-07-29_IMG_4446.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug-2021')">
+                        <h4>1 sierpnia 2021</h4>
+                        <p>Wszczęcie Dochodzenia</p>
+                        <div id="timeline-aug-2021" class="timeline-details">
+                            Policja wszczyna dochodzenie z art. 207 §1 k.k. Cytat: "Wszcząć dochodzenie o przestępstwo z art. 207§1 k.k.". Kontekst: Na podstawie zgłoszenia Barbary; brak wzmianki o przemocy fizycznej (źródło: Postanowienie [DOCUMENT filename="27_Postanowienie_wszczecie_dochodzenia_207kk_IMG_4426_2021-08-01.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug3-2021')">
+                        <h4>3 sierpnia 2021</h4>
+                        <p>Przesłuchanie Sylwestra</p>
+                        <div id="timeline-aug3-2021" class="timeline-details">
+                            Sylwester zeznaje o ignorowaniu przez syna. Cytat: "Dariusz mnie unika... nie obraża, nie wyzywa mnie...". Kontekst: Potwierdza brak przemocy fizycznej; Barbara manipuluje narracją (źródło: Protokół [DOCUMENT filename="32_Protokol_przesluchania_Sylwester_Adamski_IMG_4437.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug3-2021-2')">
+                        <h4>3 sierpnia 2021</h4>
+                        <p>Notatka Służbowa Niebieska Karta</p>
+                        <div id="timeline-aug3-2021-2" class="timeline-details">
+                            Wizyta w domu; opis konfliktu, stanu zdrowia, zamiaru cofnięcia darowizny. Cytat: "Problemy... nasiliły się od lutego br... związek z kuzynką... chcą cofnąć darowiznę". Kontekst: Barbara pod opieką psychologa; plan cofnięcia darowizny (źródło: Notatka [DOCUMENT filename="36_Notatka służbowa Niebieska karta 03.08.2021_IMG_4441.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug4-2021')">
+                        <h4>4 sierpnia 2021</h4>
+                        <p>Wniosek o Dokumentację Niebieskiej Karty</p>
+                        <div id="timeline-aug4-2021" class="timeline-details">
+                            Policja wnioskuje o Niebieską Kartę. Cytat: "Prośba o przesłanie uwierzytelnionych kopii dokumentacji... Niebieskich Kart.". Kontekst: Eskalacja prawna; Barbara używa procedury do zebrania dowodów (źródło: Wniosek [DOCUMENT filename="33_Wniosek_o_dokumentację_Niebieskiej_Karty_04-08-2021_IMG_4438.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug4-2021-2')">
+                        <h4>4 sierpnia 2021</h4>
+                        <p>Notatka Urzędowa Antoni Bogdaszewski</p>
+                        <div id="timeline-aug4-2021-2" class="timeline-details">
+                            Opis konfliktu, darowizny, kamer, zaspawania toalety. Cytat: "Barbara Adamska oświadczyła, iż jej syn Dariusz Adamski... okamerowaniu...". Kontekst: Dariusz wyjaśnia konflikt, wyprowadzka; plan cofnięcia darowizny (źródło: Notatka [DOCUMENT filename="35_Notatka_urzedowa_Barbara_Adamska_IMG_4395_2021-07-27.txt"] – zaktualizowany z nowymi danymi).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug6-2021')">
+                        <h4>6 sierpnia 2021</h4>
+                        <p>List Odwołujący Darowiznę</p>
+                        <div id="timeline-aug6-2021" class="timeline-details">
+                            Sylwester odwołuje darowiznę z powodu "rażącej niewdzięczności". Cytat: "Odwołuję... darowiznę nieruchomości...". Listing zarzutów: okamerowanie, wyzwiska, odmowa pomocy, niszczenie mienia itp. Kontekst: Pismo wysłane na nieaktualny adres; Dariusz nie odbiera (źródło: List [DOCUMENT filename="List Odwolanie darowizny 06-08-2021.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-aug6-2021-2')">
+                        <h4>6 sierpnia 2021</h4>
+                        <p>Odpowiedź na Wniosek o Niebieską Kartę</p>
+                        <div id="timeline-aug6-2021-2" class="timeline-details">
+                            Zespół Interdyscyplinarny przesyła kserokopie Niebieskich Kart. Cytat: "Przesyła potwierdzone z oryginałem kserokopie...". Kontekst: Dokumentacja interwencji z lipca 2021 (źródło: Odpowiedź [DOCUMENT filename="34_Odpowiedz_na_wniosek_DW-729-21_Niebieska_Karta_06-08-2021_IMG_4439.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep-2021')">
+                        <h4>8 września 2021</h4>
+                        <p>Notatka Urzędowa Jarosław Komza</p>
+                        <div id="timeline-sep-2021" class="timeline-details">
+                            Sprawdzenie interwencji policji. Cytat: "W okresie od 1 lutego 2021 roku miały miejsce trzy interwencje...". Kontekst: Potwierdzenie zgłoszeń; brak przemocy fizycznej (źródło: Notatka [DOCUMENT filename="53_Notatka_Urzedowa_Policja_DW-729-21_Adamowo_2021-09-08_IMG_4469.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep9-2021')">
+                        <h4>9 września 2021</h4>
+                        <p>Przesłuchanie Krystian Sługiewicz</p>
+                        <div id="timeline-sep9-2021" class="timeline-details">
+                            Potwierdzenie interwencji. Cytat: "Udaliśmy się na interwencję... syn miał się znęcać...". Kontekst: Wdrożenie Niebieskiej Karty; brak przemocy fizycznej (źródło: Protokół [DOCUMENT filename="59_Protokol_przesluchania_Krystian_Slugiewicz_10.10.2021_IMG_4476.txt"] – data z protokołu 10.10.2021, ale przesłuchanie 9.09.2021? Błąd w filename, dostosowano).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep11-2021')">
+                        <h4>11 września 2021</h4>
+                        <p>Przesłuchanie Doroty Kowalskiej</p>
+                        <div id="timeline-sep11-2021" class="timeline-details">
+                            Siostra Barbary zeznaje o znęcaniu. Cytat: "Ja słyszałam od Barbary, że Dariusz stosuje wobec niej przemoc psychiczną...". Kontekst: Potwierdza zarzuty (rozbite lampy, kamery), ale brak bezpośrednich świadków przemocy; Barbara przygnębiona (źródło: Protokół [DOCUMENT filename="62_Protokol_przesluchania_Dorota_Kowalska_11.09.2021_IMG_4479.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep20-2021')">
+                        <h4>20 września 2021</h4>
+                        <p>Przesłuchanie Dariusza Adamskiego</p>
+                        <div id="timeline-sep20-2021" class="timeline-details">
+                            Dariusz nie przyznaje się. Cytat: "Nie przyznaję się... przed pierwszym przesłuchaniem pouczono...". Kontekst: Wyjaśnia konflikt jako reakcję na ingerencję matki; kamery dla bezpieczeństwa; wyprowadzka (źródło: Protokół [DOCUMENT filename="66_Protokol_przesluchania_Dariusz_Adamski_2021.09.20_IMG_4486-4490.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep27-2021')">
+                        <h4>27 września 2021</h4>
+                        <p>Notatka o Sprawdzeniu Karalności</p>
+                        <div id="timeline-sep27-2021" class="timeline-details">
+                            Dariusz niekarany. Cytat: "Dariusz Adamski nie posiada rejestracji procesowych...". Kontekst: Brak karalności; dołączenie do akt (źródło: Notatka [DOCUMENT filename="69_Notatka_urzędowa_sprawdzenie_KSP_Dariusz_Adamski_2021-09-27_IMG_4492.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep27-2021-2')">
+                        <h4>27 września 2021</h4>
+                        <p>Akt Oskarżenia</p>
+                        <div id="timeline-sep27-2021-2" class="timeline-details">
+                            Oskarżenie o znęcanie psychiczne. Cytat: "OSKARŻAM Dariusza Adamskiego... znęcał się psychicznie...". Kontekst: Okres luty-sierpień 2021; lista świadków i dowodów (źródło: Akt [DOCUMENT filename="70_Akt_oskarżenia_Dariusz_Adamski_207kk_2021-09-27_IMG_4494-4495.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-sep27-2021-3')">
+                        <h4>27 września 2021</h4>
+                        <p>Wykaz Osób i Dowodów</p>
+                        <div id="timeline-sep27-2021-3" class="timeline-details">
+                            Lista świadków i dowodów. Cytat: "ŚWIADKOWIE: Barbara Adamska, Sylwester Adamski...". Kontekst: Dokumentacja Niebieskiej Karty, dane o podejrzanym, notatnik pokrzywdzonej (źródło: Wykaz [DOCUMENT filename="71_Wykaz_osób_i_dowodów_Dariusz_Adamski_2021-09-27_IMG_4496.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-oct-2021')">
+                        <h4>13 października 2021</h4>
+                        <p>Wyrok Nakazowy</p>
+                        <div id="timeline-oct-2021" class="timeline-details">
+                            Wyrok za znęcanie psychiczne. Cytat: "Uznaje oskarżonego Dariusza Adamskiego za winnego... kara 100 stawek dziennych grzywny...". Kontekst: Zadośćuczynienie 1000 zł; na podstawie zebranych dowodów (źródło: Wyrok [DOCUMENT filename="78_Wyrok nakazowy Sygn. akt II K 568.21 13.09.2021.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-jan-2022')">
+                        <h4>20 stycznia 2022</h4>
+                        <p>Postanowienie o Przydzieleniu Pełnomocnika</p>
+                        <div id="timeline-jan-2022" class="timeline-details">
+                            Sąd przydziela pełnomocnika z urzędu dla Sylwestra. Cytat: "Zwolnić wnioskodawcę Sylwestra Adamskiego od kosztów sądowych...". Kontekst: Ułatwia prowadzenie sprawy; pełnomocnik: Grzegorz Szlezer (źródło: Postanowienie [DOCUMENT filename="Postanowienie o przydzieleniu pełnomocnika 20.01.2022.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-apr-2022')">
+                        <h4>29 kwietnia 2022</h4>
+                        <p>Pozew o Nakazanie Złożenia Oświadczenia Woli</p>
+                        <div id="timeline-apr-2022" class="timeline-details">
+                            Sylwester wnosi pozew o zwrot nieruchomości. Cytat: "Zobowiązanie pozwanego do złożenia oświadczenia woli o przeniesieniu...". Listing zarzutów: okamerowanie, wyzwiska, znęcanie, niszczenie mienia itp. Kontekst: Opiera się na wyroku karnym i "rażącej niewdzięczności" (źródło: Pozew [DOCUMENT filename="Pozew o nakazanie złożenia oswiadczenia woli 29.04.2022.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-may-2022')">
+                        <h4>26 maja 2022</h4>
+                        <p>Zobowiązanie do Złożenia Oświadczenia Woli</p>
+                        <div id="timeline-may-2022" class="timeline-details">
+                            Sąd zobowiązuje Dariusza do odpowiedzi na pozew. Cytat: "Zobowiązuje Pana do złożenia odpowiedzi na pozew...". Kontekst: Termin 30 dni na odpowiedź; rygor pominięcia dowodu (źródło: Zobowiązanie [DOCUMENT filename="Zobowiązanie do złożenia oswiadczenia woli 26.05.2022.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-feb-2024')">
+                        <h4>8 lutego 2024</h4>
+                        <p>Propozycja Ugody</p>
+                        <div id="timeline-feb-2024" class="timeline-details">
+                            Korespondencja prawników o ugodzie. Cytat: "Poniżej propozycję do ugody: 1. umożliwienie wejścia do wszystkich pomieszczeń...". Kontekst: Warunki: dostęp do pomieszczeń, dwie kamery, narzędzia, zbieranie szuszków (źródło: Propozycja [DOCUMENT filename="Propozycja ugody.txt"]).
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-container left">
+                    <div class="timeline-content" onclick="toggleTimelineDetails('timeline-mar-2025')">
+                        <h4>3 marca 2025</h4>
+                        <p>Wezwanie na Rozprawę</p>
+                        <div id="timeline-mar-2025" class="timeline-details">
+                            Sąd wzywa Dariusza na rozprawę 19 maja 2025 r. Cytat: "Wzywa Pana aby w dniu 19 maja 2025 r. o godz. 09:00...". Kontekst: Możliwość videokonferencji; obowiązkowe stawiennictwo (źródło: Wezwanie [DOCUMENT filename="Wezwanie na rozprawę 3.3.2025.txt"]).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Kalendarz -->
+            <div class="section-header" onclick="toggleSection('calendar')">
+                11. Kalendarz Barbary Adamskiej: Chronologiczny zapis wydarzeń <span>&#9658;</span>
+            </div>
+            <div id="calendar" class="interactive-content">
+                <div class="tl-dr">TL;DR: Kalendarz Barbary pokazuje selektywne notatki, pomijające fakty korzystne dla Dariusza.</div>
+                <p class="mb-4">Poniżej znajduje się profesjonalny kalendarz oparty na notatkach Barbary Adamskiej, które zostały przedstawione jako dowód w sprawie. Kliknij na datę, aby zobaczyć szczegóły zdarzenia. Filtruj po temacie:</p>
+                <select id="calendar-filter" class="mb-4 p-2 border rounded">
+                    <option value="">Wszystko</option>
+                    <option value="prywatnosc">Naruszenie prywatności</option>
+                    <option value="izolacja">Izolacja i unikanie kontaktu</option>
+                    <option value="psychiczny">Stan psychiczny</option>
+                    <option value="prowokacja">Prowokacje</option>
+                    <option value="bezpieczenstwo">Środki bezpieczeństwa</option>
+                    <option value="julia">Dotyczące Julii</option>
+                </select>
+                <table id="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Zdarzenie</th>
+                            <th>Szczegóły</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ... (istniejące wiersze tabeli z kalendarzem, dodaj data-filter="kategoria" do <tr>) ... -->
+                    </tbody>
+                </table>
+                <a href="#download-calendar" class="cta-button">Pobierz pełny kalendarz</a>
+            </div>
+
+            <!-- Sekcja Darowizna -->
+            <div class="section-header" onclick="toggleSection('darowizna')">
+                2. Darowizna i Służebność Osobista <span>&#9658;</span>
+            </div>
+            <div id="darowizna" class="interactive-content">
+                <div class="tl-dr">TL;DR: Darowizna z 2017 r. z służebnością, ale oczekiwania Barbary wykraczają poza prawo.</div>
+                <h3>Akt Darowizny (7 lipca 2017)</h3>
+                <ul>
+                    <li>Sylwester Adamski darował synowi Dariuszowi całe gospodarstwo rolne wraz z zabudowaniami o łącznej wartości 210 000 zł [23, 32, 277].</li>
+                </ul>
+                <a href="#view-document" class="cta-button">Zobacz pełny akt darowizny</a>
+            </div>
+
+            <!-- Sekcja Geneza -->
+            <div class="section-header" onclick="toggleSection('genesis')">
+                3. Geneza i Eskalacja Konfliktu (Luty 2021) <span>&#9658;</span>
+            </div>
+            <div id="genesis" class="interactive-content">
+                <div class="tl-dr">TL;DR: Konflikt zaczyna się od ingerencji Barbary w życie Dariusza.</div>
+                <h3>Przyjazd Julii i Początek Konfliktu</h3>
+                <ul>
+                    <li>W lutym 2021 r. do Dariusza przyjechała jego kuzynka Julia [285, 286].</li>
+                </ul>
+                <a href="#more-analysis" class="cta-button">Przejdź do analizy manipulacji</a>
+            </div>
+
+            <!-- Sekcja Odwołanie Darowizny -->
+            <div class="section-header" onclick="toggleSection('odwolanie')">
+                Odwołanie Darowizny <span>&#9658;</span>
+            </div>
+            <div id="odwolanie" class="interactive-content">
+                <div class="tl-dr">TL;DR: Sylwester odwołuje darowiznę w 2021 r. z powodu "rażącej niewdzięczności", listing zarzuty jak okamerowanie, wyzwiska i niszczenie mienia.</div>
+                <h3>List Odwołujący Darowiznę (6 sierpnia 2021)</h3>
+                <blockquote class="quote-card">
+                    "Odwołuję wobec adresata darowiznę nieruchomości... rażąca niewdzięczność polegająca na zabranianiu korzystania z nieruchomości...".
+                </blockquote>
+                <p>Kontekst: Pismo wysłane na nieaktualny adres; Dariusz nie odbiera. Zarzuty opierają się na zgłoszeniach Barbary, ale brak dowodów fizycznych. Art. 898 k.c. pozwala na odwołanie w ciągu roku od dowiedzenia się o niewdzięczności, jeśli jest rażąca (np. ciężkie znieważenia, odmowa pomocy w chorobie). Nie każdy konflikt rodzinny kwalifikuje się – wymaga złej woli.</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-odwolanie-1')">
+                        Kiedy można odwołać darowiznę? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-odwolanie-1" class="faq-content">
+                        Z powodu rażącej niewdzięczności w ciągu roku. Przykłady: pobicie, znieważenia, odmowa pomocy. Skutki: Obowiązek zwrotny, ale wymaga sądu do przeniesienia własności.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Pozew Cywilny -->
+            <div class="section-header" onclick="toggleSection('pozew')">
+                Pozew Cywilny <span>&#9658;</span>
+            </div>
+            <div id="pozew" class="interactive-content">
+                <div class="tl-dr">TL;DR: Pozew z 2022 r. o zwrot nieruchomości, oparty na wyroku karnym i zarzutach rażącej niewdzięczności.</div>
+                <h3>Pozew o Nakazanie Złożenia Oświadczenia Woli (29 kwietnia 2022)</h3>
+                <blockquote class="quote-card">
+                    "Zobowiązanie pozwanego do złożenia oświadczenia woli o przeniesieniu... rażąca niewdzięczność...".
+                </blockquote>
+                <p>Kontekst: Szczegółowe zarzuty: okamerowanie, wyzwiska, niszczenie mienia, odmowa pomocy. Powód domaga się zwrotu nieruchomości; Dariusz może kwestionować jako manipulację. Sąd przydziela pełnomocnika Sylwestrowi (postanowienie z 20 stycznia 2022).</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-pozew-1')">
+                        Co oznacza rażąca niewdzięczność? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-pozew-1" class="faq-content">
+                        Zachowanie z złą wolą, boleśnie dotykające darczyńcy (np. pobicie, znieważenia). Sąd ocenia w kontekście relacji stron; zwykłe spory rodzinne nie wystarczą (wyrok SN V CSK 428/19).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Propozycja Ugody -->
+            <div class="section-header" onclick="toggleSection('ugoda')">
+                Propozycja Ugody <span>&#9658;</span>
+            </div>
+            <div id="ugoda" class="interactive-content">
+                <div class="tl-dr">TL;DR: Propozycja z 2024 r. obejmuje dostęp do pomieszczeń, ograniczony monitoring i korzystanie z urządzeń.</div>
+                <h3>Propozycja Ugody (8 lutego 2024)</h3>
+                <blockquote class="quote-card">
+                    "Poniżej propozycję do ugody: 1. umożliwienie wejścia do wszystkich pomieszczeń...".
+                </blockquote>
+                <p>Kontekst: Korespondencja prawników; warunki: dostęp do garaży, dwie kamery, narzędzia, zbieranie szuszków. Możliwa ugoda sądowa (art. 184 k.p.c.) przed procesem, jeśli zgodna z prawem.</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-ugoda-1')">
+                        Jak działa ugoda sądowa? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-ugoda-1" class="faq-content">
+                        Dopuszczalna przed pozwem, jeśli charakter sprawy pozwala. Sąd uznaje ugodę, jeśli zgodna z prawem i zasadami współżycia społecznego. Korzyści: Szybkie zakończenie sporu, uniknięcie kosztów.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Wezwanie Sądowe -->
+            <div class="section-header" onclick="toggleSection('wezwanie')">
+                Wezwanie Sądowe <span>&#9658;</span>
+            </div>
+            <div id="wezwanie" class="interactive-content">
+                <div class="tl-dr">TL;DR: Wezwanie na rozprawę w 2025 r. z możliwością videokonferencji; obowiązkowe stawiennictwo.</div>
+                <h3>Wezwanie na Rozprawę (3 marca 2025)</h3>
+                <blockquote class="quote-card">
+                    "Wzywa Pana aby w dniu 19 maja 2025 r. o godz. 09:00...".
+                </blockquote>
+                <p>Kontekst: Przesłuchanie Dariusza; link do videokonferencji. Rygor pominięcia dowodu przy niestawiennictwie. Zobowiązanie do odpowiedzi na pozew (26 maja 2022).</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-wezwanie-1')">
+                        Co grozi za niestawiennictwo? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-wezwanie-1" class="faq-content">
+                        Sąd może pominąć dowód (przesłuchanie); możliwe koszty procesu. Możliwość zdalnego udziału.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Przesłuchania Świadków -->
+            <div class="section-header" onclick="toggleSection('przesluchania')">
+                Przesłuchania Świadków <span>&#9658;</span>
+            </div>
+            <div id="przesluchania" class="interactive-content">
+                <div class="tl-dr">TL;DR: Przesłuchania potwierdzają zarzuty Barbary (np. Dorota Kowalska o rozbitych lampach), ale brak bezpośrednich świadków przemocy fizycznej; policjanci opisują interwencje.</div>
+                <h3>Przesłuchanie Doroty Kowalskiej (11 września 2021)</h3>
+                <blockquote class="quote-card">
+                    "Ja słyszałam od Barbary, że Dariusz stosuje wobec niej przemoc psychiczną... widziałam rozbite lampy...".
+                </blockquote>
+                <p>Kontekst: Siostra Barbary potwierdza zarzuty (rozbite lampy, kamery), ale opiera się na relacjach Barbary; brak przemocy fizycznej (źródło: Protokół [DOCUMENT filename="62_Protokol_przesluchania_Dorota_Kowalska_11.09.2021_IMG_4479.txt"]).</p>
+
+                <h3>Przesłuchanie Krystian Ślugiewicz (9 września 2021)</h3>
+                <blockquote class="quote-card">
+                    "Udaliśmy się na interwencję... syn miał się znęcać...".
+                </blockquote>
+                <p>Kontekst: Policjant potwierdza interwencje (zamknięte pomieszczenia, kamery); wdrożenie Niebieskiej Karty (źródło: Protokół [DOCUMENT filename="59_Protokol_przesluchania_Krystian_Slugiewicz_10.10.2021_IMG_4476.txt"] – data przesłuchania 9.09.2021).</p>
+
+                <h3>Przesłuchanie Dariusza Adamskiego (20 września 2021)</h3>
+                <blockquote class="quote-card">
+                    "Nie przyznaję się... przed pierwszym przesłuchaniem pouczono...".
+                </blockquote>
+                <p>Kontekst: Dariusz wyjaśnia konflikt jako reakcję na ingerencję matki; kamery dla bezpieczeństwa; wyprowadzka (źródło: Protokół [DOCUMENT filename="66_Protokol_przesluchania_Dariusz_Adamski_2021.09.20_IMG_4486-4490.txt"]).</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-przesluchania-1')">
+                        Czy przesłuchania potwierdzają znęcanie? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-przesluchania-1" class="faq-content">
+                        Zeznania świadków (Dorota, policjanci) opierają się na relacjach Barbary; Dariusz zaprzecza, wskazując na prowokacje. Brak przemocy fizycznej.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Akt Oskarżenia -->
+            <div class="section-header" onclick="toggleSection('akt-oskarzenia')">
+                Akt Oskarżenia <span>&#9658;</span>
+            </div>
+            <div id="akt-oskarzenia" class="interactive-content">
+                <div class="tl-dr">TL;DR: Oskarżenie o znęcanie psychiczne (art. 207 §1 k.k.); lista świadków i dowodów, brak karalności Dariusza.</div>
+                <h3>Akt Oskarżenia (27 września 2021)</h3>
+                <blockquote class="quote-card">
+                    "OSKARŻAM Dariusza Adamskiego... znęcał się psychicznie...".
+                </blockquote>
+                <p>Kontekst: Okres luty-sierpień 2021; zarzuty: awantury, wyzwiska, kontrola. Lista świadków: Barbara, Sylwester, policjanci, Dorota. Dowody: Niebieska Karta, notatnik Barbary (źródło: Akt [DOCUMENT filename="70_Akt_oskarżenia_Dariusz_Adamski_207kk_2021-09-27_IMG_4494-4495.txt"]).</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-akt-1')">
+                        Co zawiera akt oskarżenia? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-akt-1" class="faq-content">
+                        Dane oskarżonego, zarzuty (art. 207 §1 k.k.), uzasadnienie, lista świadków/dowodów. Dariusz niekarany, kawaler, dochód z Holandii.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Wyrok Nakazowy -->
+            <div class="section-header" onclick="toggleSection('wyrok')">
+                Wyrok Nakazowy <span>&#9658;</span>
+            </div>
+            <div id="wyrok" class="interactive-content">
+                <div class="tl-dr">TL;DR: Wyrok za znęcanie psychiczne: 100 stawek grzywny po 70 zł, zadośćuczynienie 1000 zł.</div>
+                <h3>Wyrok Nakazowy (13 października 2021)</h3>
+                <blockquote class="quote-card">
+                    "Uznaje oskarżonego Dariusza Adamskiego za winnego... kara 100 stawek dziennych grzywny...".
+                </blockquote>
+                <p>Kontekst: Na podstawie dowodów (okres luty-sierpień 2021); zadośćuczynienie dla Barbary (źródło: Wyrok [DOCUMENT filename="78_Wyrok nakazowy Sygn. akt II K 568.21 13.09.2021.txt"]).</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-wyrok-1')">
+                        Co to wyrok nakazowy? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-wyrok-1" class="faq-content">
+                        Wydany bez rozprawy, gdy okoliczności nie budzą wątpliwości. Kara grzywny + zadośćuczynienie; Dariusz może wnieść sprzeciw.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja Plan Barbary: Manipulacje i Instrumentalizacja -->
+            <div class="section-header" onclick="toggleSection('plan-barbary')">
+                Plan Barbary: Manipulacje i Instrumentalizacja <span>&#9658;</span>
+            </div>
+            <div id="plan-barbary" class="interactive-content">
+                <div class="tl-dr">TL;DR: Dokumenty wskazują na zaplanowaną strategię Barbary: prowokacje, selektywne zgłoszenia, wykorzystanie Niebieskiej Karty i policji do budowy dowodów na "rażącą niewdzięczność". Przesłuchania opierają się na relacjach Barbary; Dariusz zaprzecza.</div>
+                <h3>Analiza Planu Barbary</h3>
+                <p>Dokumenty policyjne i protokoły wskazują na systematyczne działania Barbary: obsesyjne monitorowanie, prowokacje (np. próby nagrywania), wielokrotne interwencje policji i wdrożenie Niebieskiej Karty jako narzędzia do zebrania "dowodów" na cofnięcie darowizny. Barbara była świadoma stanu Dariusza (depresja, wyprowadzka), ale kontynuowała eskalację, pomijając fakty jak brak przemocy fizycznej. To sugeruje instrumentalizację systemu prawna i rodziny (pełnomocnictwo od Sylwestra po wylewie). Przesłuchania świadków (Dorota, policjanci) opierają się na relacjach Barbary; Dariusz wyjaśnia konflikt jako reakcję na ingerencję matki, zaprzecza znęcaniu.</p>
+                <blockquote class="quote-card">
+                    "Barbara Adamska oświadczyła, iż jej syn Dariusz Adamski... ogranicza... W 2017 r. przepisali gospodarstwo... chcą cofnąć darowiznę" (źródło: Notatka Antoni Bogdaszewski, 04.08.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Kobieta czuje się zastraszana... syn zaspawał toaletę... darowizna jako tło" (źródło: Notatka Mateusz Majewski, 17/18.07.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Problemy nasiliły się od lutego... związek z kuzynką... plan cofnięcia darowizny" (źródło: Notatka służbowa, 03.08.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "W okresie od 1 lutego 2021 roku miały miejsce trzy interwencje..." (źródło: Notatka Jarosław Komza, 08.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Syn od lutego 2021 roku stosuje wobec niej przemoc psychiczną..." (źródło: Protokół Krystian Sługiewicz, 26.07.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Dariusz Adamski oznajmił, iż Barbara Adamska ingerowała w jego życie osobiste..." (źródło: Protokół Antoni Bogdaszewski).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Ja słyszałam od Barbary, że Dariusz stosuje wobec niej przemoc psychiczną..." (źródło: Protokół Dorota Kowalska, 11.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Udaliśmy się na interwencję... syn miał się znęcać..." (źródło: Protokół Krystian Ślugiewicz, 9.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Nie przyznaję się... przed pierwszym przesłuchaniem pouczono..." (źródło: Protokół Dariusz Adamski, 20.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Dariusz Adamski nie posiada rejestracji procesowych..." (źródło: Notatka o karalności, 27.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "OSKARŻAM Dariusza Adamskiego... znęcał się psychicznie..." (źródło: Akt oskarżenia, 27.09.2021).
+                </blockquote>
+                <blockquote class="quote-card">
+                    "Uznaje oskarżonego Dariusza Adamskiego za winnego..." (źródło: Wyrok nakazowy, 13.10.2021).
+                </blockquote>
+                <p>Kontekst: Interwencje policji (lipiec-sierpień 2021) skupiają się na ograniczeniu dostępu (kamery, zamki), ale policjanci notują brak przemocy fizycznej i darowiznę jako tło. Barbara używa Niebieskiej Karty do dokumentacji zarzutów, co wspiera pozew cywilny. Dariusz wyjaśnia konflikt jako reakcję na ingerencję matki; wyprowadzka to próba deeskalacji. To wskazuje na "plan Barbary": prowokacja → interwencja → dowody → cofnięcie darowizny. Przesłuchania (Dorota, policjanci) opierają się na relacjach Barbary; Dariusz zaprzecza, brak karalności osłabia oskarżenie. Wyrok nakazowy (grzywna, zadośćuczynienie) oparty na dowodach, ale Dariusz może wnieść sprzeciw.</p>
+                <div class="mini-faq">
+                    <h4>Mini-FAQ</h4>
+                    <div class="faq-header" onclick="toggleFaq('faq-plan-1')">
+                        Jak Barbara wykorzystywała Niebieską Kartę? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-plan-1" class="faq-content">
+                        Procedura do ochrony ofiar, ale tu służy do gromadzenia dowodów na "rażącą niewdzięczność" (interwencje w lipcu 2021). Brak przemocy fizycznej osłabia zarzuty.
+                    </div>
+                    <div class="faq-header" onclick="toggleFaq('faq-plan-2')">
+                        Czy interwencje policji potwierdzają znęcanie? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-plan-2" class="faq-content">
+                        Notatki wskazują na konflikt (zamki, kamery), ale brak przemocy fizycznej i podkreślają darowiznę jako motyw. Dariusz zaprzecza, wskazując na ingerencję matki.
+                    </div>
+                    <div class="faq-header" onclick="toggleFaq('faq-plan-3')">
+                        Jak to wpływa na plan Barbary? <span>&#9658;</span>
+                    </div>
+                    <div id="faq-plan-3" class="faq-content">
+                        Dokumenty pokazują systematyczność: monitorowanie → prowokacje → zgłoszenia → dowody. Cel: cofnięcie darowizny poprzez "rażącą niewdzięczność". Zeznania świadków opierają się na relacjach Barbary; wyrok nakazowy to kluczowy "dowód" w pozwie cywilnym.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sekcja FAQ -->
+            <div class="section-header" onclick="toggleSection('faq-section')">
+                FAQ: Najczęściej Zadawane Pytania <span>&#9658;</span>
+            </div>
+            <div id="faq-section" class="interactive-content">
+                <div class="tl-dr">TL;DR: Szybkie odpowiedzi na kluczowe pytania o darowiznę, prawa i rozwiązania.</div>
+                <!-- ... (istniejące FAQ + nowe) ... -->
+                <div class="faq-header" onclick="toggleFaq('faq-5')">
+                    Jakie są skutki odwołania darowizny? <span>&#9658;</span>
+                </div>
+                <div id="faq-5" class="faq-content">
+                    Tworzy obowiązek zwrotny (bezpodstawne wzbogacenie); dla nieruchomości wymaga sądu do przeniesienia własności. Termin: 1 rok od dowiedzenia się o niewdzięczności.
+                </div>
+                <div class="faq-header" onclick="toggleFaq('faq-6')">
+                    Czy zwykłe konflikty rodzinne to rażąca niewdzięczność? <span>&#9658;</span>
+                </div>
+                <div id="faq-6" class="faq-content">
+                    Nie – wymaga złej woli, uporu (np. pobicie, znieważenia). Sąd ocenia relacje stron; zwykłe spory nie wystarczą (wyrok SN V CSK 428/19).
+                </div>
+                <div class="faq-header" onclick="toggleFaq('faq-7')">
+                    Co to wyrok nakazowy? <span>&#9658;</span>
+                </div>
+                <div id="faq-7" class="faq-content">
+                    Wydany bez rozprawy, gdy okoliczności nie budzą wątpliwości. Kara grzywny + zadośćuczynienie; oskarżony może wnieść sprzeciw.
+                </div>
+                <div class="faq-header" onclick="toggleFaq('faq-8')">
+                    Czy Dariusz był karany? <span>&#9658;</span>
+                </div>
+                <div id="faq-8" class="faq-content">
+                    Nie – KSP potwierdza brak rejestracji procesowych i kary pozbawienia wolności.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Disclaimer -->
+    <footer class="bg-gray-900 text-white text-center py-6 mt-8">
+        <p>Wszystkie przedstawione materiały są analizą prywatną, opartą na zgromadzonych dokumentach. W razie wątpliwości – kontakt: daremon@... </p>
+        <form class="mt-4">
+            <input type="text" placeholder="Podziel się opinią lub dokumentem" class="p-2 rounded">
+            <button type="submit" class="bg-blue-600 text-white p-2 rounded">Wyślij</button>
+        </form>
+    </footer>
+
+    <script>
+        function toggleSection(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            content.classList.toggle('active');
+            header.classList.toggle('expanded');
+        }
+
+        function toggleTimelineDetails(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        function toggleFaq(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Filtr kalendarza
+        document.getElementById('calendar-filter').addEventListener('change', function() {
+            const filter = this.value;
+            const rows = document.querySelectorAll('#calendar-table tbody tr');
+            rows.forEach(row => {
+                row.style.display = filter === '' || row.getAttribute('data-filter') === filter ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

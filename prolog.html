@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dla Ani i Martynki – propozycja wspólnych wakacji</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 0 10px #ccc; padding: 32px; }
+        header { text-align: center; padding: 20px; background-color: #ffebee; border-radius: 12px 12px 0 0; }
+        .hero-image { max-width: 100%; height: auto; border-radius: 10px; }
+        h1, h2 { color: #307c8e; text-align: center; }
+        p { line-height: 1.6; }
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .gallery img { width: 250px; height: auto; border-radius: 10px; }
+        .caption { text-align: center; font-style: italic; font-size: 14px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+        button { background: #307c8e; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; display: block; margin: 20px auto; }
+        button:hover { background: #17535e; }
+        .footer { margin-top: 32px; font-size: 13px; color: #666; text-align: center; }
+        section { margin-bottom: 36px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 1. Header with Cats -->
+        <header>
+            <img src="https://images.unsplash.com/photo-1626146998435-9b5e7e7e3e6e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Zuza i Lotka" class="hero-image">
+            <h1>Dla Ani i Martynki</h1>
+        </header>
+
+        <!-- 2. Vacation Proposal -->
+        <section id="proposal">
+            <h2>Propozycja wspólnych wakacji</h2>
+            <p>Cześć Aniu, cześć Martynko,</p>
+            <p>Być może to trochę niecodzienne, ale pomyślałem, że może znajdziecie chwilę, by przeczytać moją propozycję.  
+            </p>
+            <p>
+                Chciałbym zaprosić Was na spokojny, wspólny wyjazd do parku rozrywki <b>Efteling</b> w Holandii.  
+                To piękne miejsce, w którym łatwo złapać trochę dystansu do codzienności i po prostu cieszyć się chwilą – czy to na karuzelach, czy podczas spokojnych spacerów.  
+            </p>
+            <p>
+                Oczywiście wszystko organizuję i finansuję sam – chciałbym, żebyście po prostu mogły odpocząć, jeśli uznacie to za dobrą okazję.
+            </p>
+            <p>
+                Nie oczekuję niczego w zamian, nie stawiam żadnych warunków. Może potraktujcie to po prostu jako mój gest.  
+                Jeśli będziecie miały ochotę, będzie mi miło – jeśli nie, w pełni zrozumiem.
+            </p>
+            <p>
+                Możecie napisać do mnie przez formularz poniżej lub w inny sposób, jeśli uznacie to za wygodne.
+            </p>
+            <p>
+                Życzę Wam dużo spokoju i wszystkiego dobrego, niezależnie od decyzji.<br>
+                <b>Darek</b>
+            </p>
+        </section>
+
+        <!-- 3. Cats Gallery (with correct links) -->
+        <section id="cats">
+            <h2>Zuza i Lotka czekają</h2>
+            <p>Gdybyście zdecydowały się przyjechać, będą na Was czekały też moje kotki – Zuza i Lotka. Wiem, że Martynka lubi zwierzaki, więc może wspólne chwile z nimi będą miłym dodatkiem.</p>
+            <div class="gallery">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80" alt="Zuza na parapecie">
+                    <p class="caption">Zuza czeka na głaskanie</p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1518715308788-3005759c61e9?auto=format&fit=crop&w=400&q=80" alt="Lotka w ogrodzie">
+                    <p class="caption">Lotka biega po ogrodzie</p>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Koty śpiące">
+                    <p class="caption">Zuza i Lotka mruczą do snu</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Efteling Highlights -->
+        <section id="efteling">
+            <h2>O Efteling</h2>
+            <p>
+                Efteling to bajkowy park rozrywki, w którym dzieci i dorośli mogą poczuć się choć na chwilę beztrosko. Jest dużo atrakcji, ale też piękne miejsca na spokojny spacer lub kawę.  
+                Jeśli chcecie dowiedzieć się więcej, zajrzyjcie na <a href="https://www.efteling.com/nl" target="_blank">oficjalną stronę Efteling</a>.
+            </p>
+        </section>
+
+        <!-- 5. Contact Form -->
+        <section id="contact">
+            <h2>Napisz, jeśli chcesz</h2>
+            <form method="POST" action="mail.php">
+                <div class="form-group">
+                    <label for="name">Imię</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Wiadomość</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Wyślij</button>
+            </form>
+            <p style="text-align:center; color:#888; font-size:13px; margin-top:10px;">
+                Odpowiedź trafi tylko do mnie – Darek.
+            </p>
+        </section>
+
+        <!-- 6. Footer -->
+        <div class="footer">
+            <p>To osobista, prywatna propozycja – potraktujcie ją proszę z dyskrecją.</p>
+        </div>
+    </div>
+</body>
+</html>

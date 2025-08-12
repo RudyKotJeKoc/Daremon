@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Echo</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #ccc;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 700px;
+      padding: 2rem;
+    }
+    input {
+      background-color: #111;
+      color: #ccc;
+      border: 1px solid #444;
+      padding: 0.5rem;
+      margin-top: 1rem;
+      width: 80%;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #222;
+      color: #ccc;
+      border: 1px solid #444;
+      cursor: pointer;
+    }
+    .response {
+      margin-top: 2rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Echo</h1>
+    <p>Je hoort alleen wat je durft terug te fluisteren.</p>
+    <input id="input" type="text" placeholder="Fluister hier...">
+    <button onclick="reply()">Echo</button>
+    <div id="output" class="response"></div>
+  </div>
+
+  <script>
+    function reply() {
+      const val = document.getElementById('input').value.trim().toLowerCase();
+      const output = document.getElementById('output');
+      if (val === "stilte") {
+        output.textContent = "Soms is stilte het luidste antwoord.";
+      } else if (val === "vraag 6b") {
+        output.textContent = "Je stelt een vraag die je niet kunt begrijpen.";
+      } else if (val === "delta-echo") {
+        output.textContent = "Synchronisatie mislukt. Probeer een andere frequentie.";
+      } else {
+        output.textContent = "...";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daremon.nl - Interaktywna Oś Czasu Sprawy Adamskich</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #3498db;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        .timeline-item:nth-child(even) {
+            flex-direction: row;
+        }
+        .timeline-item-content {
+            width: 45%;
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .timeline-item-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .timeline-item:nth-child(odd) .timeline-item-content::before {
+            left: 100%;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent #ecf0f1;
+        }
+        .timeline-item:nth-child(even) .timeline-item-content::before {
+            right: 100%;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #ecf0f1 transparent transparent;
+        }
+        .timeline-item-date {
+            width: 10%;
+            position: relative;
+            text-align: center;
+            font-weight: bold;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+        }
+        .timeline-item-date::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: #3498db;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        details {
+            margin-top: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: #2980b9;
+        }
+        summary::marker {
+            display: none; /* Hide default marker */
+        }
+        summary::before {
+            content: '+ '; /* Custom marker */
+            margin-right: 5px;
+        }
+        details[open] summary::before {
+            content: '- ';
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .citation {
+            font-size: 0.8em;
+            color: #666;
+            margin-left: 5px;
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+            .timeline-item-date {
+                width: auto;
+                padding-left: 30px; /* Offset for timeline line */
+                text-align: left;
+                margin-bottom: 10px;
+            }
+            .timeline-item-date::after {
+                left: 20px;
+                transform: translate(-50%, -50%);
+            }
+            .timeline-item-content {
+                width: calc(100% - 40px);
+                margin-left: 40px; /* Offset for timeline line */
+            }
+            .timeline-item-content::before {
+                left: -10px !important;
+                border-width: 10px 10px 10px 0 !important;
+                border-color: transparent #ecf0f1 transparent transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daremon.nl - Interaktywna Oś Czasu Sprawy Adamskich</h1>
+        <p>Poniżej przedstawiam interaktywną oś czasu, która chronologicznie prezentuje kluczowe wydarzenia konfliktu w rodzinie Adamskich, bazując na wszystkich dostępnych źródłach. Możesz kliknąć na każdy punkt, aby rozwinąć szczegółowe informacje i analizy.</p>
+
+        <div class="timeline">
+
+            <!-- Event: 7 lipca 2017: Akt Darowizny -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2017<br>07 Lipca</div>
+                <div class="timeline-item-content">
+                    <h3>Akt Darowizny</h3>
+                    <p>Sylwester Adamski przekazuje Dariuszowi gospodarstwo rolne wraz z zabudowaniami o wartości 210 000 zł, ustanawiając na rzecz Barbary i Sylwestra dożywotnią służebność osobistą mieszkania [1, 2].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>Dariusz twierdzi, że sam zaproponował służebność, by uniknąć konfliktów i okazać szacunek rodzicom [1]. Przez kolejne lata inwestował niemal wszystkie zarobki z Holandii w modernizację posiadłości, finansując m.in. ocieplenie, wymianę dachów, solary i fotowoltaikę, a także opłacał rachunki za media, mimo że formalnie obowiązek ten spoczywał na osobie posiadającej służebność [1, 2]. Kupił również ojcu skuter elektryczny [1, 2]. Barbara unikała konfrontacji, ale prowadziła obserwację i pozwalała Dariuszowi inwestować, budując w nim fałszywe poczucie swobody i stabilizacji [2]. Akt notarialny sporządził notariusz Marek Jan Boenigk [3]. Dokument ten jest dostępny jako kluczowy dowód [2, 4].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: 2018–2020: Lata po darowiźnie (Inwestycje) -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2018–2020</div>
+                <div class="timeline-item-content">
+                    <h3>Lata Inwestycji w Nieruchomość</h3>
+                    <p>Dariusz konsekwentnie inwestuje w nieruchomość, finansując kluczowe modernizacje i opłacając rachunki za media [2].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>W tym okresie Dariusz finansował m.in. ocieplenie, wymianę dachów, montaż solarów i fotowoltaiki, a także opłacał rachunki za media [2]. Kupuje też ojcu Sylwestrowi skuter elektryczny [2]. Barbara unikała w tym czasie konfrontacji, prowadząc jednak obserwację i pozwalając Dariuszowi inwestować, co, zdaniem Dariusza, budowało w nim fałszywe poczucie swobody i stabilizacji [2]. Dariusz podkreślał te inwestycje jako dowód swojej troski o dom rodzinny [5].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: 2019: Powrót Dariusza po wylewie ojca -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2019</div>
+                <div class="timeline-item-content">
+                    <h3>Powrót Dariusza po Wylewie Ojca</h3>
+                    <p>Dariusz wraca do Polski po wylewie ojca, aby się nim opiekować [6].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>Dwa lata przed 2021 rokiem Sylwester Adamski przeszedł wylew, ma pierwszą grupę inwalidzką i porusza się na skuterze [7]. Dariusz wraca, by się nim opiekować, co również podkreśla jako dowód swojej troski [5].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Luty 2021: Początek Napięć – Przyjazd Julii -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Luty</div>
+                <div class="timeline-item-content">
+                    <h3>Początek Napięć – Przyjazd Julii</h3>
+                    <p>Barbara Adamska zaczyna obsesyjnie sugerować związek Dariusza z kuzynką Julią, co staje się zarzewiem konfliktu [6, 8].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>7 lutego:</strong> Julia Kowalska przyjeżdża do Dariusza na zaplanowany tydzień. Barbara wita ich agresywnym pytaniem [6].</li>
+                            <li><strong>10 lutego:</strong> Barbara notuje w kalendarzu, że Julia jest w pokoju Dariusza do późnej nocy. Po godzinie drugiej w nocy zgasili światło, a Barbara weszła do pokoju około 2:30 [8-10]. Dariusz relacjonuje wtargnięcia matki do pokoju i agresywne wyzywanie Julii, co miało sprowokować jego ostrą reakcję [5, 8, 10]. Daremon analizuje ten wpis jako dowód intensywnej obserwacji i wtargnięcia do prywatnej przestrzeni, co Dariusz interpretuje jako prowokację i naruszenie prywatności [11].</li>
+                            <li><strong>11 lutego:</strong> Barbara notuje, że Julia poszła do drugiego pokoju, a Dariusz za nią, i od tej pory śpią razem [10].</li>
+                            <li><strong>14 lutego:</strong> Dariusz i Julia pieką ciasteczka w kuchni i ogłaszają związek na Facebooku [8, 10, 11]. Analiza Daremona wskazuje, że kontekst ("piekli ciasteczka") ma podkreślać "normalność" relacji, którą Barbara uważa za "niewłaściwą", co stanowi moralną podbudowę dla przyszłych działań [11].</li>
+                            <li><strong>15 lutego:</strong> Około 16:30 Dariusz odwozi Julię i oboje nie dają znaku życia, blokując telefony rodziców [8, 12].</li>
+                            <li><strong>17 lutego:</strong> Dariusz pisze do Izy, że "wypisują się z rodziny" [8, 12].</li>
+                            <li><strong>18 lutego:</strong> Ewa informuje Barbarę, że Dariusz i Julia wrócili [12].</li>
+                            <li><strong>19 lutego:</strong> Dariusz mówi Barbarze, że będzie z Julią w Adamowie [12].</li>
+                            <li><strong>20 lutego:</strong> Monika z Arturem odwiedzają Adamskich [12].</li>
+                            <li><strong>26 lutego:</strong> Ilona (lub Julia) rani się z powodu Julii i trafia do szpitala na Biziela [12].</li>
+                            <li>Dariusz twierdzi, że "ciągłe aluzje, insynuacje i obsesyjne podążanie" matki doprowadziły do tego, że on i Julia zaczęli zachowywać się jak para [6]. Konflikt rozpoczął się od obsesyjnych insynuacji matki [5].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Marzec 2021: Incydent z Paralizatorem i Interwencja Policji -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Marzec</div>
+                <div class="timeline-item-content">
+                    <h3>Incydent z Paralizatorem i Interwencja Policji</h3>
+                    <p>Dariusz miał straszyć Barbarę paralizatorem [13, 14]. Policja interweniuje z powodu głośnej muzyki [13, 14].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>Marzec (brak konkretnej daty):</strong> Dariusz straszy Barbarę paralizatorem, sądząc, że celowo spowodowali zwarcie, by wyłączyć prąd [13, 14]. Dariusz zaprzecza użyciu paralizatora [15].</li>
+                            <li><strong>3 marca:</strong> Policja odwiedza Adamskich po raz pierwszy, wezwana przez Barbarę, która oskarża Julię o kradzież. Dzielnicowy Mateusz Majewski nie stwierdza przemocy domowej [14, 16].</li>
+                            <li><strong>29 marca:</strong> Barbara i Sylwester wracają od prawnika ze Złotowa [14]. Dariusz (prawdopodobnie pod wpływem alkoholu, wraz z Zauchą [17]) głośno słucha muzyki, wali w podłogę, biega z laserem i trzaska drzwiami [13, 14]. Po 22:00 Barbara i Sylwester wzywają policję, ale Dariusz nie otwiera, ponieważ zasypia [13, 14]. Barbara wyłącza prąd w obecności funkcjonariuszy [13, 14]. Notatka policyjna dotyczyła zakłócania ciszy nocnej [13]. Barbara relacjonuje dramatyczne zajścia, jak rzekome wyrzucanie mebli czy demolowanie ogrodu, jednak jej własna rola w sprowokowaniu incydentu (wyłączenie prądu) jest znamiennie pomijana [13, 18]. Analiza Daremona podkreśla selektywność w prezentacji własnej roli Barbary [18].</li>
+                            <li><strong>30 marca:</strong> Dariusz wieczorem przywozi Julię [19].</li>
+                            <li><strong>31 marca:</strong> Policja przyjeżdża porozmawiać z Darkiem o wydarzeniach z 29 marca. Wieczorem Dariusz odwozi Julię [19].</li>
+                            <li>Po incydencie z paralizatorem, Dariusz zaczyna izolować się od rodziców, zmieniając kody i montując kamery w domu i na posesji [13, 20].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Kwiecień 2021: Izolacja i Pierwsza Próba Samobójcza -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Kwiecień</div>
+                <div class="timeline-item-content">
+                    <h3>Izolacja i Pierwsza Próba Samobójcza</h3>
+                    <p>Dariusz zaczyna się izolować od rodziców, zmienia kody i montuje kamery [13]. Podejmuje pierwszą próbę samobójczą [19].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>Noc z 3 na 4 kwietnia:</strong> Dariusz podejmuje pierwszą próbę samobójczą (wskoczenie pod samochód, połknięcie tabletek), co kończy się wymiotami. Schudł 9 kg w ciągu trzech miesięcy [5, 19]. Dariusz ujawnia swoje głębokie wyniszczenie psychiczne, myśli i próby samobójcze jako bezpośredni skutek nękania ze strony matki [5]. Krytykuje Barbarę za selektywność jej notatek, które celowo pomijały jego tragiczny stan psychiczny [5].</li>
+                            <li><strong>1 kwietnia:</strong> Dariusz zmienia kod do warsztatu, uniemożliwiając Barbarze wejście [19]. Dariusz tłumaczy montowanie kamer "od kilku lat" dla bezpieczeństwa i zamykanie pomieszczeń gospodarczych jako zabezpieczenie własności podczas jego nieobecności [20, 21].</li>
+                            <li><strong>2 kwietnia:</strong> Dariusz około 15:00 jedzie do Bydgoszczy. Jego pokój ma uchylone okno mimo niskiej temperatury, a klamka z drzwi jest wyjęta [22].</li>
+                            <li><strong>3 kwietnia:</strong> Monika przyjeżdża po Barbarę i Sylwestra. Spędzają święta u Moniki [22].</li>
+                            <li><strong>Wielkanoc, 4 kwietnia:</strong> Barbara i Sylwester wracają od Moniki po 21:00. W domu jest zimno, a okno Dariusza nadal otwarte [22].</li>
+                            <li><strong>5 kwietnia:</strong> Około 21:00 Dariusza nadal nie ma w domu, okno otwarte, pada śnieg. Rodzice dzwonią, ale nie odbiera [22].</li>
+                            <li><strong>6 kwietnia:</strong> Dariusz przyjeżdża około 13:00 sam, idzie spać. Około 18:00-19:00 przyjeżdża Eryk, Barbara puka, ale nie otwierają. Musiała sama napalić w piecu. O 22:30 Dariusza nadal nie ma, nie przyszedł porozmawiać [23].</li>
+                            <li><strong>7 kwietnia:</strong> Rano, wszędzie śnieg. Dariusz wyjeżdża, nie napalił w piecu [23].</li>
+                            <li><strong>9 kwietnia:</strong> Klamka z drzwi do pokoju Dariusza jest nadal wyjęta, nie chce rozmawiać z rodzicami [23].</li>
+                            <li><strong>10 kwietnia:</strong> Dariusz unika rodziców. Nie chce rozmawiać w warsztacie, twierdząc, że nie ma czasu. Wieczorem zamyka się w pokoju i nie otwiera [23].</li>
+                            <li><strong>11 kwietnia:</strong> Siostry Barbary, Dorota i Grażyna, odwiedzają ich. Dariusz specjalnie wyjeżdża Amperą, żeby nie rozmawiać z Dorotą [24]. Dorota jest oskarżana przez Dariusza o wpływanie na Barbarę w celu "budowania sprawy" [21].</li>
+                            <li><strong>12 kwietnia:</strong> Dariusz udaje, że go nie ma. Wiezie Barbarę i Sylwestra do Sępólna po okulary. Jest bardzo zdenerwowany, trzęsie się, nie umie wyrobić zakrętu. Ostro hamuje, wysiada i mówi, że Barbara ma jechać, bo on nie da rady. Barbara jedzie, Dariusz jedzie do lasu (od 14:00 do 15:00 w deszczu) [24].</li>
+                            <li><strong>13 kwietnia:</strong> Przyjeżdża siostrzenica Barbary, Ania, i mówi, że Dariusz pisze do niej, że sobie coś zrobi, że nie chce tak dłużej żyć [24].</li>
+                            <li><strong>14 kwietnia:</strong> Rozmowa z Darkiem – on słucha, mało mówi. Do Barbary mówi: "kurwa, ty się nie odzywaj, nie masz nic do gadania". Na propozycję terapii rodzinnej lub psychologa Dariusz wkurza się i wychodzi. Barbara i Sylwester mają psychologa na 20:00 [25].</li>
+                            <li><strong>16 kwietnia:</strong> Barbara zauważa brak jednego fotela z kompletu z podwórka [25].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: 21 Maja 2021: Incydent ze Szpitalem -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>21 Maja</div>
+                <div class="timeline-item-content">
+                    <h3>Incydent ze Szpitalem</h3>
+                    <p>Barbara notuje, że Dariusz odmówił zawiezienia Sylwestra do szpitala, sugerując pogotowie [18, 26, 27].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li>Barbara odnotowuje w kalendarzu: "Odmówił, żeby dać klucz do samochodu, żebym zawiozła Sylwka do szpitala... D. Co mnie to obchodzi, taksówką, okazją. Nawet nie zapytał, co się stało. Artur po mnie przyjechał, bo Sylwek został" [5, 18].</li>
+                            <li>Sylwester trafił do szpitala tego samego dnia z powodu m.in. niewydolności serca i uszkodzenia mózgu [26, 27].</li>
+                            <li>Notatki Barbary i pozew o odwołanie darowizny kładą nacisk na ten incydent jako "rażącą niewdzięczność" [18, 26, 28-30].</li>
+                            <li>Jednakże, żadne z pozostałych źródeł (protokoły przesłuchań Dariusza, policjantów, czy fragmenty medycznej dokumentacji) nie potwierdzają trybu transportu medycznego Sylwestra [26].</li>
+                            <li>Dariusz podkreśla, że to on odebrał ojca ze szpitala po hospitalizacji, co Barbara celowo pominęła w swoich notatkach, podważając ich wiarygodność i obiektywność [5, 18, 26, 27]. Kalendarz Barbary jest "precyzyjnym rejestrem" tworzonym pod kątem celów procesowych, pomijającym fakty korzystne dla Dariusza [31].</li>
+                            <li><strong>17 maja:</strong> Dariusz wiesza tabliczki "Hala produkcyjna, niezatrudnionym wstęp wzbroniony" na drzwiach warsztatu i zamyka je [25].</li>
+                            <li><strong>19 maja:</strong> Dariusz zakłada na drzwiach do swojego pokoju zamek na kod. Kosząc trawę, niszczy rośliny (funkie, rabarber, krzewoszkę), dwie inne podcina [27].</li>
+                            <li><strong>22 maja:</strong> Dariusz nadal nie pyta o stan Sylwestra [32].</li>
+                            <li><strong>23 maja:</strong> Skuter Sylwestra nie jest naprawiony po dwóch tygodniach [32].</li>
+                            <li><strong>24 maja:</strong> Dariusz zakłada kamerę w przedpokoju na piętrze, twierdząc, że to dla jego bezpieczeństwa, i strzela paralizatorem w obecności Barbary. Odmawia odpowiedzi na pytania o oponę dla Sylwestra i jego stan zdrowia [32].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Lipiec 2021: Eskalacja i Zaspawana Toaleta -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Lipiec</div>
+                <div class="timeline-item-content">
+                    <h3>Eskalacja Konfliktu i Zaspawana Toaleta</h3>
+                    <p>Dariusz zaspawał zewnętrzną toaletę i używał wulgaryzmów podczas konfrontacji z Barbarą [33, 34]. Policja interweniuje, wdrożono "Niebieską Kartę" [32, 33, 35, 36].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>Połowa lipca:</strong> Policja interweniuje w Adamowie po zgłoszeniu Barbary. Mateusz Majewski i Krystian Sługiewicz stwierdzają, że Dariusz nie otwiera drzwi. Wdrożono procedurę Niebieskiej Karty. Barbara relacjonuje, że Dariusz znęca się psychicznie, utrudnia dostęp do pomieszczeń, używa wulgaryzmów i kontroluje ją [16, 32]. Procedura "Niebieskiej Karty" jest wykorzystywana jako narzędzie do zebrania "dowodów" i stworzenia podstawy dla pozwu cywilnego o odwołanie darowizny [31].</li>
+                            <li><strong>17 lipca (sobota):</strong> Barbara zgłasza interwencję z powodu agresywnego zachowania syna i wyzwisk. Policjanci sporządzają Niebieską Kartę [35].</li>
+                            <li><strong>19 lipca:</strong> Barbara zgłasza brak prądu w lodówce, na dworze i w gniazdku. Monika z Michałem i Gabrysiem oraz Artur z Agatą odwiedzają Adamskich [35]. Barbara rejestruje się u psychologa w Sępólnie [35]. Sylwester Adamski udziela Barbarze Bogumile Adamskiej pełnomocnictwa do reprezentowania go przed urzędami, sądami, bankami itp. w sprawach majątkowych i opiekuńczych [4, 35, 37]. To pełnomocnictwo, udzielone przez Sylwestra (po wylewie, będącego osobą zależną [7, 31]), jest kluczowe dla dalszych działań prawnych Barbary, sugerując przejęcie kontroli nad jego decyzjami [31, 37]. Barbara cytuje: „On już nie rozumiał, co się dzieje. To ja podejmowałam decyzje. Byłam jego głosem.” [31]. Pełnomocnictwo zostało poświadczone przez Tomasza Boenigk (notariusz) [3]. Dokument jest dostępny [4, 35].</li>
+                            <li><strong>20 lipca:</strong> Barbara zauważa potłuczoną żarówkę w toalecie na dworze. Sylwester prosi Dariusza o naprawę światła w kurniku i toalecie. Dariusz odmawia, twierdząc, że to teren prywatny, używa wulgaryzmów i grozi zaspawaniem drzwi toalety. Barbara próbuje nagrywać, a Dariusz reaguje agresywnymi wyzwiskami: "Kurwa, nie rozumiesz, że to jest teren prywatny? Kurwa franco jebana. (...) No, nagrywaj, nagrywaj, kurwo." [10, 12, 33, 38, 39]. Analiza Daremona wskazuje na demonstrację roszczeniowej postawy Barbary wobec prywatnego terenu Dariusza i jego reakcji, a także celowość Barbary w zbieraniu "dowodów" [38].</li>
+                            <li><strong>21 lipca:</strong> Dariusz wyjeżdża i wraca około 2:00 w nocy. O 4:00 rano pracuje w warsztacie z Bożeną nad samochodem (białą cytryną). O 9:00 odwozi ją [39]. Bożena odmawia konfrontacji z Barbarą, broniąc Darka [17].</li>
+                            <li><strong>22 lipca:</strong> Dariusz mówi u Pawłowskiego [17], że wleje Randap do wody. Toaleta na dworze zostaje zaspawana [33, 34]. Sylwester zeznaje, że sąsiad mówił mu o tej groźbie [23, 33]. Zarzut ten jest uznawany za absurdalny, oparty na plotce, bez formalnego przesłuchania sąsiada [19, 40]. Dariusz montuje maszt, który piszczy, oraz drugą kamerę skierowaną na stół i krzesła, gdzie Barbara i Sylwester siedzą [34].</li>
+                            <li><strong>23 lipca:</strong> Dariusz zakłada zamek w pomieszczeniu, gdzie Barbara ma słoiki i rowery, i mówi mężowi, że ma opróżnić te dwa pomieszczenia [34].</li>
+                            <li><strong>24 lipca:</strong> Drzwi, gdzie stoi Ampera Dariusza (razem z kotem), zostają zakluczone [34].</li>
+                            <li><strong>25 lipca (niedziela):</strong> Barbara zgłasza kolejną interwencję policji (sierżant Krystian Sługiewicz), ponieważ Dariusz zamyka kolejne pomieszczenia [16, 36].</li>
+                            <li><strong>Koniec lipca:</strong> Druga interwencja policji Mateusza Majewskiego i Krystiana Sługiewicza. Dariusz ponownie nie otwiera drzwi. Wdrożono procedurę Niebieskiej Karty [36].</li>
+                            <li><strong>26 lipca:</strong> Antoni Bogdaszewski [16] odwiedza Adamskich. Odnotowuje około 20 kamer i podsłuchy. Dariusz nadal blokuje ich telefony [36]. Krystian Sługiewicz sporządza notatkę służbową, wskazując, że związek Dariusza z kuzynką nie został zaakceptowany przez rodziców i rozpadł się, a Dariusz obwinił rodziców za niepowodzenie związku [36].</li>
+                            <li><strong>27 lipca:</strong> Barbara oskarża Dariusza o bieganie z paralizatorem, co Dariusz zaprzecza [15].</li>
+                            <li>Dariusz wyprowadza się z domu pod koniec lipca 2021 [33].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Sierpień 2021: Odwołanie Darowizny -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Sierpień</div>
+                <div class="timeline-item-content">
+                    <h3>Odwołanie Darowizny</h3>
+                    <p>Sylwester Adamski (działający w imieniu własnym, ale reprezentowany przez Barbarę [15, 28, 37]) składa oświadczenie o odwołaniu darowizny do Dariusza [15, 37]. Pismo to, wysłane na nieaktualny adres, zawiera listę zarzutów, które Barbara wcześniej zgłosiła Policji [37].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>3 sierpnia:</strong> Sporządzono notatkę służbową Niebieska Karta. Stwierdza się, że Dariusz zamyka pomieszczenia, monitoruje posesję, głośno słucha muzyki w nocy, niszczy krzewy i drzewa oraz lampy w kurniku. Barbara i Sylwester leczą się u psychiatry i psychologa [7, 15, 41, 42].</li>
+                            <li><strong>6 sierpnia:</strong> W liście jako powód odwołania darowizny wskazano "rażącą niewdzięczność" Dariusza [15, 37]. Zarzuty obejmują m.in. zabranianie korzystania z nieruchomości, okamerowanie, wyzwiska, niszczenie sprzętu i toalety, groźby zatrucia wody, odseparowanie od rodziny i odebranie auta [7, 37, 42, 43]. Ten list jest kompilacją wszystkich krzywd i incydentów zebranych w toku lipcowych zgłoszeń, uzupełnioną o nowe punkty [16, 37]. Barbara wprost mówiła policji o zamiarze cofnięcia darowizny już na początku procedury NK [21, 31]. Dariusz nie odbiera przesyłki [15]. Dokument jest dostępny [15, 44].</li>
+                            <li>Sylwester, ojciec Dariusza, zeznaje (protokół przesłuchania z 03.08.2021 [15, 45]), że Dariusz go nie obraża ani nie bije [7]. Stwierdzenie Barbary, że Dariusz obrażał również ojca, jest sprzeczne z zeznaniami Sylwestra, co podważa wiarygodność Barbary i sugeruje celowe koloryzowanie faktów [40].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Wrzesień 2021: Postępowanie karne -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Wrzesień</div>
+                <div class="timeline-item-content">
+                    <h3>Postępowanie Karne</h3>
+                    <p>Sąd wydaje wyrok nakazowy, uznając Dariusza Adamskiego winnym znęcania się psychicznego [46].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li><strong>13 września:</strong> Sąd wydaje wyrok nakazowy, uznając Dariusza Adamskiego winnym czynu z art. 207 § 1 kk (znęcanie się psychiczne), wymierzając mu karę 100 stawek dziennych grzywny [46].</li>
+                            <li><strong>20 września:</strong> Dariusz Adamski składa zeznania, nie przyznając się do zarzucanego czynu. Tłumaczy swoje zachowanie prowokacjami ze strony matki i jej obsesją na punkcie jego związku z Julią. Oznajmia, że wyprowadził się z Adamowa i pracuje za granicą [46].</li>
+                            <li><strong>27 września:</strong> Akt oskarżenia przeciwko Dariuszowi Adamskiemu, zarzucający znęcanie się psychiczne nad matką (art. 207 § 1 k.k.) [46].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Październik 2021: Wyrok Karny i Manipulacja Adwokata -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>13 Października</div>
+                <div class="timeline-item-content">
+                    <h3>Wyrok Karny i Manipulacja Adwokata</h3>
+                    <p>Sąd wydaje wyrok nakazowy, uznając Dariusza Adamskiego winnym znęcania się psychicznego nad matką Barbarą Adamską w okresie od 1 lutego do 31 sierpnia 2021 r. [41, 47].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>Dariusz twierdzi, że przyznał się do winy pod wpływem manipulacji swojego adwokata, Aleksandra Domka [16, 20, 47]. Aleksander Domek miał namówić Dariusza do przyznania się, obiecując, że "zakończy to temat i uniemożliwi Barbarze prowadzenie sprawy cywilnej" [20, 47]. Dariusz był w stanie silnego stresu i nieprzygotowany, co Domek wykorzystał [47]. To "przyznanie się" stało się później kluczowym dowodem w sprawie cywilnej o cofnięcie darowizny [20, 47]. Dariusz uważa, że Domek zignorował fakty i działał na jego szkodę, prawdopodobnie współpracując z Barbarą [20, 47]. Dariusz czuje się "zdradzony" przez adwokata i system [20]. Zarówno Barbara, jak i Sylwester zgodnie przyznają, że Dariusz nigdy nie użył wobec nich przemocy fizycznej [40]. Barbara wniosła oskarżenie o znęcanie z art. 207 k.k., który obejmuje także przemoc fizyczną, mimo braku twardych dowodów (obdukcji, zdjęć) [40].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Listopad 2021: Zaświadczenia lekarskie -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2021<br>Listopad</div>
+                <div class="timeline-item-content">
+                    <h3>Zaświadczenia Lekarskie Barbary i Sylwestra</h3>
+                    <p>Barbara i Sylwester uzyskują zaświadczenia lekarskie potwierdzające objęcie ich opieką psychiatryczną [41].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>Barbara konsekwentnie przedstawia siebie i Sylwestra jako bezbronne ofiary psychicznego znęcania, podkreślając swoje problemy zdrowotne (nerwica, depresja, utrata wagi) jako konsekwencje działań syna [19, 31]. Sylwester i Barbara są pod opieką psychiatry i psychologa [7, 15, 42].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Styczeń 2022: Wyznaczenie pełnomocnika z urzędu dla Sylwestra -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2022<br>20 Stycznia</div>
+                <div class="timeline-item-content">
+                    <h3>Wyznaczenie Pełnomocnika z Urzędu dla Sylwestra Adamskiego</h3>
+                    <p>Sąd Rejonowy w Tucholi wydaje postanowienie o wyznaczeniu pełnomocnika z urzędu dla Sylwestra Adamskiego (ICo 317/21) [41].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <p>Ta decyzja otwiera drogę do formalnego złożenia pozwu cywilnego o odwołanie darowizny w imieniu Sylwestra [48]. Sylwester jest reprezentowany przez radcę prawnego Grzegorza Szlezera [48, 49].</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Kwiecień 2022: Pozew o Odwołanie Darowizny -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2022<br>29 Kwietnia</div>
+                <div class="timeline-item-content">
+                    <h3>Pozew o Odwołanie Darowizny</h3>
+                    <p>Sylwester Adamski (reprezentowany przez pełnomocnika z urzędu, r.pr. Grzegorza Szlezera [48, 49], faktycznie przez Barbarę [28, 50]) składa pozew o nakazanie złożenia oświadczenia woli w sprawie odwołania darowizny przeciwko Dariuszowi Adamskiemu [48, 50].</p>
+                    <details>
+                        <summary>Więcej szczegółów</summary>
+                        <ul>
+                            <li>Pozew opiera się na zarzucie "rażącej niewdzięczności" Dariusza [30].</li>
+                            <li>Zarzuty wymienione w pozwie to m.in.: okamerowanie nieruchomości i inwigilacja, uporczywe wyzywanie powoda i jego małżonki, znęcanie psychiczne nad Barbarą, ograniczenie korzystania z nieruchomości (zamykanie garaży, zaspawanie toalety zewnętrznej), odmowa zawiezienia Sylwestra do szpitala, niszczenie mienia (żarówek, roślin, kosmetyków), groźby zatrucia wody, odseparowanie od rodziny, odebranie użyczonego auta [30, 50].</li>
+                            <li>W pozwie wykorzystuje się wyrok nakazowy z 13 października 2021 r. skazujący Dariusza za znęcanie się psychicznie nad Barbarą jako dowód "rażącej niewdzięczności" [3, 30, 50].</li>
+                            <li>Dariusz odrzuca zasadność zarzutów, ale deklaruje zgodę na cofnięcie darowizny, by zakończyć spór [50, 51]. Jest to strategia dążąca do szybkiego zakończenia postępowania, ale bez przyznania winy [51]. Dariusz chce "oczyścić dobre imię" poprzez wykazanie manipulacji Barbary [51].</li>
+                            <li>Obrona Dariusza ma podkreślić, że zgoda na cofnięcie darowizny nie jest równoznaczna z przyznaniem się do "rażącej niewdzięczności", a jest jedynie gestem woli zakończenia konfliktu dla "dobra rodziny i spokoju" [51]. Dariusz jest gotów oddać majątek, który stał się dla niego źródłem cierpienia [51].</li>
+                            <li>Analiza prawna w źródłach Daremona wskazuje, że "rażąca niewdzięczność" to klauzula generalna wymagająca oceny w kontekście "całokształtu towarzyszących okoliczności i wzajemnych relacji stron" [52]. Podkreśla się, że nie każdy spór czy sprzeczne zachowanie uzasadnia odwołanie darowizny [52].</li>
+                            <li>Daremon rekomenduje również ocenę zdolności poznawczej Sylwestra w czasie udzielania pełnomocnictwa, by zbadać, czy działał z pełną świadomością, oraz psychologiczną ocenę Barbary w kontekście jej motywacji (zemsta, potrzeba kontroli) [52].</li>
+                            <li>Dokument jest dostępny [44, 48].</li>
+                            <li>W pozwie pojawiają się "nowe" zarzuty, które nie były zgłaszane we wcześniejszych zeznaniach policyjnych (np. obklejenie drzwi zdjęciami Julii, wyrzucanie kosmetyków do toalety, wycięcie magnolii, odebranie użyczonego samochodu) [40]. To wskazuje na stopniowe "dozowanie" i rozbudowywanie oskarżeń, co osłabia wiarygodność narracji [40].</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Event: Luty 2024: Propozycja ugody -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2024<br>08 Luty</div>
+                <div class="timeline-item-content">
+                    <h3>Propozycja Ugody</h3>
+                    <p>Adwokaci wymieniają propozycje ugody w sprawie, obejmujące dostęp do pomieszczeń gospodarczych, monitoring i garaż [48].</p>
+                </div>
+            </div>
+
+            <!-- Event: Lipiec 2025: Ostatnia aktualizacja opracowania Dariusza -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2025<br>06 Lipca</div>
+                <div class="timeline-item-content">
+                    <h3>Ostatnia Aktualizacja Analizy Dariusza</h3>
+                    <p>Data ostatniej aktualizacji prywatnego opracowania Dariusza Adamskiego dotyczącego analizy motywacji i strategii Barbary Adamskiej [48].</p>
+                </div>
+            </div>
+
+            <!-- Event: Lipiec 2025: Analiza psychologiczna korespondencji -->
+            <div class="timeline-item">
+                <div class="timeline-item-date">2025<br>15 Lipca</div>
+                <div class="timeline-item-content">
+                    <h3>Analiza Psychologiczna Korespondencji</h3>
+                    <p>Data sporządzenia analizy psychologicznej korespondencji tekstowej między Barbarą a Bożeną [42].</p>
+                </div>
+            </div>
+
+        </div> <!-- End of timeline -->
+
+        <h2>Dodatkowe Informacje i Analizy z Daremon.nl</h2>
+        <p>Daremon.nl dąży do demistyfikacji kompleksowości sprawy, opierając się wyłącznie na dostępnych dokumentach i relacjach, poddanych chłodnej, analitycznej ocenie [53]. Poniżej przedstawiono kluczowe perspektywy i analizy:</p>
+
+        <details>
+            <summary>Kalendarz Barbary: Narzędzie czy Kronika?</summary>
+            <p>Kalendarz Barbary Adamskiej, przedstawiony jako kluczowy dowód, jest obiektem szczególnej analizy Daremona. Jest to "precyzyjnie skonstruowana narracja", mająca na celu udowodnienie z góry założonej tezy, a nie obiektywny zapis wydarzeń [2, 9, 52]. Wpisy są selektywne i celowe [9, 31].</p>
+            <ul>
+                <li><strong>10 luty:</strong> "Zauważyłam, że ona jest cały czas u niego w pokoju. Po godzinie drugiej w nocy zgasili światło. Nadal nie wychodziła. Wtedy weszłam, było prawie 2.30 w nocy." [47]. Analiza: Wpis świadczy o intensywnej obserwacji i wtargnięciu do prywatnej przestrzeni, co Dariusz interpretuje jako prowokację i naruszenie prywatności [11, 26, 33].</li>
+                <li><strong>14 luty:</strong> "Piekli ciasteczka w kuchni. Wstawili na FB, że są w związku." [47]. Analiza: Obiektywne zdarzenie, lecz kontekst ma podkreślać "normalność" relacji, którą Barbara uważa za "niewłaściwą", co stanowi moralną podbudowę dla przyszłych działań [9, 11, 29].</li>
+                <li><strong>29 marzec:</strong> "...Po 22 zadzwoniliśmy po policję, bo chyba oszalał. Walił w podłogę, latał z laserem, trzaskał drzwiami. Policji już nie otworzył, bo zasnął." [50]. Analiza: Wpis pomija fakt, że Barbara sama wyłączyła prąd w obecności policji, co było prowokacją, prowadzącą do agresji Dariusza (incydent z paralizatorem). Wskazuje na selektywność w prezentacji własnej roli [9, 18, 18, 38].</li>
+                <li><strong>21 maj:</strong> "Odmówił, żeby dać klucz do samochodu, żebym zawiozła Sylwka do szpitala... D. Co mnie to obchodzi, taksówką, okazją. Nawet nie zapytał, co się stało. Artur po mnie przyjechał, bo Sylwek został." [5]. Analiza: Kluczowy wpis użyty jako dowód "rażącej niewdzięczności". Jednak kalendarz celowo pomija fakt, że Dariusz odebrał Sylwestra ze szpitala, co podważa jego obiektywność i ukierunkowanie na tworzenie negatywnej narracji [2, 6, 18, 40, 52].</li>
+                <li><strong>20 lipiec:</strong> "Sylwek zapukał do warsztatu. D. Wyszedł. S. Zrób światło kurom. D. Ja tam światła nie potrzebuję. S. A w ubikacji? D. To jest teren prywatny. Tam, gdzie jest zamknięte. Nie macie tam chodzić. S. Masz kupić i założyć żarówkę tam, gdzie potłukłeś. D. Kurwa, nie rozumiesz, że to jest teren prywatny? Kurwa franco jebana. Chciałam nagrać to, co mówi i wyjęłam tel. D. No, nagrywaj, nagrywaj, kurwo." [10, 12]. Analiza: Demonstracja roszczeniowej postawy Barbary wobec prywatnego terenu Dariusza i jego reakcji. Znamienne, że Barbara od razu sięga po telefon, aby nagrywać, co wskazuje na jej celowość w zbieraniu "dowodów" [21, 38].</li>
+            </ul>
+            <p>Notatki z Kalendarza Barbary (luty-lipiec 2021) są dostępne jako dokument [5, 10, 12, 20, 44, 47, 50].</p>
+        </details>
+
+        <details>
+            <summary>Manipulacje i Narracja: Anatomia Deformacji Prawdy</summary>
+            <p>Daremon analizuje, jak Barbara Adamska świadomie konstruowała narrację konfliktu, używając języka emocjonalnego, ukrywając własną rolę w eskalacji i wykorzystując kalendarz jako narzędzie do budowania sprawy prawnej [21, 29, 31, 38, 54].</p>
+            <ul>
+                <li><strong>Kreacja "Ofiary":</strong> Barbara konsekwentnie przedstawia siebie i Sylwestra jako bezbronne ofiary psychicznego znęcania, podkreślając swoje problemy zdrowotne (nerwica, depresja, utrata wagi) jako konsekwencje działań syna [19, 31].</li>
+                <li><strong>Selektywne Notatki:</strong> Kalendarz Barbary nie jest obiektywnym dziennikiem, lecz "precyzyjnym rejestrem" tworzonym pod kątem celów procesowych. Pomija fakty korzystne dla Dariusza (np. odebranie ojca ze szpitala) [2, 6, 31, 40, 52].</li>
+                <li><strong>Nadużycie "Służebności":</strong> Barbara traktuje ustanowioną służebność osobistą mieszkania jako de facto umowę o dożywocie, oczekując od Dariusza pełnej opieki, utrzymania i swobodnego dostępu do całej posesji, w tym do budynków gospodarczych, co nie wynika z aktu notarialnego [31]. Oskarżenia o "znęcanie" są odpowiedzią na odmowę spełnienia tych nieuzasadnionych roszczeń [31].</li>
+                <li><strong>Instrumentalizacja Sylwestra:</strong> Sylwester, po wylewie, jest osobą zależną [7, 31]. Barbara uzyskuje od niego pełnomocnictwo (19.07.2021) do działań prawnych, działając w jego imieniu, co sugeruje przejęcie kontroli nad jego decyzjami [15, 27, 31, 32, 34-36, 39, 46]. Cytat Barbary: „On już nie rozumiał, co się dzieje. To ja podejmowałam decyzje. Byłam jego głosem.” [31].</li>
+                <li><strong>Eskalacja i Nowe Zarzuty:</strong> Lista zarzutów Barbary rozszerza się w miarę postępów sprawy – od wyzwisk po oskarżenia o niszczenie mienia (kosmetyki, magnolia, śliwa), które pojawiają się dopiero w pozwie, co wskazuje na celowe "dozowanie" i rozbudowywanie oskarżeń [16, 31].</li>
+                <li><strong>Wykorzystanie Instytucji:</strong> Procedura "Niebieskiej Karty" i postępowanie karne (skutkujące wyrokiem nakazowym) są wykorzystywane jako narzędzia do zebrania "dowodów" i stworzenia podstawy dla pozwu cywilnego o odwołanie darowizny [16, 19, 21, 31]. Barbara wprost mówiła policji o zamiarze cofnięcia darowizny już na początku procedury NK [21, 31].</li>
+                <li><strong>Demonizacja Dariusza:</strong> Barbara przedstawia syna jako niebezpiecznego (incydent z paralizatorem, groźba Roundupu), co ma na celu wzbudzenie strachu i usprawiedliwienie radykalnych działań [31].</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Głos Dariusza: Echo Prawdy</summary>
+            <p>Dariusz Adamski przedstawia swoją perspektywę, podkreślając swoje doświadczenia i analizę konfliktu [45].</p>
+            <ul>
+                <li>Dariusz Adamski podkreśla swoje **inwestycje w dom rodzinny** (ocieplenie, dachy, solary, fotowoltaika, rachunki), ciężką pracę w Holandii i troskę o ojca (zakup skutera, powrót do Polski po wylewie) [5, 8, 13].</li>
+                <li>Twierdzi, że **konflikt rozpoczął się od obsesyjnych insynuacji matki** dotyczących jego związku z kuzynką Julią, a jego ostre reakcje były obroną przed nieuzasadnionymi atakami Barbary [5, 9, 26].</li>
+                <li>Dariusz ujawnia swoje **głębokie wyniszczenie psychiczne**, myśli i próby samobójcze (wskoczenie pod samochód, połknięcie tabletek, utrata 9 kg wagi) jako bezpośredni skutek nękania ze strony matki [5, 22]. Krytykuje Barbarę za selektywność jej notatek, które celowo pomijały jego tragiczny stan psychiczny oraz fakty świadczące na jego korzyść, jak odebranie ojca ze szpitala [2, 5, 6, 40, 52].</li>
+                <li>W swoich oświadczeniach Dariusz konsekwentnie **zaprzecza stosowaniu przemocy fizycznej**, co potwierdza nawet jego ojciec Sylwester [20]. Tłumaczy montowanie kamer "od kilku lat" dla bezpieczeństwa i zamykanie pomieszczeń gospodarczych jako zabezpieczenie własności podczas jego nieobecności [20, 21, 31].</li>
+                <li>Dariusz twierdzi, że **jego adwokat Aleksander Domek zmanipulował go do przyznania się do winy** w sprawie karnej, obiecując, że to "zakończy to temat i uniemożliwi Barbarze prowadzenie sprawy cywilnej" [20]. To "przyznanie się" zostało później wykorzystane jako fałszywy dowód w sprawie cywilnej, co Dariusz uważa za "zdradę" adwokata i systemu [20].</li>
+                <li>Mimo formalnego statusu pozwanego, Dariusz podkreśla, że to Barbara Adamska jest rzeczywistą inicjatorką i motorem całej sprawy, a Sylwester został w nią "wciągnięty" [15, 28].</li>
+                <li>W obliczu totalnego wyniszczenia psychicznego, Dariusz **deklaruje rezygnację z nieruchomości**, uznając, że "nie ma dla niego żadnej wartości" i chce, by sąd ją cofnął [28]. Robi to nie z poczucia winy, ale by zakończyć wyniszczający konflikt, wyrażając głębokie obrzydzenie wobec matki i brak zamiaru powrotu do Adamowa [28].</li>
+                <li>Dariusz uznaje, że jego walka ma już tylko wymiar symboliczny i psychologiczny: "Dla mnie ta sprawa od dawna przestała mieć wartość prawna – a ma tylko wymiar symboliczny i psychologiczny" [29].</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Absurdalne Zarzuty: Detekcja Niespójności</summary>
+            <p>Daremon demaskuje zarzuty, których wiarygodność jest rażąco niska lub które noszą znamiona manipulacji, ujawniając luki logiczne i sprzeczności z obiektywnymi faktami [40].</p>
+            <ul>
+                <li><strong>Sprzeczne zeznania o obrażaniu Sylwestra:</strong> Barbara twierdzi, że Dariusz obrażał również ojca, podczas gdy Sylwester jednoznacznie zaprzeczył, by był wyzywany, a całą agresję syna skierowaną na Barbarę [40]. To podważa wiarygodność Barbary i sugeruje celowe koloryzowanie faktów pod tezę o "znęcaniu się nad rodzicami" [40].</li>
+                <li><strong>Brak dowodów przemocy fizycznej:</strong> Zarówno Barbara, jak i Sylwester zgodnie przyznają, że Dariusz nigdy nie użył wobec nich przemocy fizycznej [40]. Mimo to Barbara wniosła oskarżenie o znęcanie z art. 207 k.k., który obejmuje także przemoc fizyczną. Brak twardych dowodów (obdukcji, zdjęć) sugeruje, że zarzuty ograniczały się do przemocy psychicznej, a sam proces karny nie doprowadził do jednoznacznego potwierdzenia ciężkich znamion przestępstwa [40].</li>
+                <li><strong>Zmienne intencje:</strong> Barbara podczas procedury Niebieskiej Karty deklarowała, że chciałaby "jedynie, aby syn wrócił do domu", by po kilku dniach formalnie zażądać od niego opuszczenia nieruchomości w liście odwołującym darowiznę. Ta rozbieżność między deklaracją a działaniem wskazuje na niespójność postawy lub celową manipulację dla różnych odbiorców (policja vs. sąd) [40].</li>
+                <li><strong>Jednostronność zarzutów o alkohol:</strong> Barbara nadmieniała o nadużywaniu alkoholu przez Dariusza, co nie zostało potwierdzone przez żadnego innego świadka, co sugeruje jednostronność tej oceny [40].</li>
+                <li><strong>Pomijanie własnej roli w konflikcie:</strong> Barbara minimalizuje swoją rolę w wywołaniu konfliktu (np. poprzez ingerencję w związek Dariusza z kuzynką Julią), przedstawiając zachowanie syna jako bezpodstawną agresję. Niezależne notatki policyjne wprost wskazują, że to sprzeciw rodziny był zarzewiem konfliktu [40].</li>
+                <li><strong>"Nowe" zarzuty w pozwie:</strong> W pozwie o odwołanie darowizny pojawiają się zarzuty, które nie były zgłaszane we wcześniejszych zeznaniach policyjnych (np. obklejenie drzwi zdjęciami Julii, wyrzucanie kosmetyków do toalety, wycięcie magnolii, odebranie użyczonego samochodu) [40]. To wskazuje na stopniowe "dozowanie" i rozbudowywanie oskarżeń, co osłabia wiarygodność narracji [40].</li>
+                <li><strong>Groźba otrucia wodą (Roundup):</strong> Zarzut ten, choć poważny, opiera się na plotce "ze słyszenia" od sąsiada [19, 40]. Brak formalnego przesłuchania sąsiada na tę okoliczność osłabia siłę tego "dowodu" [40].</li>
+                <li><strong>Błędna interpretacja choroby Sylwestra:</strong> Dariusz ujawnia, że Barbara zgłosiła jego próbę ograniczenia nocnego podjadania Sylwestra (zachowanie typowe dla zespołu otępiennego) jako "próbę zamykania ojcu lodówki", co miało go przedstawić jako oprawcę. W rzeczywistości była to próba dbania o zdrowie ojca [40].</li>
+            </ul>
+        </details>
+
+        <h2>Obsada Postaci</h2>
+        <details>
+            <summary>Szczegóły o osobach w konflikcie</summary>
+            <ul>
+                <li><strong>Barbara Bogumiła Adamska (córka Pawła i Reginy):</strong> Matka Dariusza Adamskiego i żona Sylwestra Adamskiego. Główna inicjatorka i podmiot działań prawnych przeciwko synowi. Skrupulatnie prowadzi kalendarz, dokumentując zachowania Dariusza, które uznaje za "rażącą niewdzięczność". Przez Dariusza oskarżana o manipulację, prowokowanie konfliktu i wykorzystywanie choroby męża do odzyskania darowizny. Cierpi na nerwicę i depresję, jest pod opieką psychiatry i psychologa [42].</li>
+                <li><strong>Sylwester Andrzej Adamski (syn Władysława i Stefanii):</strong> Ojciec Dariusza Adamskiego i mąż Barbary Adamskiej. W 2017 roku darował synowi gospodarstwo rolne. Dwa lata przed 2021 rokiem przeszedł wylew, ma pierwszą grupę inwalidzką i porusza się na skuterze. Jest ignorowany przez syna, ale sam zeznaje, że Dariusz go nie obraża ani nie bije. Udziela Barbarze pełnomocnictwa do działania w jego imieniu w sprawach majątkowych i opiekuńczych. Jest pod opieką psychiatry i psychologa [7].</li>
+                <li><strong>Dariusz Krzysztof Adamski (syn Sylwestra i Barbary):</strong> Obdarowany, właściciel gospodarstwa rolnego od 2017 roku. Oskarżony o znęcanie się psychiczne nad matką. Twierdzi, że jego działania są reakcją obronną na prowokacje i manipulacje matki, która dąży do odebrania mu majątku. Pracował ciężko w Holandii, inwestował w dom i opiekował się ojcem po wylewie. Cierpi na głęboką depresję, miał myśli i próby samobójcze. Czuje się zdradzony przez system prawny i swojego adwokata Aleksandra Domka [43].</li>
+                <li><strong>Julia Kowalska:</strong> Kuzynka Dariusza Adamskiego. Jej obecność w domu Dariusza w lutym 2021 roku i rzekomy związek z nim stały się zarzewiem konfliktu między Dariuszem a Barbarą. Według Dariusza, to Barbara zasugerowała ich związek [21].</li>
+                <li><strong>Dorota Kowalska:</strong> Siostra Barbary Adamskiej i bliska powierniczka. Potwierdza konflikt rodzinny i widziała zniszczone lampy w kurniku i toalecie. Dariusz oskarża ją o wpływanie na Barbarę w celu "budowania sprawy" [21].</li>
+                <li><strong>Monika Malinowska:</strong> Osoba bliska rodzinie Adamskich. Odwiedzała Barbarę i Sylwestra, wspierając ich [54].</li>
+                <li><strong>Artur (Adamski):</strong> Osoba bliska Monice, odwiedzał Adamskich. Przyjechał po Barbarę, gdy Sylwester potrzebował transportu do szpitala [54].</li>
+                <li><strong>Ewa:</strong> Informuje Barbarę o powrocie Dariusza i Julii [54].</li>
+                <li><strong>Iza:</strong> Osoba, do której Darek pisał, że "wypisują się z rodziny" [54].</li>
+                <li><strong>Zaucha:</strong> Osoba, z którą Dariusz pił 29 marca 2021 roku [17].</li>
+                <li><strong>Waldek:</strong> Osoba, która około 10:30 (29 marca 2021) przyjechała po buty [17].</li>
+                <li><strong>Bożena:</strong> Osoba, z którą Dariusz pracował nad samochodem w warsztacie 21 lipca 2021 roku. W korespondencji tekstowej z Barbarą, Bożena odmawia konfrontacji, broniąc Darka [17].</li>
+                <li><strong>Pawłowski:</strong> Osoba, u której Dariusz miał powiedzieć, że wleje Randap do wody [17].</li>
+                <li><strong>Mateusz Majewski:</strong> Dzielnicowy w Komendzie Powiatowej Policji w Sępólnie Krajeńskim. Interweniował w Adamowie [16].</li>
+                <li><strong>Krystian Sługiewicz:</strong> Sierżant sztabowy policji. Interweniował w Adamowie, wdrożył procedurę Niebieskiej Karty [16].</li>
+                <li><strong>Antoni Bogdaszewski:</strong> Świadek, funkcjonariusz policji. Odwiedził Dariusza [16].</li>
+                <li><strong>Aleksander Domek:</strong> Adwokat z urzędu Dariusza Adamskiego w sprawie karnej. Dariusz oskarża go o zdradę zaufania, brak należytej obrony i manipulację, która doprowadziła do jego przyznania się do winy w sprawie karnej [16].</li>
+                <li><strong>Michał Sarnecki:</strong> Adwokat Dariusza Adamskiego w postępowaniu cywilnym. Dariusz wyraża wątpliwości co do jego niezależności, ponieważ został mu wskazany "z polecenia Domka". Dariusz nie ma z nim kontaktu i odwołuje jego reprezentację [49].</li>
+                <li><strong>Grzegorz Szlezer:</strong> Radca prawny, pełnomocnik Sylwestra Adamskiego z urzędu w sprawie cywilnej [49].</li>
+                <li><strong>Marek Jan Boenigk:</strong> Notariusz, który sporządził akt darowizny z 2017 roku oraz pełnomocnictwo z 2021 roku [3].</li>
+                <li><strong>Tomasz Boenigk:</strong> Notariusz, prowadzący kancelarię notarialną, poświadczył podpis Sylwestra Adamskiego na pełnomocnictwie [3].</li>
+            </ul>
+        </details>
+
+    </div>
+</body>
+</html>

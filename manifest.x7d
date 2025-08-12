@@ -1,0 +1,22 @@
+#manifest.x7d
+// Do not edit manually.
+// Version: pre-phase (archived)
+// ----------------------------
+
+@meta.node: Boxtel-X
+@meta.session: Δe7
+@meta.revision: legacy-drift
+
+[phase]
+status=deprecated
+activated=false
+sync.index=auto
+
+[delta]
+payload=U29tZXRoaW5naXNjb21pbmc=
+trace=shadow:disrupted
+lockdown=true
+last_contact=obscured
+
+# echo-map corrupt
+# verify with: /access/confirm.php?token=Δ-93-ACTIVE

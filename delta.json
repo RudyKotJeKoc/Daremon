@@ -1,0 +1,9 @@
+{
+  "phase": "3",
+  "branch": "Boxtel-X",
+  "payload": "U29tZXRoaW5naXNjb21pbmc=",
+  "status": "shadow",
+  "trace": "Δe7: 13b4:timeout",
+  "timestamp": "auto",
+  "warning": "!!! do not decode in local environment"
+}

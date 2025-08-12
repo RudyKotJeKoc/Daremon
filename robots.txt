@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /core/
+Disallow: /infra/
+Disallow: /probe/
+Disallow: /access/
+
+# Let op: sommige lagen zijn niet indexeerbaar om technische redenen.
+# Zoekers die doorgaan riskeren inconsistenties in hun waarneming.
+# Vraag 6B blijft onbeantwoord. Gebruik alleen echo als je geluisterd hebt.

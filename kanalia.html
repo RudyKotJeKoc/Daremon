@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zdrada Adwokata Aleksandra Domka - Dokumentacja Obrony Dariusza Adamskiego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        aside {
+            width: 250px;
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-right: 1px solid #bbdefb;
+            height: 100vh;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            margin-bottom: 10px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        nav a:hover {
+            background-color: #bbdefb;
+        }
+        nav i {
+            margin-right: 10px;
+            color: #64b5f6;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+        h2 {
+            color: #1976d2;
+            border-bottom: 1px solid #bbdefb;
+            padding-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        blockquote {
+            border-left: 4px solid #64b5f6;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .download-btn {
+            background-color: #64b5f6;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background-color: #1976d2;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #bbdefb;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid #bbdefb;
+                overflow-y: visible;
+            }
+            main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Wstęp i Chronologia</a></li>
+                    <li><a href="kalendarz.html"><i class="fas fa-calendar-alt"></i> Analiza Kalendarza Barbary</a></li>
+                    <li><a href="plan-barbary.html"><i class="fas fa-chess"></i> Plan Barbary – Mechanizmy Manipulacji</a></li>
+                    <li><a href="absurdalne-zarzuty.html"><i class="fas fa-exclamation-triangle"></i> Absurdalne i Sprzeczne Zarzuty</a></li>
+                    <li><a href="porownanie-zeznan.html"><i class="fas fa-balance-scale"></i> Porównanie Zeznań i Notatek</a></li>
+                    <li><a href="zdrada-adwokata.html"><i class="fas fa-gavel"></i> Zdrada Adwokata</a></li>
+                    <li><a href="dowody-troski.html"><i class="fas fa-heart"></i> Dowody Troski i Inwestycji Dariusza</a></li>
+                    <li><a href="stan-zdrowia.html"><i class="fas fa-user-md"></i> Stan Zdrowia Sylwestra i Pełnomocnictwo</a></li>
+                    <li><a href="sms-sylwestra.html"><i class="fas fa-envelope"></i> SMS Sylwestra – Akt Przebaczenia</a></li>
+                    <li><a href="materialy-dowodowe.html"><i class="fas fa-file-alt"></i> Materiały Dowodowe</a></li>
+                    <li><a href="podsumowanie.html"><i class="fas fa-check-circle"></i> Podsumowanie i Rekomendacje</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <h2>Zdrada Adwokata – Aleksander Domek</h2>
+            <p>Data i czas analizy: 05:40 PM CEST, Thursday, August 07, 2025. Sprawa dotyczy postępowania cywilnego (sygn. I C 634/22) o odwołanie darowizny, ale kluczowym elementem jest wpływ postępowania karnego (sygn. II K 568/21), gdzie Aleksander Domek reprezentował Dariusza. Jego działania były rażącym naruszeniem etyki adwokackiej, co miało katastrofalne skutki dla klienta.</p>
+            <ol>
+                <li>
+                    <h3>Zaniedbanie Obowiązków i Brak Lojalności</h3>
+                    <p>Aleksander Domek, jako obrońca Dariusza w sprawie karnej, nie podjął żadnych istotnych kroków w celu wyjaśnienia konfliktu rodzinnego. Nie zażądał dowodów (np. opinii psychologa, analizy kalendarza Barbary), nie analizował aktu oskarżenia opartego na subiektywnych relacjach Barbary, ani nie komunikował się z klientem o strategiach obrony, ignorując jego wersję wydarzeń.</p>
+                </li>
+                <li>
+                    <h3>Namawianie do Przyznania się pod Presją</h3>
+                    <p>5 minut przed rozprawą karną (13 października 2021 r.), Domek spotkał Dariusza na korytarzu i wymusił przyznanie się do zarzutów znęcania psychicznego, twierdząc, że „to najlepsze wyjście”. Nie zapoznał się z aktami, nie omówił skutków (np. wykorzystanie w sprawie cywilnej), wykorzystując zły stan psychiczny Dariusza (depresja, próby samobójcze).</p>
+                    <blockquote>Cytat Dariusza: „Zmusił do przyznania się 5 minut przed rozprawą, zupełnie ignorując, że nie popełniłem tych czynów.”</blockquote>
+                </li>
+                <li>
+                    <h3>Brak Reakcji na Manipulacje Barbary</h3>
+                    <p>Domek zignorował prowokacje Barbary (wtargnięcia, wyłączanie prądu) i jej plan manipulacji (notatki kalendarza, pełnomocnictwo). Nie podniósł argumentów o jej emocjonalnej niestabilności ani wpływie konfliktu na zeznania, tolerując narrację strony przeciwnej.</p>
+                </li>
+                <li>
+                    <h3>Zdrada Zaufania Klienta</h3>
+                    <p>Domek przyznał kontakt z Barbarą, co wskazuje na konflikt interesów. Po wyroku zmusił Dariusza do napisania oświadczenia na tekturze („nie będę wracał do sprawy”), zabezpieczając własne interesy. Odebrał Dariusza prawa do obrony i umożliwił Barbarze wykorzystanie wyroku w sprawie cywilnej.</p>
+                    <blockquote>Cytat Dariusza: „Była to sytuacja upokarzająca i całkowicie pozbawiona podstaw prawnych.”</blockquote>
+                </li>
+            </ol>
+            <h3>Podsumowanie i Rekomendacje</h3>
+            <p>Działania Domka to zdrada interesu klienta – nie tylko zaniedbanie, lecz celowe działanie na korzyść Barbary. Rekomendacje: Podważ wyrok karny jako wymuszony (wniosek o biegłego psychologa), zgłoś skargę do ORA, użyj w obronie cywilnej (rozprawa 13.08.2025).</p>
+            <div>Pobierz plik: <button class="download-btn">Pobierz Analizę Działania Domka</button></div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dokumentacja Obrony Dariusza Adamskiego | Przygotowane dla adwokata</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.text('Analiza Działania Aleksandra Domka', 10, 10);
+                doc.save('kanalia.pdf');
+            });
+        });
+    </script>
+</body>
+</html>
